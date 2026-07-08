@@ -47,7 +47,6 @@ export const Navbar = () => {
                 <span className="absolute top-1 right-1 flex h-2 w-2 rounded-full bg-primary"></span>
               </Button>
             </Link>
-            <Button>Login</Button>
           </div>
 
           <div className="-mr-2 flex md:hidden">
