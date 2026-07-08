@@ -123,8 +123,14 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, ini
          window.location.href = 'https://www.avada.space/checkout-now';
          return;
       }
-      await submitPhoneNumber('', selectedPlan.id);
-      openRazorpayCheckout(selectedPlan, '', handleRazorpaySuccess, handleRazorpayFailure);
+      openRazorpayCheckout({
+        amount: selectedPlan.id === 'lifetime-plus' ? 999 : 397,
+        courseIds: ['all-courses-bundle'],
+        userPhone: '',
+        userEmail: '',
+        onSuccess: handleRazorpaySuccess,
+        onError: handleRazorpayFailure
+      });
     } catch (err) {
       setError('Something went wrong. Please try again.');
       setIsLoading(false);

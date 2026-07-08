@@ -1,748 +1,211 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Star, CheckCircle, CheckCircle2, X, ChevronDown, Sparkles, Eye, Download, Mail, Lock, Loader2, Timer, Check } from 'lucide-react';
-import { COURSES, BUNDLE_PRICE } from '../constants';
-import ModernPaymentForm from '../components/ui/modern-payment-form';
-import {
-  Logo, SocialProofToast,
-  PROBLEM_POINTS, TRANSFORMATION_STORIES, FEAR_STATS,
-  VALUE_STACK_ITEMS, TESTIMONIALS_LANDING, FAQ_ITEMS_LANDING, INCOME_TIERS,
-  COURSES_LANDING, PAGE_PREVIEWS_ROW1, PAGE_PREVIEWS_ROW2
-} from './LandingHelpers';
-
-/* ─── REUSABLE CTA WITH TIMER (Apple-style proportions) ─── */
-const CtaWithTimer = ({ timeLeft, onClick, variant = 'green' }: { timeLeft: { h: number; m: number; s: number }; onClick: () => void; variant?: 'green' | 'dark' | 'blue' }) => {
-  const f = (v: number) => v.toString().padStart(2, '0');
-  const bgClass = variant === 'dark'
-    ? 'bg-slate-900'
-    : 'bg-white border border-slate-200';
-  const btnClass = variant === 'dark'
-    ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-500'
-    : 'bg-slate-900 hover:bg-black';
-  const textColor = 'text-white';
-  const btnTextColor = 'text-white';
-  const timerAccent = variant === 'dark' ? 'text-orange-400' : 'text-orange-500';
-  const timerBg = variant === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-orange-50 border-orange-200';
-
-  return (
-    <div className={`${bgClass} rounded-2xl px-5 py-6 relative overflow-hidden max-w-sm mx-auto`}>
-      <div className="absolute top-0 right-0 w-60 h-60 bg-white/5 rounded-full blur-[80px] -mr-16 -mt-16 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/5 rounded-full blur-[60px] -ml-10 -mb-10 pointer-events-none" />
-
-      <div className="relative z-10 flex flex-col items-center text-center gap-3">
-        {/* Timer label */}
-        <div className="flex items-center gap-1.5">
-          <Timer size={14} className={`${timerAccent} animate-pulse`} />
-          <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${timerAccent}`}>Offer Ends In</span>
-        </div>
-
-        {/* Timer digits - compact on mobile */}
-        <div className="flex items-center gap-1">
-          {[{ val: f(timeLeft.h), label: 'HRS' }, { val: f(timeLeft.m), label: 'MIN' }, { val: f(timeLeft.s), label: 'SEC' }].map((unit, i) => (
-            <React.Fragment key={i}>
-              <div className="flex flex-col items-center">
-                <div className={`${timerBg} border rounded-md px-2 py-0.5`}>
-                  <span className={`text-sm font-black tabular-nums font-mono ${variant === 'dark' ? 'text-white' : 'text-slate-900'}`}>{unit.val}</span>
-                </div>
-                <span className={`text-[6px] font-bold uppercase tracking-widest mt-0.5 ${variant === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>{unit.label}</span>
-              </div>
-              {i < 2 && <span className={`text-xs font-bold ${variant === 'dark' ? 'text-slate-600' : 'text-slate-300'} -mt-3`}>:</span>}
-            </React.Fragment>
-          ))}
-        </div>
-
-        {/* Price - tighter on mobile */}
-        <div className="flex items-baseline gap-2">
-          <span className={`text-sm ${variant === 'dark' ? 'text-slate-500' : 'text-slate-400'} line-through font-bold`}>$99</span>
-          <span className={`text-3xl font-display font-black ${variant === 'dark' ? 'text-white' : 'text-slate-900'}`}>$49</span>
-          <span className="bg-orange-100 text-orange-500 text-[9px] font-bold px-1.5 py-0.5 rounded-full">50% OFF</span>
-        </div>
-
-        {/* Button - full width on mobile, auto on desktop */}
-        <button
-          onClick={onClick}
-          className={`${btnClass} ${btnTextColor} font-bold text-sm px-6 py-3 rounded-xl flex items-center justify-center gap-2 group hover:scale-[1.02] active:scale-[0.98] transition-all w-full`}
-          style={{ boxShadow: '0 0 0 2px #f97316, 0 0 16px rgba(249,115,22,0.4)' }}
-        >
-          <Download size={16} className="shrink-0" />
-          <span>Download All 12 Courses</span>
-          <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform shrink-0" />
-        </button>
-
-        <p className={`text-[10px] font-medium ${variant === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>Lifetime access • All software included • 7-day money-back</p>
-      </div>
-    </div>
-  );
-};
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { PRODUCTS } from '../lib/data';
+import { Card, CardContent, CardFooter } from '../components/ui/card';
+import { Button } from '../components/ui/button';
+import { TESTIMONIALS_LANDING, FAQ_ITEMS_LANDING, SocialProofToast, FEAR_STATS, COURSES_LANDING } from './LandingHelpers';
+import { Star, CheckCircle, ChevronDown, ArrowRight, Zap, ShieldCheck, Users, PlayCircle } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
-  const [timeLeft, setTimeLeft] = useState(() => { const D = (3 * 3600 + 36 * 60 + 20) * 1000, r = D - (Date.now() % D); return { h: Math.floor((r / 3600000) % 24), m: Math.floor((r / 60000) % 60), s: Math.floor((r / 1000) % 60) }; });
-  const [showStickyBar, setShowStickyBar] = useState(false);
-  useEffect(() => { window.scrollTo(0, 0); if ((window as any).fbq) (window as any).fbq('track', 'ViewContent', { content_name: 'Avada Design Bundle', value: 49, currency: 'USD' }); }, []);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-
-  // Payment modal state
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [paymentError, setPaymentError] = useState('');
-  const [paymentSuccess, setPaymentSuccess] = useState<string | null>(null);
-  const [studentCount, setStudentCount] = useState(22390);
-
-  useEffect(() => {
-    const calc = () => { const D = (3 * 3600 + 36 * 60 + 20) * 1000, now = Date.now(), r = D - (now % D); setTimeLeft({ h: Math.floor((r / 3600000) % 24), m: Math.floor((r / 60000) % 60), s: Math.floor((r / 1000) % 60) }); };
-    const t = setInterval(calc, 1000); calc(); return () => clearInterval(t);
-  }, []);
-  useEffect(() => { const h = () => setShowStickyBar(window.scrollY > 600); window.addEventListener('scroll', h, { passive: true }); return () => window.removeEventListener('scroll', h); }, []);
-  useEffect(() => { const t = setInterval(() => setStudentCount(c => c + 1), 4000); return () => clearInterval(t); }, []);
-
-  const formatTime = (val: number) => val.toString().padStart(2, '0');
-  const validateEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
-  const openPaymentModal = () => {
-    setShowPaymentModal(true);
-    // Meta Pixel: InitiateCheckout
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'InitiateCheckout');
-    }
-  };
-
-  const handlePaymentSuccess = () => {
-    setShowPaymentModal(false);
-    setPaymentSuccess('stripe-payment-completed');
-  };
+  const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans overflow-x-hidden selection:bg-orange-100">
-      {/* ═══ STICKY HEADER ═══ */}
-      <header className="sticky top-0 z-[60] bg-white/80 backdrop-blur-2xl border-b border-slate-100/60 px-5 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button onClick={openPaymentModal} className="hidden md:block text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all premium-stroke" style={{ background: 'linear-gradient(135deg,#f97316,#ea580c)', boxShadow: '0 0 20px rgba(249,115,22,0.45)' }}>Join 50,000+ Students</button>
+    <div className="min-h-screen bg-background flex flex-col items-center">
+      <SocialProofToast />
+      
+      {/* ═══════ HERO ═══════ */}
+      <section className="w-full py-20 md:py-32 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/30 border-b border-border/40">
+        <div className="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-widest mb-6 bg-primary/10 px-4 py-2 rounded-full border border-primary/20">
+          <Zap size={14} className="fill-primary" /> Trusted by 50,000+ architects & designers
+        </div>
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight lg:text-7xl mb-6 max-w-4xl leading-[1.1]">
+          Master <span className="text-primary">Architecture</span> Design & Visualization
+        </h1>
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed">
+          Learn SketchUp, V-Ray, D5 Render, Lumion, AI Design and more. 
+          Get lifetime access, 24/7 support, and a career-ready portfolio.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-4 mb-8">
+          <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-shadow" onClick={() => navigate(`/product/${PRODUCTS[0].id}`)}>
+            Get Started — ₹{PRODUCTS[0].price} <ArrowRight size={18} className="ml-2" />
+          </Button>
+          <Button size="lg" variant="outline" className="text-lg px-8 py-6" onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}>
+            View All Courses
+          </Button>
+        </div>
+        <div className="flex items-center gap-6 text-xs font-medium text-muted-foreground">
+          <span className="flex items-center gap-1"><ShieldCheck size={14} className="text-primary" /> 7-Day Money Back</span>
+          <span className="flex items-center gap-1"><Zap size={14} className="text-primary" /> Instant Access</span>
+          <span className="flex items-center gap-1"><Users size={14} className="text-primary" /> 24/7 Support</span>
+        </div>
+      </section>
+
+      {/* ═══════ STATS BAR ═══════ */}
+      <section className="w-full py-12 bg-zinc-900 text-white">
+        <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {FEAR_STATS.map((s, i) => (
+            <div key={i} className="text-center">
+              <div className="text-3xl md:text-4xl font-extrabold text-primary mb-1">{s.stat}</div>
+              <p className="text-xs md:text-sm text-zinc-400 leading-snug max-w-[200px] mx-auto">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════ FEATURED PRODUCTS ═══════ */}
+      <section id="products" className="w-full py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-primary text-xs font-bold uppercase tracking-widest mb-3">Our Bundles</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Choose Your Path</h2>
+            <p className="text-muted-foreground text-lg">Pick a bundle and start learning today.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {PRODUCTS.map((product) => (
+              <Card key={product.id} className="overflow-hidden flex flex-col group border-2 border-border hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-xl">
+                <div className="aspect-video relative overflow-hidden bg-zinc-100">
+                  <img 
+                    src={product.imageUrl} 
+                    alt={product.name}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                    90% OFF
+                  </div>
+                </div>
+                <CardContent className="p-6 flex-1">
+                  <h3 className="text-2xl font-bold mb-2">{product.name}</h3>
+                  <p className="text-muted-foreground mb-4 line-clamp-2 text-sm leading-relaxed">
+                    {product.description}
+                  </p>
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-3xl font-extrabold text-primary">₹{product.price}</span>
+                    <span className="text-lg text-muted-foreground line-through">₹{product.price * 10}</span>
+                  </div>
+                </CardContent>
+                <CardFooter className="p-6 pt-0 flex flex-col gap-3">
+                  <Button className="w-full text-base py-5 shadow-md shadow-primary/20" onClick={() => navigate(`/checkout?product=${product.id}`)}>
+                    Buy Now — ₹{product.price} <ArrowRight size={16} className="ml-2" />
+                  </Button>
+                  <Button asChild variant="outline" className="w-full">
+                    <Link to={`/product/${product.id}`}>View Course Details</Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
           </div>
         </div>
-      </header>
+      </section>
 
-      <main>
-        {/* 1. HERO — The Hook */}
-        <section className="relative pt-0 pb-10 md:pb-20 overflow-hidden" style={{ background: '#ffffff' }}>
-          <div className="w-full px-4 md:max-w-4xl md:mx-auto relative z-10">
-            <div className="flex flex-col items-center text-center pt-7 md:pt-14">
-
-              {/* Top badge */}
-              <div className="mb-2 md:mb-3 inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-orange-200 rounded-full shadow-sm">
-                <CheckCircle2 size={12} className="text-orange-500" />
-                <span className="text-[11px] md:text-xs font-semibold text-slate-600">Learn Interior & Exterior Design + <span className="text-orange-500 font-bold">AI</span></span>
-              </div>
-
-
-              {/* Intro text */}
-              <p className="text-sm md:text-base text-slate-700 mb-3 md:mb-5 max-w-md font-medium">
-                Start charging <span className="underline underline-offset-2 decoration-orange-400"><span className="text-orange-500 font-bold">$2,000</span>–<span className="text-orange-500 font-bold">$5,000</span></span> for designing and rendering.
-              </p>
-
-              {/* Big headline */}
-              <h1 className="tracking-tight mb-2 md:mb-3">
-                <span className="block text-[2.2rem] leading-tight md:text-6xl font-display font-black text-slate-900 mb-0.5">
-                  Learn to Design
-                </span>
-                <span className="block text-[2rem] leading-none md:text-5xl font-display font-black">
-                  <span className="text-orange-500">Homes</span><span className="text-slate-400 font-light text-2xl md:text-3xl mx-1">,</span><span className="text-slate-900">Offices</span><span className="text-slate-400 font-light text-2xl md:text-3xl mx-1"> &</span><span className="text-slate-700">Villas</span>
-                </span>
-                <span className="block text-lg md:text-2xl font-serif italic text-slate-600 mt-1 md:mt-2">
-                  and show real 3D to clients.
-                </span>
-              </h1>
-
-              {/* PDR line */}
-              <p className="text-sm md:text-base font-bold text-slate-800 mt-2 md:mt-4 mb-1">
-                Learn <span className="text-orange-500">PDR</span> — Planning, Designing & Rendering
-              </p>
-              <p className="text-xs md:text-sm text-slate-500 mb-5 md:mb-8 max-w-sm md:max-w-md">
-                One bundle. Everything included.
-              </p>
-
-              {/* Story Block */}
-              <div className="w-full max-w-3xl mx-auto mb-6 md:mb-10 text-left bg-white p-5 md:p-8 rounded-2xl shadow-sm border border-orange-100 relative overflow-hidden">
-                <p className="text-sm md:text-lg font-serif text-slate-800 leading-relaxed mb-3 italic">
-                  "In our business of Architecture and Design, <span className="font-bold text-slate-900 border-b-2 border-orange-400">Planning, Design and Rendering</span> matter the most."
-                </p>
-                <div className="w-10 h-1 bg-orange-500 rounded-full mb-3"></div>
-                <p className="text-xs md:text-base text-slate-600 leading-relaxed mb-3 font-medium">
-                  The question isn't <em className="text-slate-800 font-bold">if</em> you can. It's...
-                </p>
-                <p className="text-base md:text-2xl font-display font-black text-orange-500 mb-4">
-                  How to do it FASTER?
-                </p>
-                {/* Hero Video */}
-                <div className="w-full mb-4 overflow-hidden rounded-xl shadow-xl" style={{ position: 'relative', paddingTop: '56.25%' }}>
-                  <iframe src="https://iframe.mediadelivery.net/embed/489113/a214b199-e64a-4eaf-af70-edfbc586e5fd?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style={{ border: 0, position: 'absolute', top: 0, height: '100%', width: '100%' }} allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowFullScreen={true} />
-                </div>
-
-                <div className="flex items-start gap-3 p-3 md:p-4 bg-orange-50 border border-orange-100 rounded-xl">
-                  <span className="text-xl md:text-2xl mt-0.5 shrink-0">🚀</span>
-                  <p className="text-slate-700 font-medium leading-relaxed text-xs md:text-base">
-                    That's exactly why we built this. A complete blueprint — from software basics to client-ready renders — designed to make you <strong className="text-orange-500">job or business ready in just one month.</strong>
-                  </p>
-                </div>
-              </div>
-
-              {/* CTA */}
-              <div className="flex flex-col sm:flex-row gap-3 items-center mb-3 w-full sm:w-auto">
-                <button onClick={openPaymentModal} className="w-full sm:w-auto px-8 py-3.5 md:py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-2xl font-bold text-sm md:text-lg shadow-xl shadow-orange-500/20 hover:shadow-orange-500/30 hover:scale-[1.03] transition-all flex items-center justify-center gap-3 group premium-stroke whitespace-nowrap">
-                  <Download size={18} className="shrink-0" />
-                  Get All Courses & 24/7 Support <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
-                </button>
-              </div>
-              <p className="text-[10px] md:text-xs text-slate-500 mb-7 md:mb-10 font-bold">24/7 Team Support • Free Software • 7-Day Money-Back Guarantee</p>
-
-              {/* Outcome strip */}
-              <div className="w-full mb-6 flex gap-2">
-                <div className="flex-1 bg-amber-50 border border-amber-200 rounded-xl px-3 py-3 text-left">
-                  <p className="text-base font-black text-slate-900">💼 Get a Better Job</p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">Higher-paying design roles</p>
-                </div>
-                <div className="flex-1 bg-amber-50 border border-amber-200 rounded-xl px-3 py-3 text-left">
-                  <p className="text-base font-black text-slate-900">🏢 Own Design Firm</p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">Freelance & studio projects</p>
-                </div>
-              </div>
-
-            </div>
+      {/* ═══════ WHAT'S INCLUDED ═══════ */}
+      <section className="w-full py-20 px-4 sm:px-6 lg:px-8 bg-background border-y border-border/40">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-primary text-xs font-bold uppercase tracking-widest mb-3">Courses Included</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Learn Every Tool You Need</h2>
+            <p className="text-muted-foreground text-lg">From beginner drafting to AI-powered design — all in one bundle.</p>
           </div>
-        </section>
-
-
-        {/* ═══════ COURSE SLIDESHOW — Master Every Tool ═══════ */}
-        <section className="py-8 md:py-16 bg-white border-b border-gray-100 overflow-hidden relative">
-           <div className="container mx-auto px-4 mb-8">
-             <div className="text-center reveal">
-                 <div className="inline-flex items-center gap-2 text-orange-500 text-xs font-bold uppercase tracking-widest mb-2">
-                   <Sparkles size={14} />
-                   All 12 Premium Courses Included
-                 </div>
-                 <h2 className="text-2xl md:text-4xl font-display font-black text-gray-900 leading-tight">Master Every Tool Needed<br/>For Professional Design</h2>
-             </div>
-           </div>
-           
-           <div className="flex flex-col gap-3 md:gap-4 relative w-full overflow-hidden pb-4">
-            {/* ROW 1: Courses 1 to 6 */}
-            <div className="flex gap-3 md:gap-4 animate-scroll-right hover:pause w-max pl-4 md:pl-6">
-              {[...COURSES.slice(0, 6), ...COURSES.slice(0, 6)].map((course, i) => {
-                const globalIndex = i % 6;
-                return (
-                  <div key={`row1-${course.id}-${i}`} className="w-[140px] md:w-[150px] shrink-0 bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    <div className="relative aspect-square overflow-hidden bg-gray-100">
-                      <img src={course.imageUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      
-                      {/* Number Badge */}
-                      <div className="absolute top-1.5 left-1.5 w-6 h-6 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center font-display font-bold text-gray-900 shadow-sm text-[10px] border border-gray-200">
-                        {globalIndex + 1}
-                      </div>
-                      
-                      {/* Software Badge */}
-                      <div className="absolute top-1.5 right-1.5 bg-white/95 backdrop-blur-sm text-gray-900 text-[8px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200">
-                        {course.software}
-                      </div>
-                      
-                      {/* View Overlay */}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center text-orange-500 shadow-lg">
-                          <Eye size={14} />
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="p-2">
-                      <h3 className="font-display font-bold text-gray-900 text-xs md:text-sm mb-1 line-clamp-1 leading-tight" title={course.title}>{course.title}</h3>
-                      <div className="mt-1 pt-1 border-t border-gray-100">
-                        <div className="bg-orange-50 text-orange-600 text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center justify-center gap-1 border border-orange-100 w-full">
-                          <CheckCircle2 size={8}/> Included
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            
-            {/* ROW 2: Courses 7 to 12 */}
-            <div className="flex gap-3 md:gap-4 animate-scroll-right hover:pause w-max pl-4 md:pl-6" style={{ animationDelay: '-22.5s' }}>
-              {[...COURSES.slice(6, 12), ...COURSES.slice(6, 12)].map((course, i) => {
-                const globalIndex = (i % 6) + 6;
-                return (
-                  <div key={`row2-${course.id}-${i}`} className="w-[140px] md:w-[150px] shrink-0 bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    <div className="relative aspect-square overflow-hidden bg-gray-100">
-                      <img src={course.imageUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      
-                      {/* Number Badge */}
-                      <div className="absolute top-1.5 left-1.5 w-6 h-6 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center font-display font-bold text-gray-900 shadow-sm text-[10px] border border-gray-200">
-                        {globalIndex + 1}
-                      </div>
-                      
-                      {/* Software Badge */}
-                      <div className="absolute top-1.5 right-1.5 bg-white/95 backdrop-blur-sm text-gray-900 text-[8px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200">
-                        {course.software}
-                      </div>
-                      
-                      {/* View Overlay */}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center text-orange-500 shadow-lg">
-                          <Eye size={14} />
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="p-2">
-                      <h3 className="font-display font-bold text-gray-900 text-xs md:text-sm mb-1 line-clamp-1 leading-tight" title={course.title}>{course.title}</h3>
-                      <div className="mt-1 pt-1 border-t border-gray-100">
-                        <div className="bg-orange-50 text-orange-600 text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center justify-center gap-1 border border-orange-100 w-full">
-                          <CheckCircle2 size={8}/> Included
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-
-
-        {/* ═══════ CTA #1 — After Course Showcase ═══════ */}
-        <section className="py-8 md:py-10 px-4 md:px-5">
-          <div className="max-w-3xl mx-auto">
-            <CtaWithTimer timeLeft={timeLeft} onClick={openPaymentModal} variant="green" />
-          </div>
-        </section>
-
-
-        {/* 4. STUDENT WORK CAROUSEL — Visual Proof */}
-        <section className="py-16 md:py-24 bg-slate-50 overflow-hidden border-b border-slate-200 grid-bg">
-          <div className="max-w-5xl mx-auto px-5 mb-12 text-center">
-            <div className="reveal">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">See What Our <span className="text-orange-600">Students Have Created</span></h2>
-              <p className="text-slate-600 text-lg max-w-2xl mx-auto italic font-serif">"With 24/7 team support, these students transformed their portfolios and confidence."</p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-6 md:gap-8">
-            <div className="flex gap-3 md:gap-8 animate-scroll-left hover:pause">
-              {[...PAGE_PREVIEWS_ROW1, ...PAGE_PREVIEWS_ROW1].map((img, i) => (
-                <div key={i} className="w-[200px] md:w-[400px] shrink-0 aspect-video rounded-xl md:rounded-2xl overflow-hidden border border-slate-200 shadow-2xl relative group bg-slate-100">
-                  <img src={img} alt="Student Work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {COURSES_LANDING.map((course) => (
+              <div key={course.id} className="bg-card rounded-2xl border border-border overflow-hidden group hover:shadow-lg hover:border-primary/30 transition-all duration-300">
+                <div className="aspect-[4/3] relative overflow-hidden bg-zinc-100">
+                  <img src={course.imageUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm text-xs font-bold px-2 py-1 rounded-full text-foreground border border-border">{course.software}</div>
+                  <div className="absolute bottom-2 right-2 bg-primary/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">{course.students} students</div>
                 </div>
-              ))}
-            </div>
-            <div className="flex gap-3 md:gap-8 animate-scroll-right hover:pause">
-              {[...PAGE_PREVIEWS_ROW2, ...PAGE_PREVIEWS_ROW2].map((img, i) => (
-                <div key={i} className="w-[200px] md:w-[400px] shrink-0 aspect-video rounded-xl md:rounded-2xl overflow-hidden border border-slate-200 shadow-2xl relative group bg-slate-100">
-                  <img src={img} alt="Student Work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="p-5">
+                  <h3 className="font-bold text-lg mb-2">{course.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-3 line-clamp-2">{course.description}</p>
+                  <ul className="space-y-1.5">
+                    {course.learningPoints.map((pt, j) => (
+                      <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground">
+                        <CheckCircle size={12} className="text-primary mt-0.5 shrink-0" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-
-        {/* 6. INCOME TIERS — The ROI */}
-        <section className="py-16 bg-white border-b border-slate-200">
-          <div className="max-w-5xl mx-auto px-5">
-            <div className="reveal text-center mb-10">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Invest in Yourself Today. <br className="hidden md:block" /><span className="text-orange-600">Start making money in the industry.</span></h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {INCOME_TIERS.map((tier, i) => (
-                <div key={i} className="reveal bg-white border border-slate-200 rounded-2xl p-6 hover:border-orange-600/40 transition-all shadow-soft flex flex-col justify-between">
-                  <div className="flex items-center justify-between mb-4"><span className="text-sm font-bold text-slate-900 leading-tight w-2/3">{tier.label}</span><span className="text-3xl">{tier.icon}</span></div>
-                  <div className="flex items-center justify-between">
-                    <div><p className="text-[10px] font-mono text-slate-500 uppercase">Before</p><p className="text-slate-400 text-sm line-through">{tier.before}</p></div>
-                    <ArrowRight size={16} className="text-orange-600" />
-                    <div className="text-right"><p className="text-[10px] font-mono text-orange-500 uppercase">After</p><p className="text-orange-600 text-sm font-bold">{tier.after}</p></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 7. WHAT YOU GET — The Offer */}
-        <section className="py-16 md:py-20 bg-slate-50 border-y border-slate-200 grid-bg">
-          <div className="max-w-5xl mx-auto px-5">
-            <div className="reveal text-center mb-10">
-              <p className="text-orange-500 text-xs font-mono uppercase tracking-widest mb-3">Included with enrollment</p>
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Everything You Need to Succeed, <span className="text-orange-600">Provided Today</span></h2>
-              <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">A supportive bundle filled with all the software guides, 24/7 team support, and tools you need.</p>
-            </div>
-            <div className="reveal max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-soft">
-              {VALUE_STACK_ITEMS.map((item, i) => (
-                <div key={i} className={`flex justify-between items-center px-6 py-4 ${i !== VALUE_STACK_ITEMS.length - 1 ? 'border-b border-slate-100' : ''}`}>
-                  <div className="flex items-center gap-3"><CheckCircle size={16} className="text-orange-500 shrink-0" /><span className="text-sm text-slate-800 font-medium">{item.name}</span></div>
-                  <span className="text-sm font-bold text-slate-500">{item.value}</span>
-                </div>
-              ))}
-              
-              <div className="bg-orange-50 border-t border-orange-100 px-6 py-4 flex flex-col sm:flex-row gap-3 justify-between items-center">
-                <div className="flex items-center gap-3"><CheckCircle2 size={16} className="text-orange-600 shrink-0" /><span className="text-sm text-orange-900 font-bold">All Software (Free/Student Edition Links)</span></div>
-                <span className="text-sm font-black text-orange-600">INCLUDED</span>
-              </div>
-
-              <div className="bg-orange-50/50 border-t border-orange-200 px-6 py-6 flex flex-col items-center gap-6 justify-center">
-                <div className="flex flex-col sm:flex-row gap-6 items-center justify-center w-full">
-                  <span className="text-slate-900 font-bold text-center">Lifetime Access + Free Updates</span>
-                </div>
-                <button onClick={openPaymentModal} className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl font-bold text-lg shadow-xl shadow-orange-500/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-3 group premium-stroke whitespace-nowrap">
-                  <Download size={16} /> Access Everything Instantly <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════ CTA #2 — After Value Stack ═══════ */}
-        <section className="py-8 md:py-10 px-4 md:px-5 bg-white">
-          <div className="max-w-3xl mx-auto">
-            <CtaWithTimer timeLeft={timeLeft} onClick={openPaymentModal} variant="green" />
-          </div>
-        </section>
-
-        {/* 2. PROOF STATS */}
-        <section className="py-10 bg-slate-50 border-y border-slate-200 grid-bg">
-          <div className="max-w-5xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-6">
-            {FEAR_STATS.map((s, i) => (
-              <div key={i} className="text-center reveal">
-                <span className="text-2xl mb-2 block">{s.icon}</span>
-                <span className="text-3xl md:text-4xl font-display font-black text-orange-500">{s.stat}</span>
-                <p className="text-xs text-slate-500 mt-1 leading-snug">{s.label}</p>
               </div>
             ))}
           </div>
-        </section>
-
-        {/* 3. MANIFESTO — The Story & The Gap */}
-        <section className="py-16 md:py-28 grid-bg bg-white border-b border-slate-200">
-          <div className="max-w-3xl mx-auto px-5">
-            <div className="reveal text-center mb-12">
-              <p className="text-orange-500 text-xs font-mono uppercase tracking-widest mb-4">A Supportive Message from Our Team</p>
-              <h2 className="text-3xl md:text-5xl font-serif italic text-slate-900 mb-8 leading-snug">"We believe in practical, hands-on learning with experts who are always ready to help you."</h2>
-            </div>
-            <div className="reveal space-y-6 text-slate-600 text-base md:text-lg leading-relaxed">
-              <p>Learning complex software can feel overwhelming <strong className="text-slate-900">when you're doing it alone.</strong></p>
-              <p>That's why our program is built differently. You aren't just getting tutorial videos; you're joining a community where our team reviews your work, answers your technical questions, and cheers you on as you improve.</p>
-              <p>Whether you are a student, a freelancer, or a studio owner, <strong className="text-orange-600">we are here to support your transition</strong> into modern, high-quality 3D rendering. No more struggling with endless YouTube tutorials that leave you confused.</p>
-              <p>You don't need to spend thousands of dollars on expensive, outdated courses to build a portfolio you can be incredibly proud of.</p>
-              
-              <div className="my-10 bg-gradient-to-br from-orange-50 to-orange-50 border border-orange-200 rounded-2xl p-6 md:p-8 shadow-soft">
-                <p className="font-bold text-slate-900 text-xl mb-4">Here is How We Support You:</p>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3"><CheckCircle size={18} className="text-orange-500 shrink-0" /><span className="text-slate-800">12 Comprehensive Courses structured compassionately for beginners.</span></li>
-                  <li className="flex items-center gap-3"><CheckCircle size={18} className="text-orange-500 shrink-0" /><span className="text-slate-800">Direct links to free/student versions so you save your money.</span></li>
-                  <li className="flex items-center gap-3"><CheckCircle size={18} className="text-orange-500 shrink-0" /><span className="text-slate-800">24/7 support from team, installation help to course doubts—whenever you're stuck, we're here.</span></li>
-                </ul>
-                <div className="mt-6 pt-6 border-t border-orange-100 flex items-center justify-between">
-                  <span className="text-slate-600 text-sm italic font-bold">A complete learning ecosystem for just $49.</span>
-                  <button onClick={openPaymentModal} className="text-orange-600 font-bold text-sm hover:text-orange-600 flex items-center gap-1 group">Join Our Community <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
-                </div>
-              </div>
-
-              <p className="text-slate-900 font-semibold text-lg md:text-xl border-l-4 border-orange-500 pl-4 bg-orange-50 p-4 rounded-r-xl">Investing in your education is the best step you can take for your creative journey. Our team is excited to welcome you and help you build something amazing.</p>
-            </div>
-          </div>
-        </section>
-
-
-        {/* 5. OLD vs NEW — The Contrast */}
-        <section className="py-16 md:py-24 bg-white grid-bg">
-          <div className="max-w-5xl mx-auto px-5">
-            <div className="reveal text-center mb-12"><h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">The Lonely, Frustrating Path <br className="hidden md:block" />vs. <span className="text-orange-600">Our Hand-Holding Blueprint</span></h2></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="reveal grid-bg border border-red-200 rounded-2xl p-8 shadow-soft">
-                <div className="flex items-center gap-3 mb-6"><div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center"><X size={20} className="text-red-500" /></div><h3 className="text-xl font-bold text-red-500">The Old Struggle</h3></div>
-                <ul className="space-y-4">
-                  {PROBLEM_POINTS.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-slate-600 text-sm"><span className="mt-1 shrink-0 text-base">{item.emoji}</span>{item.text}</li>
-                  ))}
-                  {['Searching random YouTube tutorials that leave you confused and frustrated', 'Paying expensive monthly subscriptions for software you barely know how to use', 'Graduating from college but lacking a truly stunning portfolio to get hired'].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-slate-600 text-sm"><X size={14} className="text-red-500 mt-1 shrink-0" />{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="reveal bg-gradient-to-br from-orange-50 to-slate-50 border border-orange-200 rounded-2xl p-8 shadow-soft">
-                <div className="flex items-center gap-3 mb-6"><div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center"><CheckCircle size={20} className="text-orange-600" /></div><h3 className="text-xl font-bold text-slate-900">Our Supportive System</h3></div>
-                <ul className="space-y-4">
-                  {['A friendly, step-by-step pipeline: AutoCAD → SketchUp → V-Ray → Lumion → AI', 'AI handles the heavy lifting. You focus on creativity. 10x your output stress-free.', 'A stunning, professional portfolio built safely in just 15 days—even from zero', 'All necessary software links provided—say goodbye to expensive licenses', '24/7 support from team, installation help to course doubts'].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-slate-700 text-sm"><CheckCircle size={14} className="text-orange-500 mt-1 shrink-0" />{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 8. TESTIMONIALS — Social Proof */}
-        <section className="py-16 md:py-24 bg-white overflow-hidden grid-bg">
-          <div className="max-w-5xl mx-auto px-5 mb-12">
-            <div className="text-center mb-12">
-              <p className="text-orange-500 text-xs font-mono uppercase tracking-widest mb-4">Student Reviews</p>
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Students & <span className="text-orange-500">Professionals</span></h2>
-              <p className="text-slate-600 text-lg">50,000+ learners • 4.9★ average rating</p>
-            </div>
-
-            {/* Featured Transformations */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-              {TRANSFORMATION_STORIES.map((story, i) => (
-                <div key={i} className="reveal bg-gradient-to-br from-slate-50 to-orange-50 border border-slate-200 rounded-2xl p-8 shadow-soft relative overflow-hidden transition-all hover:border-orange-300">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>
-                  <span className="text-4xl mb-4 block">{story.emoji}</span>
-                  <div className="flex items-center gap-2 mb-6"><span className="font-bold text-slate-900 text-lg">{story.name}</span><span className="text-sm font-medium text-orange-500">• {story.role}</span></div>
-                  <div className="mb-4"><p className="text-[10px] font-mono uppercase text-slate-400 mb-1 tracking-wider">Before</p><p className="text-slate-600 text-sm leading-relaxed">{story.before}</p></div>
-                  <div><p className="text-[10px] font-mono uppercase text-orange-500 mb-1 tracking-wider">After</p><p className="text-slate-900 text-base font-bold leading-relaxed">{story.after}</p></div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <div className="flex gap-6 animate-scroll-left hover:pause">
-              {[...TESTIMONIALS_LANDING, ...TESTIMONIALS_LANDING].map((t, i) => (
-                <div key={i} className="w-[350px] shrink-0 bg-white border border-slate-200 p-8 rounded-3xl hover:border-orange-200 transition-all shadow-soft">
-                  <div className="flex gap-1 mb-4">{[...Array(5)].map((_, j) => <Star key={j} size={14} className="fill-orange-500 text-orange-500" />)}</div>
-                  <p className="text-slate-700 text-sm leading-relaxed mb-6 italic">"{t.content}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center font-bold text-orange-500">{t.name[0]}</div>
-                    <div className="text-left">
-                      <p className="text-sm font-bold text-slate-900 flex items-center gap-1">{t.name} <CheckCircle size={12} className="text-orange-600" /></p>
-                      <p className="text-[10px] text-slate-500 uppercase tracking-widest">{t.role} • {t.location}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="max-w-4xl mx-auto px-5 mt-16 md:mt-24 text-center reveal">
-            <img src="/renders/mentors.png" alt="Industry Experts" className="w-full h-auto drop-shadow-2xl" />
-          </div>
-        </section>
-
-        {/* 9. FAQ + FINAL CTA */}
-        <section className="py-16 md:py-24 bg-slate-50 border-t border-slate-200 grid-bg">
-          <div className="max-w-3xl mx-auto px-5 mb-16">
-            <div className="reveal text-center mb-12">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Common Questions</h2>
-              <p className="text-slate-600 text-base">All your questions, answered.</p>
-            </div>
-            <div className="space-y-3">
-              {FAQ_ITEMS_LANDING.map((faq, i) => (
-                <details key={i} className="reveal group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-soft" open={openFaqIndex === i}>
-                  <summary className="flex items-center justify-between p-5 cursor-pointer list-none" onClick={(e) => { e.preventDefault(); setOpenFaqIndex(openFaqIndex === i ? null : i); }}>
-                    <span className="text-sm md:text-base font-semibold text-slate-900 pr-6">{faq.question}</span>
-                    <ChevronDown size={18} className={`text-slate-400 transition-transform shrink-0 ${openFaqIndex === i ? 'rotate-180' : ''}`} />
-                  </summary>
-                  <div className="px-5 pb-5"><p className="text-slate-600 text-sm leading-relaxed">{faq.answer}</p></div>
-                </details>
-              ))}
-            </div>
-          </div>
-
-          {/* ═══════ CTA #3 — Final CTA ═══════ */}
-          <div className="max-w-3xl mx-auto px-4 md:px-5">
-            <div className="text-center mb-6 md:mb-8">
-              <h3 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-2">Let us hold your hand towards a brighter future.</h3>
-              <p className="text-slate-500 text-xs md:text-sm">AI is moving fast, but you don't have to face it alone. 50,000+ students chose our supportive community.</p>
-            </div>
-            <CtaWithTimer timeLeft={timeLeft} onClick={openPaymentModal} variant="dark" />
-          </div>
-        </section>
-      </main>
-
-      <footer className="bg-slate-900 py-12 px-6 text-center border-t border-slate-800 text-white/70">
-        <p className="text-xs uppercase tracking-[0.2em] mb-4">Avada Design & Architecture • 2026</p>
-        <div className="flex justify-center gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400"><span>Privacy</span><span>Terms</span><span>Support</span></div>
-      </footer>
-
-      {/* ═══ WHATSAPP FLOAT ═══ */}
-      <a href="https://wa.me/918545015333" target="_blank" rel="noopener noreferrer"
-        className="fixed bottom-16 right-4 z-[75] flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold px-3 py-2 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all"
-        style={{ boxShadow: '0 4px 0 #000, 0 6px 16px rgba(0,0,0,0.3)' }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span className="hidden sm:inline">Chat with us</span>
-      </a>
-
-      {/* ═══ STICKY BOTTOM BAR ═══ */}
-      <div className={`fixed bottom-0 left-0 right-0 z-[70] transition-transform duration-500 ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}>
-        <button onClick={openPaymentModal} className="w-full bg-white/98 backdrop-blur-2xl border-t border-slate-100 shadow-[0_-1px_40px_rgba(15,23,42,0.12)] px-4 py-2.5 flex items-center gap-3 active:bg-slate-50 transition-colors group">
-
-          {/* Left: price + label + timer */}
-          <div className="flex flex-col items-start gap-0.5 shrink-0">
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-base font-black text-slate-900">$49</span>
-              <span className="text-[10px] font-black text-slate-900 uppercase tracking-wide">Offer ends in</span>
-            </div>
-            <div className="flex items-center gap-0.5">
-              {[formatTime(timeLeft.h), formatTime(timeLeft.m), formatTime(timeLeft.s)].map((val, i) => (
-                <span key={i} className="flex items-center gap-0.5">
-                  <span className="bg-slate-900 text-white text-[11px] font-black font-mono px-1.5 py-0.5 rounded tabular-nums">{val}</span>
-                  {i < 2 && <span className="text-slate-400 text-[10px] font-bold mx-0.5">:</span>}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: Download Now button fills remaining space */}
-          <div className="flex-1 flex items-center justify-center gap-1.5 bg-slate-900 text-white text-xs font-bold py-3 rounded-xl group-hover:bg-black transition-all"
-            style={{ boxShadow: '0 0 0 2px #f97316, 0 0 12px rgba(249,115,22,0.35)' }}>
-            Download Now
-            <ArrowRight size={13} />
-          </div>
-
-        </button>
-      </div>
-
-      {/* ═══════ PAYMENT MODAL ═══════ */}
-      {showPaymentModal && (
-        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 gap-3">
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowPaymentModal(false)} />
-          <div className="relative z-10 inline-flex items-center gap-2 bg-white rounded-full px-5 py-2.5 shadow-xl border border-gray-200">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0"></span>
-            <span className="text-sm font-bold text-gray-900">{studentCount.toLocaleString('en-IN')}</span>
-            <span className="text-xs text-gray-500">students already enrolled</span>
-          </div>
-          <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh] animate-[fadeIn_0.3s_ease-out]">
-            <button aria-label="Close" onClick={() => setShowPaymentModal(false)} className="absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center bg-white/20 hover:bg-white/40 rounded-full text-white transition-colors">
-              <X size={16} />
-            </button>
-
-            {/* Header - pure black */}
-            <div className="bg-black text-white px-5 py-5">
-              <div className="inline-flex items-center gap-1.5 text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1.5">
-                <Sparkles size={12} />
-                Complete Bundle
-              </div>
-              <h3 className="text-xl font-display font-bold mb-1">All {COURSES.length} Courses</h3>
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-display font-black">$49</span>
-                <span className="text-gray-500 text-sm line-through">$99</span>
-                <span className="bg-white/10 text-white text-xs font-bold px-2 py-0.5 rounded-full border border-white/20">50% OFF</span>
-              </div>
-            </div>
-
-            <div className="px-5 pt-4 pb-5">
-              {/* Features */}
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                {["12 Premium Courses", "10,000+ Textures", "Official Certificate", "24/7 Team Support", "Lifetime Access"].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-gray-700 font-medium">
-                    <CheckCircle2 size={12} className="text-gray-900 shrink-0" />
-                    {item}
-                  </div>
-                ))}
-                <div className="flex items-center gap-2 text-xs font-bold col-span-2 bg-green-50 border border-green-200 rounded-lg px-3 py-2 text-green-600">
-                  <Download size={12} className="shrink-0 text-green-600" />
-                  Software Download — All Links Included
-                </div>
-              </div>
-
-              {/* Timer */}
-              <div className="bg-gray-50 rounded-xl p-2.5 mb-5 flex items-center justify-between border border-gray-200">
-                <div className="flex items-center gap-2">
-                  <Timer size={14} className="text-gray-900 animate-pulse" />
-                  <span className="text-xs font-bold text-gray-900">Offer ends in:</span>
-                </div>
-                <div className="flex items-center gap-0.5 font-display font-bold text-sm tabular-nums text-gray-900 bg-white px-2.5 py-1 rounded-md border border-gray-200 shadow-sm">
-                  <span>{formatTime(timeLeft.h)}</span><span className="text-gray-400">:</span>
-                  <span>{formatTime(timeLeft.m)}</span><span className="text-gray-400">:</span>
-                  <span>{formatTime(timeLeft.s)}</span>
-                </div>
-              </div>
-
-              {/* Email — very prominent */}
-              <label className="block text-xl font-black text-gray-900 mb-2">Email</label>
-              <div className="relative mb-1">
-                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={email}
-                  autoFocus
-                  onChange={(e) => { setEmail(e.target.value); setEmailError(false); }}
-                  className={`w-full pl-11 pr-4 py-3.5 bg-white border-2 ${
-                    emailError ? 'border-red-500' : 'border-gray-900'
-                  } rounded-xl text-sm font-medium focus:outline-none transition-all`}
-                />
-              </div>
-              {emailError && <p className="text-red-500 text-[10px] mb-2 font-bold">Enter a valid email address</p>}
-
-              <ModernPaymentForm
-                bare
-                email={email}
-                onSuccess={handlePaymentSuccess}
-              />
-
-              <div className="flex items-center justify-center gap-2 mt-4 text-[10px] text-gray-400">
-                <Lock size={10} /> SSL Secured Payment • 7-Day Money-Back Guarantee
-              </div>
-            </div>
-          </div>
         </div>
-      )}
+      </section>
 
-      {/* ═══════ PAYMENT SUCCESS OVERLAY ═══════ */}
-      {paymentSuccess && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-[fadeIn_0.5s_ease]">
-          <div className="bg-white rounded-[2rem] p-8 max-w-lg w-full text-center shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-gray-100 relative overflow-hidden max-h-[90vh] overflow-y-auto">
-            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-600 to-orange-500"></div>
-            <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
-              <Check size={40} className="text-orange-500" strokeWidth={3} />
-            </div>
-            <h2 className="text-3xl font-display font-black text-gray-900 mb-2">Payment Successful!</h2>
-            <p className="text-gray-500 mb-6 leading-relaxed">
-              Your payment of <span className="font-bold text-gray-900">$49</span> was received. Welcome to Avada!
-            </p>
-            {/* Save link warning */}
-            <div className="bg-yellow-50 border-2 border-yellow-400 rounded-2xl p-4 mb-4 text-left">
-              <p className="text-yellow-800 text-sm font-black mb-1">⚠️ Save this link — it's your only access</p>
-              <p className="text-yellow-700 text-xs leading-relaxed">This link was also emailed to you. Bookmark it now or copy it below.</p>
-            </div>
-            <div className="bg-gray-50 rounded-2xl p-5 mb-6 text-left border border-gray-100">
-              <div className="flex items-center gap-2 mb-3">
-                <Sparkles size={16} className="text-orange-500" />
-                <h3 className="font-bold text-gray-900">Your Course Library:</h3>
-              </div>
-              <a
-                href="https://drive.google.com/drive/folders/1CCyv9u82HiYI8jnyULISfBoGMcbcqd9U?usp=drive_link"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-4 rounded-xl text-center transition-colors text-sm mb-3"
-              >
-                Open Google Drive →
-              </a>
-              <button
-                onClick={() => { navigator.clipboard.writeText('https://drive.google.com/drive/folders/1CCyv9u82HiYI8jnyULISfBoGMcbcqd9U?usp=drive_link'); }}
-                className="w-full border-2 border-gray-200 hover:border-gray-400 text-gray-600 font-bold py-2.5 px-4 rounded-xl text-xs transition-colors"
-              >
-                Copy Link
-              </button>
-            </div>
-            <div className="bg-gray-50 rounded-2xl p-4 mb-8 text-left border border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      {/* ═══════ TESTIMONIALS ═══════ */}
+      <section className="w-full py-16 md:py-24 bg-muted/20 overflow-hidden border-b border-border/40">
+        <div className="max-w-5xl mx-auto px-5 mb-12 text-center">
+          <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">Student Reviews</p>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight mb-4">
+            Loved by <span className="text-primary">50,000+</span> Students
+          </h2>
+          <p className="text-muted-foreground text-lg">Real stories from architects and designers across India.</p>
+        </div>
+
+        <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory px-4 md:px-0 max-w-6xl mx-auto no-scrollbar">
+          {TESTIMONIALS_LANDING.map((t, i) => (
+            <div key={i} className="w-[300px] md:w-[350px] shrink-0 snap-center bg-card border border-border p-8 rounded-2xl hover:border-primary/30 transition-all shadow-sm flex flex-col justify-between">
               <div>
-                <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Receipt Number</div>
-                <div className="font-mono text-xs text-gray-600 truncate">{paymentSuccess}</div>
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, j) => <Star key={j} size={14} className="fill-primary text-primary" />)}
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6 italic">"{t.content}"</p>
               </div>
-              <div className="sm:text-right w-full sm:w-auto p-3 bg-white rounded-lg border border-gray-100">
-                <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Support / WhatsApp</div>
-                <a href="https://wa.me/918545015333" target="_blank" rel="noopener noreferrer" className="font-bold text-orange-600 hover:text-orange-500">+91 8545015333</a>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center font-bold text-primary">{t.name[0]}</div>
+                <div className="text-left">
+                  <p className="text-sm font-bold text-foreground flex items-center gap-1">{t.name} <CheckCircle size={12} className="text-primary" /></p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest">{t.role} • {t.location}</p>
+                </div>
               </div>
             </div>
-            <button
-              onClick={() => setPaymentSuccess(null)}
-              className="w-full bg-gray-900 text-white font-bold py-4 rounded-xl hover:bg-black transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
-            >
-              Close & Start Learning
-            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════ FAQ ═══════ */}
+      <section className="w-full py-16 md:py-24 bg-background border-t border-border/40">
+        <div className="max-w-3xl mx-auto px-5">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight mb-4">Common Questions</h2>
+            <p className="text-muted-foreground text-base">Everything you need to know before getting started.</p>
+          </div>
+          <div className="space-y-3">
+            {FAQ_ITEMS_LANDING.map((faq, i) => (
+              <div key={i} className="bg-card border border-border rounded-xl overflow-hidden shadow-sm hover:border-primary/30 transition-all">
+                <button
+                  onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
+                  className="w-full flex items-center justify-between p-5 text-left"
+                >
+                  <span className="text-sm md:text-base font-semibold text-foreground pr-6">{faq.question}</span>
+                  <ChevronDown size={18} className={`text-muted-foreground transition-transform shrink-0 ${openFaqIndex === i ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`px-5 text-muted-foreground text-sm leading-relaxed transition-all duration-300 overflow-hidden ${openFaqIndex === i ? 'max-h-40 pb-5 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  {faq.answer}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      )}
+      </section>
 
-
-      <SocialProofToast />
+      {/* ═══════ FINAL CTA ═══════ */}
+      <section className="w-full py-20 bg-zinc-900 text-white text-center px-4">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Start Your Design Career Today</h2>
+          <p className="text-zinc-400 mb-8 text-lg">Join 50,000+ professionals. Get instant access to every course.</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button size="lg" className="text-lg px-10 py-6 shadow-lg shadow-primary/30" onClick={() => navigate(`/checkout?product=${PRODUCTS[0].id}`)}>
+              Get Started — ₹{PRODUCTS[0].price} <ArrowRight size={18} className="ml-2" />
+            </Button>
+            <Button size="lg" variant="outline" className="text-lg px-10 py-6 border-zinc-700 text-zinc-300 hover:bg-zinc-800" onClick={() => navigate(`/checkout?product=${PRODUCTS[1].id}`)}>
+              All Courses — ₹{PRODUCTS[1].price}
+            </Button>
+          </div>
+          <p className="text-zinc-500 text-xs mt-6">🔒 Secure checkout • 7-day money-back guarantee • Instant access</p>
+        </div>
+      </section>
     </div>
   );
 };

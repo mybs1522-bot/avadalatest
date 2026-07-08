@@ -1,6 +1,23 @@
 import React from 'react';
-import { FEATURES } from '../constants';
 import { GlassCard } from './ui/GlassCard';
+
+const FEATURES = [
+  {
+    icon: '🚀',
+    title: 'Self-Paced Learning',
+    description: 'Learn at your own pace with lifetime access to all course materials and updates.'
+  },
+  {
+    icon: '💻',
+    title: 'Industry-Standard Tools',
+    description: 'Master SketchUp, V-Ray, D5 Render, Lumion, and AI design tools with step-by-step guides.'
+  },
+  {
+    icon: '🎓',
+    title: 'Official Certification',
+    description: 'Receive industry-recognized certificates of completion to boost your professional portfolio.'
+  }
+];
 
 export const Features: React.FC = () => {
   return (
