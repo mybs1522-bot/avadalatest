@@ -4,8 +4,8 @@ import { PRODUCTS } from '../lib/data';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../components/ui/card';
-import { triggerRazorpayCheckout } from '../lib/razorpay';
-import { Lock, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { triggerRazorpaySubscriptionCheckout } from '../lib/razorpay';
+import { Lock, ShieldCheck, CheckCircle2, Clock, Sparkles } from 'lucide-react';
 
 export default function CheckoutPage() {
   const location = useLocation();
@@ -15,10 +15,7 @@ export default function CheckoutPage() {
   const productId = searchParams.get('product');
   const isCart = searchParams.get('cart') === 'true';
   
-  const product = productId ? PRODUCTS.find(p => p.id === productId) : null;
-  
-  // GST is already included in the price
-  const total = product ? product.price : (isCart ? 397 : 0);
+  const product = productId ? PRODUCTS.find(p => p.id === productId) : PRODUCTS[0];
 
   const [formData, setFormData] = useState({
     name: '',
@@ -43,14 +40,18 @@ export default function CheckoutPage() {
     e.preventDefault();
     if (!validate()) return;
 
-    triggerRazorpayCheckout(
-      total,
+    triggerRazorpaySubscriptionCheckout(
+      {
+        monthlyPrice: 199,
+        trialDays: 2,
+        productName: product ? product.name : 'Avada Architecture Pass',
+      },
       (res) => {
-        alert('Payment successful! Payment ID: ' + res.razorpay_payment_id);
+        alert('Trial activated successfully! Mandate ID / Payment ID: ' + (res.razorpay_payment_id || res.razorpay_subscription_id || 'SUCCESS'));
         navigate('/');
       },
       (err) => {
-        console.error("Payment failed", err);
+        console.error("Subscription setup failed", err);
       },
       {
         name: formData.name,
@@ -72,15 +73,24 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-muted/20 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-extrabold mb-2">Secure Checkout</h1>
-        <p className="text-muted-foreground mb-8">Complete your purchase to get instant access.</p>
+        {/* Trial Header Badge */}
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 mb-8 flex items-center gap-3 text-emerald-800 dark:text-emerald-300">
+          <Sparkles size={24} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
+          <div>
+            <p className="font-bold text-sm sm:text-base">2-Day Free Trial Activated (₹0 Due Today)</p>
+            <p className="text-xs opacity-90">Enjoy 48 hours of full access. Auto-renews at ₹199/month via UPI AutoPay starting Day 3. Cancel anytime before trial ends.</p>
+          </div>
+        </div>
+
+        <h1 className="text-3xl font-extrabold mb-2">Activate Your 2-Day Trial</h1>
+        <p className="text-muted-foreground mb-8">Setup your UPI AutoPay mandate with ₹0 charge today.</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left Col: Customer Details Form */}
           <div>
             <Card>
               <CardHeader>
-                <CardTitle>Contact Information</CardTitle>
+                <CardTitle>Contact Details</CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-5" id="checkout-form">
@@ -110,7 +120,7 @@ export default function CheckoutPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-1.5">Phone Number <span className="text-destructive">*</span></label>
+                    <label className="block text-sm font-semibold mb-1.5">Phone Number (UPI Linked) <span className="text-destructive">*</span></label>
                     <Input 
                       type="tel" 
                       placeholder="10-digit mobile number" 
@@ -130,7 +140,7 @@ export default function CheckoutPage() {
                       onChange={(e) => setFormData({...formData, termsAccepted: e.target.checked})}
                     />
                     <label htmlFor="terms" className="text-sm text-muted-foreground cursor-pointer leading-relaxed">
-                      I accept the <Link to="/terms" className="text-primary hover:underline font-semibold">Terms and Conditions</Link>, <Link to="/privacy-policy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>, and <Link to="/refund-policy" className="text-primary hover:underline font-semibold">Refund Policy</Link>.
+                      I accept the <Link to="/terms" className="text-primary hover:underline font-semibold">Terms</Link>, <Link to="/privacy-policy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>, and authorize a recurring UPI AutoPay mandate of ₹199/month starting in 2 days.
                     </label>
                   </div>
                   {errors.terms && <p className="text-destructive text-xs">{errors.terms}</p>}
@@ -143,50 +153,46 @@ export default function CheckoutPage() {
           <div>
             <Card className="sticky top-24 border-primary/20 bg-primary/5">
               <CardHeader>
-                <CardTitle>Order Summary</CardTitle>
+                <CardTitle>Plan Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {product ? (
+                {product && (
                   <div className="flex items-start gap-4 pb-4 border-b border-border">
                     <img src={product.imageUrl} alt={product.name} className="w-20 h-14 object-cover rounded" />
                     <div>
                       <h3 className="font-bold text-sm leading-tight">{product.name}</h3>
-                      <p className="text-xs text-muted-foreground mt-1">Lifetime Access • Digital Delivery</p>
+                      <p className="text-xs text-emerald-600 font-semibold mt-1">2 Days Free Trial Included</p>
                     </div>
-                  </div>
-                ) : (
-                  <div className="pb-4 border-b border-border">
-                    <h3 className="font-bold text-sm">Shopping Cart Items</h3>
-                    <p className="text-xs text-muted-foreground mt-1">Multiple courses • Lifetime Access</p>
                   </div>
                 )}
 
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Subtotal</span>
-                    <span className="font-medium">₹{total}</span>
+                    <span className="text-muted-foreground">Initial Trial (2 Days)</span>
+                    <span className="font-bold text-emerald-600">FREE (₹0)</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">GST</span>
-                    <span className="font-medium text-emerald-600">Included ✓</span>
+                    <span className="text-muted-foreground">Recurring Billing (from Day 3)</span>
+                    <span className="font-bold">₹199 / month</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Shipping</span>
-                    <span className="font-medium text-emerald-600">Free (Digital)</span>
+                    <span className="text-muted-foreground">Payment Method</span>
+                    <span className="font-medium text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">UPI AutoPay</span>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-border flex justify-between items-center text-xl font-extrabold">
-                  <span>Total</span>
-                  <span className="text-primary">₹{total}</span>
+
+                <div className="pt-4 border-t border-border flex justify-between items-center text-lg font-extrabold">
+                  <span>Due Today</span>
+                  <span className="text-emerald-600">₹0</span>
                 </div>
               </CardContent>
               <CardFooter className="flex-col gap-4">
-                <Button type="submit" form="checkout-form" size="lg" className="w-full text-lg h-14 shadow-lg shadow-primary/25">
-                  Complete Payment — ₹{total} <Lock size={16} className="ml-2" />
+                <Button type="submit" form="checkout-form" size="lg" className="w-full text-lg h-14 shadow-lg shadow-primary/25 bg-emerald-600 hover:bg-emerald-700 text-white">
+                  Start 2-Day Free Trial (₹0) <Lock size={16} className="ml-2" />
                 </Button>
-                <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-                  <ShieldCheck size={14} className="text-emerald-500" />
-                  256-bit SSL Secure Checkout • Powered by Razorpay
+                <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground text-center">
+                  <ShieldCheck size={14} className="text-emerald-500 shrink-0" />
+                  Razorpay UPI AutoPay • Mandate authorization only (₹0 debited today)
                 </div>
               </CardFooter>
             </Card>
@@ -194,15 +200,15 @@ export default function CheckoutPage() {
             <div className="mt-6 space-y-3">
               <div className="flex items-center gap-3 text-sm">
                 <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
-                <span>Instant access via email after payment.</span>
+                <span><strong>2 days full unrestricted access</strong> to course materials.</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm">
+                <Clock size={16} className="text-emerald-500 shrink-0" />
+                <span>First ₹199 charge automatically applies in 48 hours.</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
-                <span><strong>7-day no-questions-asked</strong> refund guarantee.</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
-                <span>All prices are inclusive of GST.</span>
+                <span>Cancel anytime effortlessly before trial expires.</span>
               </div>
             </div>
           </div>

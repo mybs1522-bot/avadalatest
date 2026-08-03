@@ -16,6 +16,97 @@ export const loadRazorpay = (): Promise<boolean> => {
   });
 };
 
+export const triggerRazorpaySubscriptionCheckout = async (
+  subscriptionDetails: {
+    subscriptionId?: string;
+    planId?: string;
+    monthlyPrice: number;
+    trialDays: number;
+    productName: string;
+  },
+  onSuccess: (response: any) => void,
+  onFailure?: (response: any) => void,
+  customerDetails?: { name: string; email: string; contact: string }
+) => {
+  const res = await loadRazorpay();
+
+  if (!res) {
+    alert('Razorpay SDK failed to load. Are you online?');
+    return;
+  }
+
+  // Priority: passed ID -> env variable -> default sub_TLIjzEw0Da9kX8
+  let subId = subscriptionDetails.subscriptionId || import.meta.env.VITE_RAZORPAY_SUBSCRIPTION_ID || 'sub_TLIjzEw0Da9kX8';
+  const activePlanId = subscriptionDetails.planId || import.meta.env.VITE_RAZORPAY_PLAN_ID || 'plan_TLIfzHlkk1kIcr';
+
+
+  // If subscriptionId is not available, attempt fetching from edge function service
+  if (!subId) {
+    try {
+      const functionUrl = 'https://aexrgtpxyzfxjecozstf.supabase.co/functions/v1/razorpay-subscription';
+      const fetchRes = await fetch(functionUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          plan_id: activePlanId,
+          trial_days: subscriptionDetails.trialDays,
+          monthly_amount: subscriptionDetails.monthlyPrice
+        })
+      });
+
+      if (fetchRes.ok) {
+        const data = await fetchRes.json();
+        if (data.subscriptionId) {
+          subId = data.subscriptionId;
+        }
+      }
+    } catch (err) {
+      console.warn("Could not auto-generate subscription ID via Edge function", err);
+    }
+  }
+
+  const startAtUnix = Math.floor(Date.now() / 1000) + (subscriptionDetails.trialDays * 24 * 60 * 60);
+
+  const options: any = {
+    key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Wh4xEHePkQXqRO',
+    subscription_id: subId, // Mandates Razorpay to open the UPI AutoPay screen!
+    name: 'Avada Design',
+    description: `${subscriptionDetails.productName} — 2-Day Free Trial, then ₹${subscriptionDetails.monthlyPrice}/mo`,
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=100&q=80',
+    handler: function (response: any) {
+      onSuccess(response);
+    },
+    prefill: customerDetails || {
+      name: 'John Doe',
+      email: 'john@example.com',
+      contact: '9999999999',
+    },
+    notes: {
+      plan_id: activePlanId,
+      subscription_id: subId,
+      trial_days: `${subscriptionDetails.trialDays} days`,
+      recurring_amount: `₹${subscriptionDetails.monthlyPrice}/month`,
+      start_at: startAtUnix,
+    },
+    theme: {
+      color: '#059669', // Emerald theme for free trial
+    },
+  };
+
+  const paymentObject = new (window as any).Razorpay(options);
+  paymentObject.on('payment.failed', function (response: any) {
+    if (onFailure) {
+      onFailure(response);
+    } else {
+      alert(`Subscription mandate setup failed! Reason: ${response.error.description}`);
+    }
+  });
+
+  paymentObject.open();
+};
+
+
+
 export const triggerRazorpayCheckout = async (
   amountInINR: number,
   onSuccess: (response: any) => void,
@@ -29,13 +120,12 @@ export const triggerRazorpayCheckout = async (
     return;
   }
 
-  // Using a dummy key for demonstration purposes
   const options = {
     key: 'rzp_live_Wh4xEHePkQXqRO', 
-    amount: amountInINR * 100, // Amount is in currency subunits (paise)
+    amount: amountInINR * 100,
     currency: 'INR',
     name: 'Avada Design',
-    description: 'Course Purchase',
+    description: 'Course Access',
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=100&q=80',
     handler: function (response: any) {
       onSuccess(response);
@@ -49,7 +139,7 @@ export const triggerRazorpayCheckout = async (
       address: 'E-36, Coregano, Sector 8, Noida - 201301',
     },
     theme: {
-      color: '#f97316', // Primary orange color matching the theme
+      color: '#f97316',
     },
   };
 
@@ -64,3 +154,4 @@ export const triggerRazorpayCheckout = async (
   
   paymentObject.open();
 };
+

@@ -2,7 +2,10 @@ export const PRODUCTS = [
   {
     id: 'sketchup-vray-d5',
     name: 'Sketchup + Vray + D5 Render',
-    price: 397,
+    price: 199,
+    trialDays: 2,
+    billingPeriod: 'month',
+    trialText: '2-Day Free Trial (₹0 Today)',
     description: 'Master the ultimate architectural visualization workflow with this comprehensive bundle. Learn to model in SketchUp, create photorealistic renders in V-Ray, and produce stunning real-time walkthroughs with D5 Render.',
     imageUrl: 'https://lh3.googleusercontent.com/d/1vbV4j6K9sgzbbZ7qlRdgqPTXWiHBPLsr',
     topics: [
@@ -18,7 +21,10 @@ export const PRODUCTS = [
   {
     id: 'all-courses-bundle',
     name: 'All Courses Bundle',
-    price: 999,
+    price: 199,
+    trialDays: 2,
+    billingPeriod: 'month',
+    trialText: '2-Day Free Trial (₹0 Today)',
     description: 'Get access to our entire library of architecture and design courses at a massive discount. This bundle includes everything you need from drafting to advanced parametric modeling.',
     imageUrl: 'https://lh3.googleusercontent.com/d/1aHEt_z78tYD_0Cn66DiduAnhwn-o8El8',
     topics: [
@@ -32,3 +38,4 @@ export const PRODUCTS = [
     ]
   }
 ];
+

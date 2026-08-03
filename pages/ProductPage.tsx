@@ -64,21 +64,20 @@ export default function ProductPage() {
               </div>
 
               {/* Price + CTA for desktop (visible alongside the card) */}
-              <div className="hidden lg:flex items-center gap-6 mb-6">
+              <div className="hidden lg:flex flex-col gap-1 mb-6">
                 <div className="flex items-baseline gap-3">
-                  <span className="text-5xl font-extrabold text-white">₹{product.price}</span>
-                  <span className="text-xl text-zinc-500 line-through">₹{product.price * 10}</span>
-                  <span className="bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">90% OFF</span>
+                  <span className="text-5xl font-extrabold text-emerald-400">₹0</span>
+                  <span className="text-xl text-zinc-300 font-semibold">Today (2-Day Free Trial)</span>
+                  <span className="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">UPI AUTOPAY</span>
                 </div>
+                <span className="text-sm text-zinc-400">Auto-renews at ₹199/month starting Day 3. Cancel anytime.</span>
               </div>
               <div className="hidden lg:flex gap-4">
-                <Button size="lg" className="text-lg px-10 py-6 shadow-lg shadow-primary/30" onClick={handleCheckout}>
-                  Buy Now <ArrowRight size={18} className="ml-2" />
-                </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-zinc-700 text-zinc-300 hover:bg-zinc-800" asChild>
-                  <Link to="/cart">Add to Cart</Link>
+                <Button size="lg" className="text-lg px-10 py-6 shadow-lg shadow-emerald-500/30 bg-emerald-600 hover:bg-emerald-500 text-white" onClick={handleCheckout}>
+                  Start 2-Day Free Trial (₹0) <ArrowRight size={18} className="ml-2" />
                 </Button>
               </div>
+
             </div>
 
             {/* Right: Video/Image Card */}
@@ -238,19 +237,20 @@ export default function ProductPage() {
           <div className="flex items-center gap-3">
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-xl md:text-2xl font-extrabold text-foreground">₹{product.price}</span>
-                <span className="text-sm text-muted-foreground line-through">₹{product.price * 10}</span>
+                <span className="text-xl md:text-2xl font-extrabold text-emerald-600">₹0</span>
+                <span className="text-sm font-semibold text-muted-foreground">Today (2-Day Trial)</span>
               </div>
-              <p className="text-xs text-muted-foreground hidden sm:block">Lifetime access • 7-day guarantee</p>
+              <p className="text-xs text-muted-foreground hidden sm:block">Then ₹199/month via UPI AutoPay • Cancel anytime</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button size="lg" className="text-base px-6 md:px-10 py-5 shadow-lg shadow-primary/25" onClick={handleCheckout}>
-              Buy Now <ArrowRight size={16} className="ml-1.5" />
+            <Button size="lg" className="text-base px-6 md:px-10 py-5 shadow-lg shadow-emerald-600/25 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={handleCheckout}>
+              Start Free Trial <ArrowRight size={16} className="ml-1.5" />
             </Button>
           </div>
         </div>
       </div>
+
 
       {/* Bottom spacer for sticky bar */}
       <div className="h-20"></div>
