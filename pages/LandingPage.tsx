@@ -81,7 +81,6 @@ const LandingPage: React.FC = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [termsAccepted, setTermsAccepted] = useState(true);
   const [nameError, setNameError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -110,7 +109,6 @@ const LandingPage: React.FC = () => {
     if (!name.trim()) { setNameError(true); hasError = true; } else { setNameError(false); }
     if (!phone || phone.length < 10) { setPhoneError(true); hasError = true; } else { setPhoneError(false); }
     if (!email || !validateEmail(email)) { setEmailError(true); hasError = true; } else { setEmailError(false); }
-    if (!termsAccepted) { alert('Please accept the terms to proceed'); return; }
     if (hasError) return;
 
     setIsLoading(true);
@@ -593,9 +591,8 @@ const LandingPage: React.FC = () => {
                 </div>
                 <h3 className="text-2xl font-display font-black tracking-tight mb-1">All 4 Masterclass Courses</h3>
                 <div className="flex items-baseline gap-2.5">
-                  <span className="text-3xl font-display font-black text-emerald-400">Free Trial</span>
+                  <span className="text-3xl font-display font-black text-emerald-400 whitespace-nowrap">Free Trial</span>
                   <span className="text-slate-400 text-xs font-semibold">Then ₹399/mo after 3 days</span>
-                  <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/30">3-DAY ACCESS</span>
                 </div>
               </div>
             </div>
@@ -691,25 +688,11 @@ const LandingPage: React.FC = () => {
                   {emailError && <p className="text-red-500 text-[10px] mt-1 font-bold">Enter a valid email address</p>}
                 </div>
 
-                {/* Terms Checkbox */}
-                <div className="flex items-start gap-2.5 pt-2">
-                  <input
-                    type="checkbox"
-                    id="modal-terms"
-                    checked={termsAccepted}
-                    onChange={(e) => setTermsAccepted(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 accent-emerald-600 shrink-0 cursor-pointer"
-                  />
-                  <label htmlFor="modal-terms" className="text-xs text-slate-600 leading-snug cursor-pointer">
-                    I accept the Terms & authorize a recurring UPI AutoPay mandate of ₹399/month starting in 3 days. Cancel anytime.
-                  </label>
-                </div>
-
                 {/* Main Action Button */}
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl text-base flex items-center justify-center gap-2 transition-all shadow-xl shadow-emerald-600/30 active:scale-[0.98] disabled:opacity-70 cursor-pointer mt-2"
+                  className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl text-base flex items-center justify-center gap-2 transition-all shadow-xl shadow-emerald-600/30 active:scale-[0.98] disabled:opacity-70 cursor-pointer mt-3"
                 >
                   {isLoading ? (
                     <><Loader2 className="animate-spin" size={18} /> Setting up trial mandate...</>
