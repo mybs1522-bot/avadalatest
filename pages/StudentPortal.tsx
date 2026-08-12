@@ -35,21 +35,21 @@ const COURSE_MODULES: CourseModule[] = [
         id: 'l1',
         title: '01. SketchUp Workspace & 3D Modeling Fundamentals',
         duration: '18 min',
-        videoUrl: 'https://drive.google.com/file/d/1EmKeIQgblDsBTdm7_PrXyfEOMTdwltcm/preview',
+        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
         description: 'Complete guide to setting up your SketchUp 3D workspace, camera controls, and shortcut keys.'
       },
       {
         id: 'l2',
         title: '02. V-Ray Exterior Sunlight & HDRI Environment Setup',
         duration: '24 min',
-        videoUrl: 'https://drive.google.com/file/d/1EmKeIQgblDsBTdm7_PrXyfEOMTdwltcm/preview',
+        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
         description: 'Master photorealistic exterior sunlighting, dome lights, and HDRI sky maps.'
       },
       {
         id: 'l3',
         title: '03. V-Ray Materials & Realistic Surface Texturing',
         duration: '31 min',
-        videoUrl: 'https://drive.google.com/file/d/1EmKeIQgblDsBTdm7_PrXyfEOMTdwltcm/preview',
+        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
         description: 'Creating realistic glass, polished concrete, wood grains, and metallic surfaces.'
       }
     ]
@@ -62,14 +62,14 @@ const COURSE_MODULES: CourseModule[] = [
         id: 'l4',
         title: '04. D5 Render Real-Time Lighting & Asset Library',
         duration: '22 min',
-        videoUrl: 'https://drive.google.com/file/d/1EmKeIQgblDsBTdm7_PrXyfEOMTdwltcm/preview',
+        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
         description: 'Importing models into D5 Render, setting up real-time raytracing, and scattering foliage.'
       },
       {
         id: 'l5',
         title: '05. Creating Cinematic Walkthrough Animations in D5',
         duration: '29 min',
-        videoUrl: 'https://drive.google.com/file/d/1EmKeIQgblDsBTdm7_PrXyfEOMTdwltcm/preview',
+        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
         description: 'Setting up keyframe animation paths, depth of field, and rendering 4K video walkthroughs.'
       }
     ]
@@ -82,19 +82,20 @@ const COURSE_MODULES: CourseModule[] = [
         id: 'l6',
         title: '06. AutoCAD 2D Blueprints to 3D Revit BIM Model',
         duration: '35 min',
-        videoUrl: 'https://drive.google.com/file/d/1EmKeIQgblDsBTdm7_PrXyfEOMTdwltcm/preview',
+        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
         description: 'Convert 2D CAD floor plans into parametric 3D Revit BIM models ready for construction.'
       },
       {
         id: 'l7',
         title: '07. Photoshop Post-Production & Final Render Polish',
         duration: '20 min',
-        videoUrl: 'https://drive.google.com/file/d/1EmKeIQgblDsBTdm7_PrXyfEOMTdwltcm/preview',
+        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
         description: 'Color correction, adding scale figures, sky replacements, and portfolio post-processing.'
       }
     ]
   }
 ];
+
 
 
 export default function StudentPortal() {
