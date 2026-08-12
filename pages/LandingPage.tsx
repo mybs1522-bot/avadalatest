@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Star, CheckCircle, CheckCircle2, X, ChevronDown, Sparkles, Eye, Download, ShieldCheck, Timer } from 'lucide-react';
+import { ArrowRight, Star, CheckCircle, CheckCircle2, X, ChevronDown, Sparkles, Eye, Download, ShieldCheck, Timer, Phone, Mail, User, Lock, Loader2 } from 'lucide-react';
 import { COURSES } from '../constants';
+import { triggerRazorpaySubscriptionCheckout } from '../lib/razorpay';
+import { sendStudentWelcomeEmail } from '../lib/email';
 import {
   Logo, SocialProofToast,
   PROBLEM_POINTS, TRANSFORMATION_STORIES, FEAR_STATS,
@@ -72,19 +74,80 @@ const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState(() => { const D = (3 * 3600 + 36 * 60 + 20) * 1000, r = D - (Date.now() % D); return { h: Math.floor((r / 3600000) % 24), m: Math.floor((r / 60000) % 60), s: Math.floor((r / 1000) % 60) }; });
   const [showStickyBar, setShowStickyBar] = useState(false);
-  useEffect(() => { window.scrollTo(0, 0); }, []);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  // Payment Modal State
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(true);
+  const [nameError, setNameError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [studentCount, setStudentCount] = useState(22392);
+
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   useEffect(() => {
     const calc = () => { const D = (3 * 3600 + 36 * 60 + 20) * 1000, now = Date.now(), r = D - (now % D); setTimeLeft({ h: Math.floor((r / 3600000) % 24), m: Math.floor((r / 60000) % 60), s: Math.floor((r / 1000) % 60) }); };
     const t = setInterval(calc, 1000); calc(); return () => clearInterval(t);
   }, []);
   useEffect(() => { const h = () => setShowStickyBar(window.scrollY > 600); window.addEventListener('scroll', h, { passive: true }); return () => window.removeEventListener('scroll', h); }, []);
+  useEffect(() => { const t = setInterval(() => setStudentCount(c => c + 1), 5000); return () => clearInterval(t); }, []);
 
   const formatTime = (val: number) => val.toString().padStart(2, '0');
+  const validateEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
-  const goToCheckout = () => {
-    navigate('/checkout');
+  const openPaymentModal = () => {
+    setShowPaymentModal(true);
+  };
+
+  const handleModalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    let hasError = false;
+    if (!name.trim()) { setNameError(true); hasError = true; } else { setNameError(false); }
+    if (!phone || phone.length < 10) { setPhoneError(true); hasError = true; } else { setPhoneError(false); }
+    if (!email || !validateEmail(email)) { setEmailError(true); hasError = true; } else { setEmailError(false); }
+    if (!termsAccepted) { alert('Please accept the terms to proceed'); return; }
+    if (hasError) return;
+
+    setIsLoading(true);
+
+    triggerRazorpaySubscriptionCheckout(
+      {
+        monthlyPrice: 399,
+        trialDays: 3,
+        productName: 'Avada Architecture Masterclass Pass',
+      },
+      (res) => {
+        setIsLoading(false);
+        localStorage.setItem('student_session', JSON.stringify({
+          email: email.trim(),
+          name: name.trim() || email.split('@')[0],
+          trialActive: true
+        }));
+
+        sendStudentWelcomeEmail({
+          studentEmail: email.trim(),
+          studentName: name.trim() || email.split('@')[0],
+        });
+
+        alert('3-Day Free Trial Activated! Welcome to your Student Portal.');
+        setShowPaymentModal(false);
+        navigate('/portal');
+      },
+      (err) => {
+        setIsLoading(false);
+        console.error('Subscription setup failed', err);
+      },
+      {
+        name: name.trim() || 'Student',
+        email: email.trim(),
+        contact: phone.trim()
+      }
+    );
   };
 
   return (
@@ -94,7 +157,7 @@ const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Logo />
           <div className="flex items-center gap-4">
-            <button onClick={goToCheckout} className="hidden md:block text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all bg-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-600/30">
+            <button onClick={openPaymentModal} className="hidden md:block text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all bg-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-600/30">
               Start 3-Day Free Trial (₹0 Today)
             </button>
           </div>
@@ -166,7 +229,7 @@ const LandingPage: React.FC = () => {
 
               {/* HERO CTA BUTTON */}
               <div className="flex flex-col sm:flex-row gap-3 items-center mb-3 w-full sm:w-auto">
-                <button onClick={goToCheckout} className="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-extrabold text-sm md:text-lg shadow-xl shadow-emerald-600/30 hover:scale-[1.03] transition-all flex items-center justify-center gap-3 group">
+                <button onClick={openPaymentModal} className="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-extrabold text-sm md:text-lg shadow-xl shadow-emerald-600/30 hover:scale-[1.03] transition-all flex items-center justify-center gap-3 group">
                   <Sparkles size={20} className="shrink-0" />
                   Start 3-Day Free Trial (₹0 Today) <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
                 </button>
@@ -256,7 +319,7 @@ const LandingPage: React.FC = () => {
         {/* ═══════ CTA #1 — After Course Showcase ═══════ */}
         <section className="py-8 md:py-10 px-4 md:px-5">
           <div className="max-w-3xl mx-auto">
-            <CtaWithTimer timeLeft={timeLeft} onClick={goToCheckout} variant="green" />
+            <CtaWithTimer timeLeft={timeLeft} onClick={openPaymentModal} variant="green" />
           </div>
         </section>
 
@@ -329,7 +392,7 @@ const LandingPage: React.FC = () => {
               </div>
 
               <div className="bg-emerald-50/50 border-t border-emerald-200 px-6 py-6 flex flex-col items-center gap-6 justify-center">
-                <button onClick={goToCheckout} className="w-full sm:w-auto px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-extrabold text-lg shadow-xl shadow-emerald-600/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-3 group">
+                <button onClick={openPaymentModal} className="w-full sm:w-auto px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-extrabold text-lg shadow-xl shadow-emerald-600/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-3 group">
                   <Sparkles size={18} /> Start 3-Day Free Trial (₹0 Today) <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
                 </button>
               </div>
@@ -340,7 +403,7 @@ const LandingPage: React.FC = () => {
         {/* ═══════ CTA #2 — After Value Stack ═══════ */}
         <section className="py-8 md:py-10 px-4 md:px-5 bg-white">
           <div className="max-w-3xl mx-auto">
-            <CtaWithTimer timeLeft={timeLeft} onClick={goToCheckout} variant="green" />
+            <CtaWithTimer timeLeft={timeLeft} onClick={openPaymentModal} variant="green" />
           </div>
         </section>
 
@@ -377,7 +440,7 @@ const LandingPage: React.FC = () => {
                 </ul>
                 <div className="mt-6 pt-6 border-t border-emerald-100 flex items-center justify-between">
                   <span className="text-slate-600 text-sm italic font-bold">Start your 3-Day Trial today for ₹0.</span>
-                  <button onClick={goToCheckout} className="text-emerald-600 font-bold text-sm hover:text-emerald-700 flex items-center gap-1 group">Start Trial Now <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
+                  <button onClick={openPaymentModal} className="text-emerald-600 font-bold text-sm hover:text-emerald-700 flex items-center gap-1 group">Start Trial Now <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
                 </div>
               </div>
             </div>
@@ -452,7 +515,7 @@ const LandingPage: React.FC = () => {
               <h3 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-2">Let us hold your hand towards a brighter future.</h3>
               <p className="text-slate-500 text-xs md:text-sm">Start your 3-Day Free Trial (₹0 Today) and explore all masterclasses.</p>
             </div>
-            <CtaWithTimer timeLeft={timeLeft} onClick={goToCheckout} variant="dark" />
+            <CtaWithTimer timeLeft={timeLeft} onClick={openPaymentModal} variant="dark" />
           </div>
         </section>
       </main>
@@ -469,7 +532,7 @@ const LandingPage: React.FC = () => {
 
       {/* ═══ STICKY BOTTOM BAR ═══ */}
       <div className={`fixed bottom-0 left-0 right-0 z-[70] transition-transform duration-500 ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}>
-        <button onClick={goToCheckout} className="w-full bg-white/98 backdrop-blur-2xl border-t border-slate-100 shadow-[0_-1px_40px_rgba(15,23,42,0.12)] px-4 py-2.5 flex items-center gap-3 active:bg-slate-50 transition-colors group">
+        <button onClick={openPaymentModal} className="w-full bg-white/98 backdrop-blur-2xl border-t border-slate-100 shadow-[0_-1px_40px_rgba(15,23,42,0.12)] px-4 py-2.5 flex items-center gap-3 active:bg-slate-50 transition-colors group">
 
           {/* Left: price + label + timer */}
           <div className="flex flex-col items-start gap-0.5 shrink-0">
@@ -495,6 +558,179 @@ const LandingPage: React.FC = () => {
 
         </button>
       </div>
+
+      {/* ═══════ EXACT POPUP CHECKOUT MODAL DIALOG ═══════ */}
+      {showPaymentModal && (
+        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 gap-3 animate-in fade-in duration-200">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => !isLoading && setShowPaymentModal(false)} />
+          
+          {/* Top Floating Student Count Badge */}
+          <div className="relative z-10 inline-flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-full px-5 py-2 shadow-xl border border-emerald-100">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+            <span className="text-sm font-black text-slate-900">{studentCount.toLocaleString('en-IN')}</span>
+            <span className="text-xs text-slate-500 font-semibold">students already enrolled</span>
+          </div>
+
+          {/* Main Modal Dialog Box */}
+          <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col z-10 border border-slate-100">
+            
+            {/* Close Button (X) */}
+            <button 
+              aria-label="Close modal" 
+              onClick={() => !isLoading && setShowPaymentModal(false)} 
+              className="absolute top-3.5 right-3.5 z-20 w-8 h-8 flex items-center justify-center bg-white/20 hover:bg-white/40 rounded-full text-white transition-colors cursor-pointer"
+            >
+              <X size={16} />
+            </button>
+
+            {/* Dark Card Header */}
+            <div className="bg-slate-900 text-white px-6 py-5 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-extrabold uppercase tracking-widest mb-1.5">
+                  <Sparkles size={12} className="fill-yellow-400" />
+                  COMPLETE BUNDLE
+                </div>
+                <h3 className="text-2xl font-display font-black tracking-tight mb-1">All 4 Masterclass Courses</h3>
+                <div className="flex items-baseline gap-2.5">
+                  <span className="text-3xl font-display font-black text-emerald-400">₹0 Today</span>
+                  <span className="text-slate-400 text-xs font-semibold">Then ₹399/mo after 3 days</span>
+                  <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/30">3-DAY FREE TRIAL</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Body Form */}
+            <div className="p-6 overflow-y-auto space-y-4">
+              
+              {/* Feature Checklist */}
+              <div className="grid grid-cols-2 gap-2">
+                {["4 Premium Courses", "10,000+ Textures", "Official Certificate", "24/7 Team Support", "72 Hours Full Access"].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-slate-700 font-semibold">
+                    <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Download Links Banner */}
+              <div className="flex items-center gap-2 text-xs font-bold bg-amber-50 border border-amber-200/60 rounded-xl p-3 text-amber-900">
+                <Download size={14} className="text-amber-600 shrink-0" />
+                <span>Software Download Links Provided</span>
+              </div>
+
+              {/* Countdown Timer Strip */}
+              <div className="bg-red-50/80 border border-red-100 rounded-xl p-3 flex items-center justify-between">
+                <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
+                  <Timer size={14} className="text-red-500 animate-pulse" />
+                  <span>Offer ends in:</span>
+                </div>
+                <div className="flex items-center gap-1 font-mono font-bold text-sm text-red-600 bg-white px-2.5 py-1 rounded-md border border-red-200 shadow-xs tabular-nums">
+                  <span>{formatTime(timeLeft.h)}</span>
+                  <span className="text-slate-400">:</span>
+                  <span>{formatTime(timeLeft.m)}</span>
+                  <span className="text-slate-400">:</span>
+                  <span>{formatTime(timeLeft.s)}</span>
+                </div>
+              </div>
+
+              {/* Form Input Fields */}
+              <form onSubmit={handleModalSubmit} className="space-y-3 pt-1">
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
+                    Full Name
+                  </label>
+                  <div className="relative">
+                    <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      placeholder="Your full name"
+                      value={name}
+                      onChange={(e) => { setName(e.target.value); setNameError(false); }}
+                      className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border ${nameError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all`}
+                      required
+                    />
+                  </div>
+                  {nameError && <p className="text-red-500 text-[10px] mt-1 font-bold">Please enter your full name</p>}
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
+                    Phone Number (UPI Linked)
+                  </label>
+                  <div className="relative">
+                    <Phone size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <span className="absolute left-9 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs">+91</span>
+                    <input
+                      type="tel"
+                      placeholder="10-digit mobile number"
+                      value={phone}
+                      onChange={(e) => { setPhone(e.target.value.replace(/\D/g, '').slice(0, 10)); setPhoneError(false); }}
+                      className={`w-full pl-16 pr-4 py-2.5 bg-slate-50 border ${phoneError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all`}
+                      required
+                    />
+                  </div>
+                  {phoneError && <p className="text-red-500 text-[10px] mt-1 font-bold">Enter a valid 10-digit number</p>}
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <Mail size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="email"
+                      placeholder="your@email.com"
+                      value={email}
+                      onChange={(e) => { setEmail(e.target.value); setEmailError(false); }}
+                      className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border ${emailError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all`}
+                      required
+                    />
+                  </div>
+                  {emailError && <p className="text-red-500 text-[10px] mt-1 font-bold">Enter a valid email address</p>}
+                </div>
+
+                {/* Terms Checkbox */}
+                <div className="flex items-start gap-2.5 pt-2">
+                  <input
+                    type="checkbox"
+                    id="modal-terms"
+                    checked={termsAccepted}
+                    onChange={(e) => setTermsAccepted(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 accent-emerald-600 shrink-0 cursor-pointer"
+                  />
+                  <label htmlFor="modal-terms" className="text-xs text-slate-600 leading-snug cursor-pointer">
+                    I accept the Terms & authorize a recurring UPI AutoPay mandate of ₹399/month starting in 3 days. Cancel anytime.
+                  </label>
+                </div>
+
+                {/* Main Action Button */}
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl text-base flex items-center justify-center gap-2 transition-all shadow-xl shadow-emerald-600/30 active:scale-[0.98] disabled:opacity-70 cursor-pointer mt-2"
+                >
+                  {isLoading ? (
+                    <><Loader2 className="animate-spin" size={18} /> Setting up trial mandate...</>
+                  ) : (
+                    <>
+                      <Sparkles size={18} />
+                      Start 3-Day Free Trial (₹0 Today)
+                      <ArrowRight size={18} />
+                    </>
+                  )}
+                </button>
+              </form>
+
+              <div className="flex items-center justify-center gap-1.5 text-[10px] text-slate-400 font-semibold text-center pt-1">
+                <Lock size={12} className="text-emerald-500" /> Razorpay UPI AutoPay • ₹0 Debited Today
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
 
       <SocialProofToast />
     </div>
