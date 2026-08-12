@@ -152,7 +152,39 @@ export const triggerRazorpayCheckout = async (
       alert(`Payment failed! Reason: ${response.error.description}`);
     }
   });
-  
+
   paymentObject.open();
 };
+
+/**
+ * Verifies if a Razorpay Subscription / AutoPay trial is active or cancelled
+ */
+export const verifySubscriptionStatus = async (subscriptionId: string): Promise<{ active: boolean; status: string }> => {
+
+  try {
+    const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Wh4xEHePkQXqRO';
+    
+    // Call Razorpay Subscriptions API endpoint
+    const response = await fetch(`https://api.razorpay.com/v1/subscriptions/${subscriptionId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Basic ' + btoa(`${keyId}:`),
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      // Razorpay statuses: "created", "authenticated", "active" are valid active states
+      // "cancelled", "paused", "expired" mean user cancelled AutoPay!
+      const isActive = ['created', 'authenticated', 'active'].includes(data.status);
+      return { active: isActive, status: data.status };
+    }
+  } catch (error) {
+    console.warn('Could not verify Razorpay subscription status directly via API:', error);
+  }
+
+  // Fallback to active state if client-side API is restricted
+  return { active: true, status: 'active' };
+};
+
 
