@@ -54,7 +54,7 @@ export const sendStudentWelcomeEmail = async ({
                 
                 <div class="content">
                   <p style="font-size: 16px; font-weight: 600;">Hi ${studentName},</p>
-                  <p>Your <strong>3-Day Free Trial (₹0 Today)</strong> has been successfully activated! You now have full HD streaming access to all 4 course masterclasses:</p>
+                  <p>Your <strong>3-Day Free Trial</strong> has been successfully activated! You now have full HD streaming access to all 4 course masterclasses:</p>
                   
                   <ul style="padding-left: 20px; color: #3f3f46; font-size: 14px;">
                     <li><strong>SketchUp + V-Ray Complete Masterclass</strong> (22 Video Lessons)</li>
@@ -69,7 +69,7 @@ export const sendStudentWelcomeEmail = async ({
                     <strong style="color: #065f46; font-size: 13px;">🔒 Access Details:</strong>
                     <p style="margin: 4px 0 0; font-size: 12px; color: #047857;">
                       Login Email: <strong>${studentEmail}</strong><br/>
-                      Trial Duration: <strong>72 Hours (₹0 Today)</strong>
+                      Trial Duration: <strong>72 Hours (Free Trial)</strong>
                     </p>
                   </div>
                 </div>

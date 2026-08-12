@@ -92,13 +92,13 @@ export default function CheckoutPage() {
         <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 mb-8 flex items-center gap-3 text-emerald-800 dark:text-emerald-300">
           <Sparkles size={24} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
           <div>
-            <p className="font-bold text-sm sm:text-base">3-Day Free Trial Activated (₹0 Due Today)</p>
+            <p className="font-bold text-sm sm:text-base">3-Day Free Trial Activated</p>
             <p className="text-xs opacity-90">Enjoy 72 hours of full access. Auto-renews at ₹399/month via UPI AutoPay starting Day 4. Cancel anytime before trial ends.</p>
           </div>
         </div>
 
-        <h1 className="text-3xl font-extrabold mb-2">Activate Your 3-Day Trial</h1>
-        <p className="text-muted-foreground mb-8">Setup your UPI AutoPay mandate with ₹0 charge today.</p>
+        <h1 className="text-3xl font-extrabold mb-2">Activate Your 3-Day Free Trial</h1>
+        <p className="text-muted-foreground mb-8">Setup your UPI AutoPay mandate for your 3-day free trial.</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left Col: Customer Details Form */}
@@ -207,7 +207,7 @@ export default function CheckoutPage() {
                 </Button>
                 <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground text-center">
                   <ShieldCheck size={14} className="text-emerald-500 shrink-0" />
-                  Razorpay UPI AutoPay • Mandate authorization only (₹0 debited today)
+                  Razorpay UPI AutoPay • Mandate authorization only (Free Trial)
                 </div>
               </CardFooter>
             </Card>

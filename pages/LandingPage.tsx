@@ -50,8 +50,8 @@ const CtaWithTimer = ({ timeLeft, onClick, variant = 'green' }: { timeLeft: { h:
 
         {/* Price */}
         <div className="flex items-baseline gap-2">
-          <span className="text-3xl font-display font-black text-emerald-600 dark:text-emerald-400">₹0 Today</span>
-          <span className="bg-emerald-100 text-emerald-700 text-[9px] font-bold px-2 py-0.5 rounded-full">3-DAY FREE TRIAL</span>
+          <span className="text-3xl font-display font-black text-emerald-600 dark:text-emerald-400">Free Trial</span>
+          <span className="bg-emerald-100 text-emerald-700 text-[9px] font-bold px-2 py-0.5 rounded-full">3 DAYS ACCESS</span>
         </div>
 
         {/* Button */}
@@ -60,7 +60,7 @@ const CtaWithTimer = ({ timeLeft, onClick, variant = 'green' }: { timeLeft: { h:
           className={`${btnClass} text-sm px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 group hover:scale-[1.02] active:scale-[0.98] transition-all w-full shadow-lg shadow-emerald-600/30`}
         >
           <Sparkles size={16} className="shrink-0" />
-          <span>Start 3-Day Free Trial (₹0 Today)</span>
+          <span>Start 3-Day Free Trial</span>
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform shrink-0" />
         </button>
 
@@ -158,7 +158,7 @@ const LandingPage: React.FC = () => {
           <Logo />
           <div className="flex items-center gap-4">
             <button onClick={openPaymentModal} className="hidden md:block text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all bg-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-600/30">
-              Start 3-Day Free Trial (₹0 Today)
+              Start 3-Day Free Trial
             </button>
           </div>
         </div>
@@ -231,10 +231,10 @@ const LandingPage: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-3 items-center mb-3 w-full sm:w-auto">
                 <button onClick={openPaymentModal} className="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-extrabold text-sm md:text-lg shadow-xl shadow-emerald-600/30 hover:scale-[1.03] transition-all flex items-center justify-center gap-3 group">
                   <Sparkles size={20} className="shrink-0" />
-                  Start 3-Day Free Trial (₹0 Today) <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+                  Start 3-Day Free Trial <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
                 </button>
               </div>
-              <p className="text-[10px] md:text-xs text-slate-500 mb-7 md:mb-10 font-bold">₹0 Due Today • 72 Hours Full Access • Cancel Anytime</p>
+              <p className="text-[10px] md:text-xs text-slate-500 mb-7 md:mb-10 font-bold">72 Hours Full Access • Mandate Authorization • Cancel Anytime</p>
 
               {/* Banners below First CTA */}
               <div className="w-full max-w-3xl mx-auto flex flex-col gap-4 md:gap-6 mb-8 md:mb-12">
@@ -387,13 +387,13 @@ const LandingPage: React.FC = () => {
               ))}
               
               <div className="bg-emerald-50 border-t border-emerald-100 px-6 py-4 flex flex-col sm:flex-row gap-3 justify-between items-center">
-                <div className="flex items-center gap-3"><CheckCircle2 size={16} className="text-emerald-600 shrink-0" /><span className="text-sm text-emerald-900 font-bold">3-Day Free Trial (₹0 Today)</span></div>
+                <div className="flex items-center gap-3"><CheckCircle2 size={16} className="text-emerald-600 shrink-0" /><span className="text-sm text-emerald-900 font-bold">3-Day Free Trial</span></div>
                 <span className="text-sm font-black text-emerald-600">INCLUDED</span>
               </div>
 
               <div className="bg-emerald-50/50 border-t border-emerald-200 px-6 py-6 flex flex-col items-center gap-6 justify-center">
                 <button onClick={openPaymentModal} className="w-full sm:w-auto px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-extrabold text-lg shadow-xl shadow-emerald-600/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-3 group">
-                  <Sparkles size={18} /> Start 3-Day Free Trial (₹0 Today) <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
+                  <Sparkles size={18} /> Start 3-Day Free Trial <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
                 </button>
               </div>
             </div>
@@ -434,12 +434,12 @@ const LandingPage: React.FC = () => {
               <div className="my-10 bg-gradient-to-br from-emerald-50 to-emerald-50/50 border border-emerald-200 rounded-2xl p-6 md:p-8 shadow-soft">
                 <p className="font-bold text-slate-900 text-xl mb-4">Here is How We Support You:</p>
                 <ul className="space-y-3">
-                  <li className="flex items-center gap-3"><CheckCircle size={18} className="text-emerald-500 shrink-0" /><span className="text-slate-800">Full 3-Day Free Trial (₹0 Today) to explore all video streams.</span></li>
+                  <li className="flex items-center gap-3"><CheckCircle size={18} className="text-emerald-500 shrink-0" /><span className="text-slate-800">Full 3-Day Free Trial to explore all video streams.</span></li>
                   <li className="flex items-center gap-3"><CheckCircle size={18} className="text-emerald-500 shrink-0" /><span className="text-slate-800">4 Complete Masterclasses: SketchUp, V-Ray, D5 Render & AutoCAD.</span></li>
                   <li className="flex items-center gap-3"><CheckCircle size={18} className="text-emerald-500 shrink-0" /><span className="text-slate-800">24/7 team support whenever you feel stuck.</span></li>
                 </ul>
                 <div className="mt-6 pt-6 border-t border-emerald-100 flex items-center justify-between">
-                  <span className="text-slate-600 text-sm italic font-bold">Start your 3-Day Trial today for ₹0.</span>
+                  <span className="text-slate-600 text-sm italic font-bold">Start your 3-Day Trial today.</span>
                   <button onClick={openPaymentModal} className="text-emerald-600 font-bold text-sm hover:text-emerald-700 flex items-center gap-1 group">Start Trial Now <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
                 </div>
               </div>
@@ -513,7 +513,7 @@ const LandingPage: React.FC = () => {
           <div className="max-w-3xl mx-auto px-4 md:px-5">
             <div className="text-center mb-6 md:mb-8">
               <h3 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-2">Let us hold your hand towards a brighter future.</h3>
-              <p className="text-slate-500 text-xs md:text-sm">Start your 3-Day Free Trial (₹0 Today) and explore all masterclasses.</p>
+              <p className="text-slate-500 text-xs md:text-sm">Start your 3-Day Free Trial and explore all masterclasses.</p>
             </div>
             <CtaWithTimer timeLeft={timeLeft} onClick={openPaymentModal} variant="dark" />
           </div>
@@ -537,7 +537,7 @@ const LandingPage: React.FC = () => {
           {/* Left: price + label + timer */}
           <div className="flex flex-col items-start gap-0.5 shrink-0">
             <div className="flex items-baseline gap-1.5">
-              <span className="text-base font-black text-emerald-600">₹0 Today</span>
+              <span className="text-base font-black text-emerald-600">Free Trial</span>
               <span className="text-[10px] font-black text-slate-900 uppercase tracking-wide">3-Day Trial ends in</span>
             </div>
             <div className="flex items-center gap-0.5">
@@ -552,7 +552,7 @@ const LandingPage: React.FC = () => {
 
           {/* Right: Start 3-Day Trial button */}
           <div className="flex-1 flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 rounded-xl transition-all shadow-md shadow-emerald-600/30">
-            Start 3-Day Free Trial (₹0)
+            Start 3-Day Free Trial
             <ArrowRight size={13} />
           </div>
 
@@ -593,9 +593,9 @@ const LandingPage: React.FC = () => {
                 </div>
                 <h3 className="text-2xl font-display font-black tracking-tight mb-1">All 4 Masterclass Courses</h3>
                 <div className="flex items-baseline gap-2.5">
-                  <span className="text-3xl font-display font-black text-emerald-400">₹0 Today</span>
+                  <span className="text-3xl font-display font-black text-emerald-400">Free Trial</span>
                   <span className="text-slate-400 text-xs font-semibold">Then ₹399/mo after 3 days</span>
-                  <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/30">3-DAY FREE TRIAL</span>
+                  <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/30">3-DAY ACCESS</span>
                 </div>
               </div>
             </div>
@@ -716,7 +716,7 @@ const LandingPage: React.FC = () => {
                   ) : (
                     <>
                       <Sparkles size={18} />
-                      Start 3-Day Free Trial (₹0 Today)
+                      Start 3-Day Free Trial
                       <ArrowRight size={18} />
                     </>
                   )}
@@ -724,7 +724,7 @@ const LandingPage: React.FC = () => {
               </form>
 
               <div className="flex items-center justify-center gap-1.5 text-[10px] text-slate-400 font-semibold text-center pt-1">
-                <Lock size={12} className="text-emerald-500" /> Razorpay UPI AutoPay • ₹0 Debited Today
+                <Lock size={12} className="text-emerald-500" /> Razorpay UPI AutoPay • Mandate Authorization Only
               </div>
 
             </div>

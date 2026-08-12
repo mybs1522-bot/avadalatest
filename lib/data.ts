@@ -5,7 +5,7 @@ export const PRODUCTS = [
     price: 399,
     trialDays: 3,
     billingPeriod: 'month',
-    trialText: '3-Day Free Trial (₹0 Today)',
+    trialText: '3-Day Free Trial',
     description: 'Master the ultimate architectural visualization workflow with this comprehensive bundle. Learn to model in SketchUp, create photorealistic renders in V-Ray, and produce stunning real-time walkthroughs with D5 Render.',
     imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
     topics: [
@@ -24,7 +24,7 @@ export const PRODUCTS = [
     price: 399,
     trialDays: 3,
     billingPeriod: 'month',
-    trialText: '3-Day Free Trial (₹0 Today)',
+    trialText: '3-Day Free Trial',
     description: 'Get access to our entire library of architecture and design courses at a massive discount. This bundle includes everything you need from drafting to advanced parametric modeling.',
     imageUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
     topics: [

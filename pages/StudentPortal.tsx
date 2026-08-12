@@ -692,8 +692,8 @@ export default function StudentPortal() {
 
               <div className="mt-6 pt-6 border-t border-border text-center">
                 <p className="text-xs text-muted-foreground mb-3">Haven't started your 3-Day Free Trial yet?</p>
-                <Button variant="outline" className="w-full text-xs font-semibold" onClick={() => navigate('/checkout')}>
-                  <Sparkles size={14} className="mr-1 text-emerald-500" /> Start 3-Day Free Trial (₹0 Today)
+                <Button variant="outline" className="w-full text-xs font-semibold" onClick={() => navigate('/')}>
+                  <Sparkles size={14} className="mr-1 text-emerald-500" /> Start 3-Day Free Trial
                 </Button>
               </div>
             </CardContent>

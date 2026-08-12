@@ -81,16 +81,16 @@ export const CallToActionWidget = ({ timeLeft, onClick, headline, subtext }: { t
           <div className="flip-clock-group"><div className="flex gap-1"><FlipDigit value={s[0]} /><FlipDigit value={s[1]} /></div><span className="flip-clock-label">SEC</span></div>
         </div>
         <div className="mb-6">
-          <p className="text-emerald-400 font-semibold text-sm mt-2">Special Offer — 3-Day Free Trial (₹0 Today)</p>
+          <p className="text-emerald-400 font-semibold text-sm mt-2">Special Offer — 3-Day Free Trial</p>
         </div>
         <div className="w-full max-w-md mx-auto">
           <button onClick={onClick} className="cta-primary w-full text-white px-8 py-4 md:py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 group hover:scale-[1.03] active:scale-[0.98] premium-stroke" style={{ background: 'linear-gradient(135deg, #059669 0%, #047857 100%)', boxShadow: '0 6px 20px -4px rgba(5,150,105,0.5)', border: '1px solid rgba(255,255,255,0.15)' }}>
-            <span className="text-lg md:text-xl font-display font-bold uppercase tracking-widest relative z-10">Start 3-Day Free Trial (₹0 Today)</span>
+            <span className="text-lg md:text-xl font-display font-bold uppercase tracking-widest relative z-10">Start 3-Day Free Trial</span>
             <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
         <div className="mt-4 flex items-center justify-center gap-4 md:gap-8 text-[9px] md:text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500">
-          <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-emerald-500" /> ₹0 Due Today</div>
+          <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-emerald-500" /> Free Trial</div>
           <div className="w-[1px] h-3 bg-zinc-500"></div>
           <div className="flex items-center gap-1.5"><Zap size={14} className="text-emerald-500" /> Instant Access</div>
           <div className="w-[1px] h-3 bg-zinc-500 hidden sm:block"></div>
@@ -152,7 +152,7 @@ export const TESTIMONIALS_LANDING = [
 ];
 
 export const FAQ_ITEMS_LANDING = [
-  { question: "How does the 3-Day Free Trial work?", answer: "When you sign up, you authorize a UPI AutoPay mandate with ₹0 debited today. You get immediate 72-hour unrestricted access to all 4 course masterclasses. Your subscription auto-renews at ₹399/month starting on Day 4 unless you cancel anytime during your trial." },
+  { question: "How does the 3-Day Free Trial work?", answer: "When you sign up, you authorize a UPI AutoPay mandate for your 3-day free trial. You get immediate 72-hour unrestricted access to all 4 course masterclasses. Your subscription auto-renews at ₹399/month starting on Day 4 unless you cancel anytime during your trial." },
   { question: "I'm terrified of AI taking my job. Will this help?", answer: "We completely understand that fear! AI is scary if you ignore it, but it's an incredible superpower when you master it. We will hold your hand and teach you exactly how to use AI as your personal assistant, making you brilliantly fast and completely irreplaceable." },
   { question: "I am a complete beginner and get overwhelmed easily. Is this for me?", answer: "Yes, this program was built exactly with you in mind. We know learning software can be intimidating. We start from the absolute basics ('how to click here') and our team is always available to hold your hand when you feel stuck." },
   { question: "Are you really going to help me, or is this just another course?", answer: "This is a true 24/7 support community. When your render looks weird or your software crashes, you don't have to figure it out alone. You reach out to us, and we patiently help you fix it. Your success is our personal mission." },
