@@ -641,7 +641,7 @@ export default function StudentPortal() {
                 <UserCheck size={24} />
               </div>
               <CardTitle className="text-2xl font-bold">Student Portal Login</CardTitle>
-              <p className="text-xs text-zinc-400 mt-1">Access your 2-Day Trial Course Library & Video Stream</p>
+              <p className="text-xs text-zinc-400 mt-1">Access your 3-Day Trial Course Library & Video Stream</p>
             </CardHeader>
 
             <CardContent className="p-6">
@@ -690,9 +690,9 @@ export default function StudentPortal() {
               </form>
 
               <div className="mt-6 pt-6 border-t border-border text-center">
-                <p className="text-xs text-muted-foreground mb-3">Haven't started your 2-Day Free Trial yet?</p>
+                <p className="text-xs text-muted-foreground mb-3">Haven't started your 3-Day Free Trial yet?</p>
                 <Button variant="outline" className="w-full text-xs font-semibold" onClick={() => navigate('/checkout')}>
-                  <Sparkles size={14} className="mr-1 text-emerald-500" /> Start 2-Day Free Trial (₹0 Today)
+                  <Sparkles size={14} className="mr-1 text-emerald-500" /> Start 3-Day Free Trial (₹0 Today)
                 </Button>
               </div>
             </CardContent>
@@ -710,7 +710,7 @@ export default function StudentPortal() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 mb-2">
-                <Sparkles size={12} /> 2-DAY FREE TRIAL ACTIVE
+                <Sparkles size={12} /> 3-DAY FREE TRIAL ACTIVE
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
                 Welcome, <span className="text-emerald-400 capitalize">{user.name}</span>
@@ -722,9 +722,10 @@ export default function StudentPortal() {
               <div className="bg-zinc-800 border border-zinc-700 px-3 py-2 rounded-xl text-right">
                 <p className="text-[10px] text-zinc-400 font-mono">TRIAL STATUS</p>
                 <p className="text-xs font-bold text-emerald-400 flex items-center gap-1">
-                  <Clock size={12} /> 48 Hours Remaining
+                  <Clock size={12} /> 72 Hours Remaining
                 </p>
               </div>
+
 
               {/* Change Password Button */}
               <Button 

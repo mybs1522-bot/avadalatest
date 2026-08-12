@@ -29,7 +29,7 @@ export const sendStudentWelcomeEmail = async ({
         from: 'Avada Design <onboarding@ragegrow.com>',
 
         to: [studentEmail],
-        subject: '🚀 Your 2-Day Free Trial is Active! Access Your Course Library',
+        subject: '🚀 Your 3-Day Free Trial is Active! Access Your Course Library',
         html: `
           <!DOCTYPE html>
           <html>
@@ -47,14 +47,14 @@ export const sendStudentWelcomeEmail = async ({
             <body>
               <div class="card">
                 <div class="header">
-                  <div class="badge">2-DAY FREE TRIAL ACTIVATED</div>
+                  <div class="badge">3-DAY FREE TRIAL ACTIVATED</div>
                   <h1 style="margin: 0; font-size: 24px; font-weight: 800;">Welcome to Avada Design</h1>
                   <p style="margin: 6px 0 0; color: #a1a1aa; font-size: 13px;">Your 3D Architectural Masterclass Library is Ready</p>
                 </div>
                 
                 <div class="content">
                   <p style="font-size: 16px; font-weight: 600;">Hi ${studentName},</p>
-                  <p>Your <strong>2-Day Free Trial (₹0 Today)</strong> has been successfully activated! You now have full HD streaming access to all 4 course masterclasses:</p>
+                  <p>Your <strong>3-Day Free Trial (₹0 Today)</strong> has been successfully activated! You now have full HD streaming access to all 4 course masterclasses:</p>
                   
                   <ul style="padding-left: 20px; color: #3f3f46; font-size: 14px;">
                     <li><strong>SketchUp + V-Ray Complete Masterclass</strong> (22 Video Lessons)</li>
@@ -69,10 +69,11 @@ export const sendStudentWelcomeEmail = async ({
                     <strong style="color: #065f46; font-size: 13px;">🔒 Access Details:</strong>
                     <p style="margin: 4px 0 0; font-size: 12px; color: #047857;">
                       Login Email: <strong>${studentEmail}</strong><br/>
-                      Trial Duration: <strong>48 Hours (₹0 Today)</strong>
+                      Trial Duration: <strong>72 Hours (₹0 Today)</strong>
                     </p>
                   </div>
                 </div>
+
 
                 <div class="footer">
                   Need help? Contact support at <a href="mailto:support@avada.com" style="color: #059669;">support@avada.com</a><br/>

@@ -45,7 +45,7 @@ export default function CheckoutPage() {
     triggerRazorpaySubscriptionCheckout(
       {
         monthlyPrice: 199,
-        trialDays: 2,
+        trialDays: 3,
         productName: product ? product.name : 'Avada Architecture Pass',
       },
       (res) => {
@@ -61,10 +61,9 @@ export default function CheckoutPage() {
           studentName: formData.name,
         });
 
-        alert('2-Day Free Trial Activated! Welcome to your Student Portal.');
+        alert('3-Day Free Trial Activated! Welcome to your Student Portal.');
         navigate('/portal');
       },
-
 
       (err) => {
         console.error("Subscription setup failed", err);
@@ -93,12 +92,12 @@ export default function CheckoutPage() {
         <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 mb-8 flex items-center gap-3 text-emerald-800 dark:text-emerald-300">
           <Sparkles size={24} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
           <div>
-            <p className="font-bold text-sm sm:text-base">2-Day Free Trial Activated (₹0 Due Today)</p>
-            <p className="text-xs opacity-90">Enjoy 48 hours of full access. Auto-renews at ₹199/month via UPI AutoPay starting Day 3. Cancel anytime before trial ends.</p>
+            <p className="font-bold text-sm sm:text-base">3-Day Free Trial Activated (₹0 Due Today)</p>
+            <p className="text-xs opacity-90">Enjoy 72 hours of full access. Auto-renews at ₹199/month via UPI AutoPay starting Day 4. Cancel anytime before trial ends.</p>
           </div>
         </div>
 
-        <h1 className="text-3xl font-extrabold mb-2">Activate Your 2-Day Trial</h1>
+        <h1 className="text-3xl font-extrabold mb-2">Activate Your 3-Day Trial</h1>
         <p className="text-muted-foreground mb-8">Setup your UPI AutoPay mandate with ₹0 charge today.</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -156,7 +155,7 @@ export default function CheckoutPage() {
                       onChange={(e) => setFormData({...formData, termsAccepted: e.target.checked})}
                     />
                     <label htmlFor="terms" className="text-sm text-muted-foreground cursor-pointer leading-relaxed">
-                      I accept the <Link to="/terms" className="text-primary hover:underline font-semibold">Terms</Link>, <Link to="/privacy-policy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>, and authorize a recurring UPI AutoPay mandate of ₹199/month starting in 2 days.
+                      I accept the <Link to="/terms" className="text-primary hover:underline font-semibold">Terms</Link>, <Link to="/privacy-policy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>, and authorize a recurring UPI AutoPay mandate of ₹199/month starting in 3 days.
                     </label>
                   </div>
                   {errors.terms && <p className="text-destructive text-xs">{errors.terms}</p>}
@@ -177,18 +176,18 @@ export default function CheckoutPage() {
                     <img src={product.imageUrl} alt={product.name} className="w-20 h-14 object-cover rounded" />
                     <div>
                       <h3 className="font-bold text-sm leading-tight">{product.name}</h3>
-                      <p className="text-xs text-emerald-600 font-semibold mt-1">2 Days Free Trial Included</p>
+                      <p className="text-xs text-emerald-600 font-semibold mt-1">3 Days Free Trial Included</p>
                     </div>
                   </div>
                 )}
 
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Initial Trial (2 Days)</span>
+                    <span className="text-muted-foreground">Initial Trial (3 Days)</span>
                     <span className="font-bold text-emerald-600">FREE (₹0)</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Recurring Billing (from Day 3)</span>
+                    <span className="text-muted-foreground">Recurring Billing (from Day 4)</span>
                     <span className="font-bold">₹199 / month</span>
                   </div>
                   <div className="flex justify-between">
@@ -204,7 +203,7 @@ export default function CheckoutPage() {
               </CardContent>
               <CardFooter className="flex-col gap-4">
                 <Button type="submit" form="checkout-form" size="lg" className="w-full text-lg h-14 shadow-lg shadow-primary/25 bg-emerald-600 hover:bg-emerald-700 text-white">
-                  Start 2-Day Free Trial (₹0) <Lock size={16} className="ml-2" />
+                  Start 3-Day Free Trial (₹0) <Lock size={16} className="ml-2" />
                 </Button>
                 <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground text-center">
                   <ShieldCheck size={14} className="text-emerald-500 shrink-0" />
@@ -216,11 +215,11 @@ export default function CheckoutPage() {
             <div className="mt-6 space-y-3">
               <div className="flex items-center gap-3 text-sm">
                 <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
-                <span><strong>2 days full unrestricted access</strong> to course materials.</span>
+                <span><strong>3 days full unrestricted access</strong> to course materials.</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Clock size={16} className="text-emerald-500 shrink-0" />
-                <span>First ₹199 charge automatically applies in 48 hours.</span>
+                <span>First ₹199 charge automatically applies in 72 hours.</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
@@ -228,7 +227,6 @@ export default function CheckoutPage() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
