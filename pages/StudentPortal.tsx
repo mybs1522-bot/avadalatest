@@ -252,9 +252,10 @@ export default function StudentPortal() {
             <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 flex items-start gap-3">
               <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
               <div className="text-xs text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Anti-Download DRM Active:</strong> This video is protected against unauthorized downloads, screen copying, and link scraping. Enjoy continuous HD streaming on your registered device.
+                <strong className="text-foreground">Anti-Download DRM Active:</strong> Double-click any video file above to play it immediately in full HD. Video content is protected against unauthorized downloads, screen copying, and link scraping.
               </div>
             </div>
+
           </div>
 
           {/* Right Col: Course Modules & Lessons List */}

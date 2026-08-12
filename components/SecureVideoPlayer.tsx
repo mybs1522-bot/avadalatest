@@ -83,13 +83,6 @@ export const SecureVideoPlayer: React.FC<SecureVideoPlayerProps> = ({
       {/* Video Container */}
       <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
         
-        {/* Anti-copy transparent shield over top right controls to prevent pop-out redirect */}
-        <div 
-          className="absolute top-0 right-0 w-24 h-16 bg-transparent z-20 cursor-default" 
-          title="Video Player Controlled"
-          onClick={(e) => e.stopPropagation()}
-        />
-
         {/* Dynamic User Watermark overlay across player */}
         <div className="absolute inset-0 pointer-events-none z-10 flex flex-col justify-around p-8 opacity-20 rotate-[-12deg]">
           <div className="text-xs font-mono font-bold text-white tracking-widest uppercase">
@@ -100,16 +93,16 @@ export const SecureVideoPlayer: React.FC<SecureVideoPlayerProps> = ({
           </div>
         </div>
 
-        {/* Secure Video Embed */}
+        {/* Secure Interactive Video Embed */}
         <iframe
           src={embedUrl}
           className="w-full h-full border-0 pointer-events-auto"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen={false}
-          sandbox="allow-scripts allow-same-origin"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowFullScreen={true}
           title={title}
         />
       </div>
+
 
       {/* Security Disclaimer */}
       <div className="bg-zinc-950 p-3 flex items-center justify-between text-xs text-zinc-400 border-t border-zinc-800">
