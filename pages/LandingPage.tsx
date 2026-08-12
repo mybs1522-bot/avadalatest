@@ -632,82 +632,83 @@ const LandingPage: React.FC = () => {
               </div>
 
               {/* Form Input Fields */}
-              <form onSubmit={handleModalSubmit} className="space-y-3 pt-1">
+              <form onSubmit={handleModalSubmit} className="space-y-4 pt-1">
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
+                  <label className="block text-xs font-extrabold text-slate-600 uppercase tracking-wider mb-1.5">
                     Full Name
                   </label>
-                  <div className="relative">
-                    <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <div className="relative flex items-center">
+                    <User size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                     <input
                       type="text"
                       placeholder="Your full name"
                       value={name}
                       onChange={(e) => { setName(e.target.value); setNameError(false); }}
-                      className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border ${nameError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all`}
+                      className={`w-full pl-11 pr-4 py-3 bg-slate-50 border ${nameError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all`}
                       required
                     />
                   </div>
-                  {nameError && <p className="text-red-500 text-[10px] mt-1 font-bold">Please enter your full name</p>}
+                  {nameError && <p className="text-red-500 text-xs mt-1 font-semibold">Please enter your full name</p>}
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
+                  <label className="block text-xs font-extrabold text-slate-600 uppercase tracking-wider mb-1.5">
                     Phone Number (UPI Linked)
                   </label>
-                  <div className="relative">
-                    <Phone size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <span className="absolute left-9 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs">+91</span>
+                  <div className="relative flex items-center">
+                    <Phone size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                    <span className="absolute left-11 top-1/2 -translate-y-1/2 text-slate-600 font-bold text-sm pointer-events-none">+91</span>
                     <input
                       type="tel"
                       placeholder="10-digit mobile number"
                       value={phone}
                       onChange={(e) => { setPhone(e.target.value.replace(/\D/g, '').slice(0, 10)); setPhoneError(false); }}
-                      className={`w-full pl-16 pr-4 py-2.5 bg-slate-50 border ${phoneError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all`}
+                      className={`w-full pl-20 pr-4 py-3 bg-slate-50 border ${phoneError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all`}
                       required
                     />
                   </div>
-                  {phoneError && <p className="text-red-500 text-[10px] mt-1 font-bold">Enter a valid 10-digit number</p>}
+                  {phoneError && <p className="text-red-500 text-xs mt-1 font-semibold">Enter a valid 10-digit number</p>}
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
+                  <label className="block text-xs font-extrabold text-slate-600 uppercase tracking-wider mb-1.5">
                     Email Address
                   </label>
-                  <div className="relative">
-                    <Mail size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <div className="relative flex items-center">
+                    <Mail size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                     <input
                       type="email"
                       placeholder="your@email.com"
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); setEmailError(false); }}
-                      className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border ${emailError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all`}
+                      className={`w-full pl-11 pr-4 py-3 bg-slate-50 border ${emailError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all`}
                       required
                     />
                   </div>
-                  {emailError && <p className="text-red-500 text-[10px] mt-1 font-bold">Enter a valid email address</p>}
+                  {emailError && <p className="text-red-500 text-xs mt-1 font-semibold">Enter a valid email address</p>}
                 </div>
 
                 {/* Main Action Button */}
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl text-base flex items-center justify-center gap-2 transition-all shadow-xl shadow-emerald-600/30 active:scale-[0.98] disabled:opacity-70 cursor-pointer mt-3"
+                  className="w-full py-4 px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl text-base flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-emerald-600/30 active:scale-[0.98] disabled:opacity-70 cursor-pointer mt-4"
                 >
                   {isLoading ? (
-                    <><Loader2 className="animate-spin" size={18} /> Setting up trial mandate...</>
+                    <><Loader2 className="animate-spin" size={20} /> Setting up trial mandate...</>
                   ) : (
                     <>
-                      <Sparkles size={18} />
-                      Start 3-Day Free Trial
-                      <ArrowRight size={18} />
+                      <Sparkles size={18} className="shrink-0 text-amber-300 fill-amber-300" />
+                      <span className="leading-none">Start 3-Day Free Trial</span>
+                      <ArrowRight size={18} className="shrink-0" />
                     </>
                   )}
                 </button>
               </form>
 
-              <div className="flex items-center justify-center gap-1.5 text-[10px] text-slate-400 font-semibold text-center pt-1">
-                <Lock size={12} className="text-emerald-500" /> Razorpay UPI AutoPay • Mandate Authorization Only
+              <div className="flex items-center justify-center gap-1.5 text-xs text-slate-400 font-medium text-center pt-2">
+                <Lock size={13} className="text-emerald-500 shrink-0" />
+                <span>Razorpay UPI AutoPay • Mandate Authorization Only</span>
               </div>
 
             </div>
