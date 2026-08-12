@@ -2,7 +2,7 @@ export const PRODUCTS = [
   {
     id: 'sketchup-vray-d5',
     name: 'Sketchup + Vray + D5 Render',
-    price: 199,
+    price: 399,
     trialDays: 3,
     billingPeriod: 'month',
     trialText: '3-Day Free Trial (₹0 Today)',
@@ -21,7 +21,7 @@ export const PRODUCTS = [
   {
     id: 'all-courses-bundle',
     name: 'All Courses Bundle',
-    price: 199,
+    price: 399,
     trialDays: 3,
     billingPeriod: 'month',
     trialText: '3-Day Free Trial (₹0 Today)',

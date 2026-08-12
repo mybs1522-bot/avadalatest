@@ -56,7 +56,8 @@ export default async function handler(req, res) {
         break;
 
       case 'subscription.charged':
-        // Successful monthly ₹199 billing executed after trial!
+        // Successful monthly ₹399 billing executed after trial!
+
         const subCharged = payload.subscription.entity;
         const payment = payload.payment.entity;
         console.log(`Monthly Billing Success ₹${payment.amount / 100} for Sub ${subCharged.id}`);

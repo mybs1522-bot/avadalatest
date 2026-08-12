@@ -44,7 +44,7 @@ export default function CheckoutPage() {
 
     triggerRazorpaySubscriptionCheckout(
       {
-        monthlyPrice: 199,
+        monthlyPrice: 399,
         trialDays: 3,
         productName: product ? product.name : 'Avada Architecture Pass',
       },
@@ -93,7 +93,7 @@ export default function CheckoutPage() {
           <Sparkles size={24} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
           <div>
             <p className="font-bold text-sm sm:text-base">3-Day Free Trial Activated (₹0 Due Today)</p>
-            <p className="text-xs opacity-90">Enjoy 72 hours of full access. Auto-renews at ₹199/month via UPI AutoPay starting Day 4. Cancel anytime before trial ends.</p>
+            <p className="text-xs opacity-90">Enjoy 72 hours of full access. Auto-renews at ₹399/month via UPI AutoPay starting Day 4. Cancel anytime before trial ends.</p>
           </div>
         </div>
 
@@ -155,7 +155,7 @@ export default function CheckoutPage() {
                       onChange={(e) => setFormData({...formData, termsAccepted: e.target.checked})}
                     />
                     <label htmlFor="terms" className="text-sm text-muted-foreground cursor-pointer leading-relaxed">
-                      I accept the <Link to="/terms" className="text-primary hover:underline font-semibold">Terms</Link>, <Link to="/privacy-policy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>, and authorize a recurring UPI AutoPay mandate of ₹199/month starting in 3 days.
+                      I accept the <Link to="/terms" className="text-primary hover:underline font-semibold">Terms</Link>, <Link to="/privacy-policy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>, and authorize a recurring UPI AutoPay mandate of ₹399/month starting in 3 days.
                     </label>
                   </div>
                   {errors.terms && <p className="text-destructive text-xs">{errors.terms}</p>}
@@ -188,7 +188,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Recurring Billing (from Day 4)</span>
-                    <span className="font-bold">₹199 / month</span>
+                    <span className="font-bold">₹399 / month</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Payment Method</span>
@@ -219,7 +219,7 @@ export default function CheckoutPage() {
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Clock size={16} className="text-emerald-500 shrink-0" />
-                <span>First ₹199 charge automatically applies in 72 hours.</span>
+                <span>First ₹399 charge automatically applies in 72 hours.</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
