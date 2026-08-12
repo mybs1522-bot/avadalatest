@@ -387,7 +387,7 @@ const LandingPage: React.FC = () => {
             <div className="text-center mb-10">
               <p className="text-emerald-600 text-xs font-mono uppercase tracking-widest mb-3">Included with 3-Day Free Trial</p>
               <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Everything You Need to Succeed, <span className="text-emerald-600">Included Today</span></h2>
-              <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">Full 72 hours of unrestricted access to all 4 course masterclasses + support team.</p>
+              <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">Full 72 hours of unrestricted access to all 7 course masterclasses + support team.</p>
             </div>
             <div className="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-soft">
               {VALUE_STACK_ITEMS.map((item, i) => (
@@ -602,7 +602,7 @@ const LandingPage: React.FC = () => {
                   <Sparkles size={12} className="fill-yellow-400" />
                   COMPLETE BUNDLE
                 </div>
-                <h3 className="text-2xl font-display font-black tracking-tight mb-1">All 4 Masterclass Courses</h3>
+                <h3 className="text-2xl font-display font-black tracking-tight mb-1">All 7 Masterclass Courses</h3>
                 <div className="flex items-baseline gap-2.5">
                   <span className="text-3xl font-display font-black text-emerald-400 whitespace-nowrap">Free Trial</span>
                   <span className="text-slate-400 text-xs font-semibold">Then ₹399/mo after 3 days</span>
@@ -615,7 +615,7 @@ const LandingPage: React.FC = () => {
               
               {/* Feature Checklist */}
               <div className="grid grid-cols-2 gap-2">
-                {["4 Premium Courses", "10,000+ Textures", "Official Certificate", "24/7 Team Support", "72 Hours Full Access"].map((item, i) => (
+                {["7 Premium Courses", "10,000+ Textures", "Official Certificate", "24/7 Team Support", "72 Hours Full Access"].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs text-slate-700 font-semibold">
                     <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
                     <span>{item}</span>

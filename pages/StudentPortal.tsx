@@ -426,6 +426,36 @@ const LUMION_LESSONS: Lesson[] = [
   }
 ];
 
+const REVIT_LESSONS: Lesson[] = [
+  {
+    id: 'rev-1',
+    title: 'Revit Complete Course — Full Video Library',
+    duration: 'Full Course',
+    videoUrl: 'https://drive.google.com/embeddedfolderview?id=1s_9yXkU_gdoi9gF_IZLf3gQerPbeuu7u#list',
+    description: 'Complete Revit BIM course: 3D building modeling, floor plans, sections, elevations, families, and construction documentation.'
+  }
+];
+
+const ENSCAPE_LESSONS: Lesson[] = [
+  {
+    id: 'ens-1',
+    title: 'Enscape Complete Course — Full Video Library',
+    duration: 'Full Course',
+    videoUrl: 'https://drive.google.com/embeddedfolderview?id=1tKMwCLUTQtXhhAbXi6rMufhwil2DBBdr#list',
+    description: 'Real-time rendering, VR walkthroughs, material editing, and atmospheric lighting in Enscape.'
+  }
+];
+
+const TDSMAX_VRAY_LESSONS: Lesson[] = [
+  {
+    id: 'max-1',
+    title: '3ds Max + V-Ray Complete Course — Full Video Library',
+    duration: 'Full Course',
+    videoUrl: 'https://drive.google.com/embeddedfolderview?id=1C7n0_MyIeh-cHVzu2W4RVbxulNJB3B87#list',
+    description: 'Professional 3D modeling, photorealistic V-Ray rendering, interior/exterior visualization in 3ds Max.'
+  }
+];
+
 const COURSES_PORTAL_DATA: CourseItem[] = [
   // 1ST COURSE: Sketchup + V-Ray Masterclass (All 22 Videos)
   {
@@ -515,6 +545,60 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
         id: 'lum-mod-1',
         name: 'Lumion Complete Course (15 Videos)',
         lessons: LUMION_LESSONS
+      }
+    ]
+  },
+
+  // 5TH COURSE: Revit Complete Course
+  {
+    id: 'revit-complete-course',
+    title: '5. Revit Complete Course',
+    subtitle: 'BIM modeling & Architectural documentation',
+    description: 'BIM modeling, architectural documentation, 3D building design, and parametric families in Autodesk Revit.',
+    imageUrl: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80',
+    badge: '1 Module • 1 Folder',
+    totalLessons: 1,
+    modules: [
+      {
+        id: 'rev-mod-1',
+        name: 'Revit Complete Course (1 Folder)',
+        lessons: REVIT_LESSONS
+      }
+    ]
+  },
+
+  // 6TH COURSE: Enscape Real-Time Rendering
+  {
+    id: 'enscape-realtime-rendering',
+    title: '6. Enscape Real-Time Rendering',
+    subtitle: 'Real-time rendering & VR walkthroughs',
+    description: 'Real-time rendering, VR walkthroughs, material editing, and atmospheric lighting in Enscape.',
+    imageUrl: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?auto=format&fit=crop&w=1200&q=80',
+    badge: '1 Module • 1 Folder',
+    totalLessons: 1,
+    modules: [
+      {
+        id: 'ens-mod-1',
+        name: 'Enscape Complete Course (1 Folder)',
+        lessons: ENSCAPE_LESSONS
+      }
+    ]
+  },
+
+  // 7TH COURSE: 3ds Max + V-Ray
+  {
+    id: '3dsmax-vray-course',
+    title: '7. 3ds Max + V-Ray',
+    subtitle: 'Professional 3D modeling & V-Ray rendering',
+    description: 'Professional 3D modeling, photorealistic V-Ray rendering, interior/exterior visualization in 3ds Max.',
+    imageUrl: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80',
+    badge: '1 Module • 1 Folder',
+    totalLessons: 1,
+    modules: [
+      {
+        id: 'max-mod-1',
+        name: '3ds Max + V-Ray Complete Course (1 Folder)',
+        lessons: TDSMAX_VRAY_LESSONS
       }
     ]
   }

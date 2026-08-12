@@ -130,6 +130,9 @@ export const VALUE_STACK_ITEMS = [
   { name: 'Lumion Cinematic Walkthroughs', value: 'Included' },
   { name: 'D5 Real-Time Rendering', value: 'Included' },
   { name: 'AI Design & Rendering Course', value: 'Included' },
+  { name: 'Revit BIM Architecture Course', value: 'Included' },
+  { name: 'Enscape Real-Time Rendering Course', value: 'Included' },
+  { name: '3ds Max + V-Ray Visualization Course', value: 'Included' },
   { name: '10,000+ Premium Texture Library', value: 'Included' },
   { name: '2,000+ Drag-and-Drop 3D Models', value: 'Included' },
   { name: 'Software Download Links Hub', value: 'Included' },
@@ -152,7 +155,7 @@ export const TESTIMONIALS_LANDING = [
 ];
 
 export const FAQ_ITEMS_LANDING = [
-  { question: "How does the 3-Day Free Trial work?", answer: "When you sign up, you authorize a UPI AutoPay mandate for your 3-day free trial. You get immediate 72-hour unrestricted access to all 4 course masterclasses. Your subscription auto-renews at ₹399/month starting on Day 4 unless you cancel anytime during your trial." },
+  { question: "How does the 3-Day Free Trial work?", answer: "When you sign up, you authorize a UPI AutoPay mandate for your 3-day free trial. You get immediate 72-hour unrestricted access to all 7 course masterclasses. Your subscription auto-renews at ₹399/month starting on Day 4 unless you cancel anytime during your trial." },
   { question: "I'm terrified of AI taking my job. Will this help?", answer: "We completely understand that fear! AI is scary if you ignore it, but it's an incredible superpower when you master it. We will hold your hand and teach you exactly how to use AI as your personal assistant, making you brilliantly fast and completely irreplaceable." },
   { question: "I am a complete beginner and get overwhelmed easily. Is this for me?", answer: "Yes, this program was built exactly with you in mind. We know learning software can be intimidating. We start from the absolute basics ('how to click here') and our team is always available to hold your hand when you feel stuck." },
   { question: "Are you really going to help me, or is this just another course?", answer: "This is a true 24/7 support community. When your render looks weird or your software crashes, you don't have to figure it out alone. You reach out to us, and we patiently help you fix it. Your success is our personal mission." },
