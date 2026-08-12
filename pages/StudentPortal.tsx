@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SecureVideoPlayer } from '../components/SecureVideoPlayer';
+import { verifySubscriptionStatus } from '../lib/razorpay';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { 
   PlayCircle, ShieldCheck, Clock, BookOpen, UserCheck, 
   Sparkles, LogOut, Video, ArrowLeft, ChevronRight, CheckCircle2,
-  Key, Lock, X, Check
+  Key, Lock, X, Check, AlertTriangle
 } from 'lucide-react';
+
 
 
 interface Lesson {
@@ -540,6 +542,23 @@ export default function StudentPortal() {
   // Selected course state (null = show course thumbnail grid view)
   const [selectedCourse, setSelectedCourse] = useState<CourseItem | null>(null);
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
+  const [subStatusInfo, setSubStatusInfo] = useState<{ active: boolean; status: string }>({ active: true, status: 'active' });
+
+  // METHOD 2: Check Razorpay Subscription status on student portal load
+  useEffect(() => {
+    if (user) {
+      const activeSubId = import.meta.env.VITE_RAZORPAY_SUBSCRIPTION_ID || 'sub_TLKtqBChWenADS';
+      verifySubscriptionStatus(activeSubId).then((res) => {
+        setSubStatusInfo(res);
+        if (!res.active) {
+          const updatedUser = { ...user, trialActive: false };
+          setUser(updatedUser);
+          localStorage.setItem('student_session', JSON.stringify(updatedUser));
+        }
+      });
+    }
+  }, [user?.email]);
+
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
