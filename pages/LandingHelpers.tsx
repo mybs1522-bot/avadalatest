@@ -52,7 +52,7 @@ export const FEAR_STATS = [
 export const Logo = () => (
   <div className="flex flex-col items-center text-center cursor-pointer group" onClick={() => window.location.href = '/'}>
     <span className="font-display font-bold text-lg tracking-tight leading-none text-slate-900 whitespace-nowrap">Avada</span>
-    <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-emerald-600 whitespace-nowrap mt-1">Design</span>
+    <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-orange-600 whitespace-nowrap mt-1">Design</span>
   </div>
 );
 
@@ -68,7 +68,7 @@ export const CallToActionWidget = ({ timeLeft, onClick, headline, subtext }: { t
   return (
     <div className="relative py-12 md:py-20 px-6 overflow-hidden">
       <div className="absolute inset-0 bg-slate-900"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 blur-[150px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 blur-[150px] rounded-full pointer-events-none"></div>
       <div className="max-w-2xl mx-auto relative z-10 text-center">
         {headline && <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-2 tracking-tight">{headline}</h3>}
         {subtext && <p className="text-zinc-400 text-sm mb-6">{subtext}</p>}
@@ -81,20 +81,20 @@ export const CallToActionWidget = ({ timeLeft, onClick, headline, subtext }: { t
           <div className="flip-clock-group"><div className="flex gap-1"><FlipDigit value={s[0]} /><FlipDigit value={s[1]} /></div><span className="flip-clock-label">SEC</span></div>
         </div>
         <div className="mb-6">
-          <p className="text-emerald-400 font-semibold text-sm mt-2">Special Offer — 3-Day Free Trial</p>
+          <p className="text-orange-400 font-semibold text-sm mt-2">Special Offer — 3-Day Free Trial</p>
         </div>
         <div className="w-full max-w-md mx-auto">
-          <button onClick={onClick} className="cta-primary w-full text-white px-8 py-4 md:py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 group hover:scale-[1.03] active:scale-[0.98] premium-stroke" style={{ background: 'linear-gradient(135deg, #059669 0%, #047857 100%)', boxShadow: '0 6px 20px -4px rgba(5,150,105,0.5)', border: '1px solid rgba(255,255,255,0.15)' }}>
+          <button onClick={onClick} className="cta-primary w-full text-white px-8 py-4 md:py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 group hover:scale-[1.03] active:scale-[0.98] premium-stroke" style={{ background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)', boxShadow: '0 6px 20px -4px rgba(5,150,105,0.5)', border: '1px solid rgba(255,255,255,0.15)' }}>
             <span className="text-lg md:text-xl font-display font-bold uppercase tracking-widest relative z-10">Start 3-Day Free Trial</span>
             <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
         <div className="mt-4 flex items-center justify-center gap-4 md:gap-8 text-[9px] md:text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500">
-          <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-emerald-500" /> Free Trial</div>
+          <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-orange-500" /> Free Trial</div>
           <div className="w-[1px] h-3 bg-zinc-500"></div>
-          <div className="flex items-center gap-1.5"><Zap size={14} className="text-emerald-500" /> Instant Access</div>
+          <div className="flex items-center gap-1.5"><Zap size={14} className="text-orange-500" /> Instant Access</div>
           <div className="w-[1px] h-3 bg-zinc-500 hidden sm:block"></div>
-          <div className="hidden sm:flex items-center gap-1.5"><Users size={14} className="text-emerald-500" /> 72 Hours Full Access</div>
+          <div className="hidden sm:flex items-center gap-1.5"><Users size={14} className="text-orange-500" /> 72 Hours Full Access</div>
         </div>
       </div>
     </div>
@@ -115,7 +115,7 @@ export const SocialProofToast: React.FC = () => {
   return (
     <div className={`fixed bottom-20 left-3 z-[70] transition-all duration-400 ${visible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
       <div className="bg-white/95 backdrop-blur-xl border border-slate-100 rounded-full px-3 py-1.5 shadow-md flex items-center gap-2">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+        <span className="w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span>
         <p className="text-[11px] font-medium text-slate-600 whitespace-nowrap"><span className="font-bold text-slate-800">{j.name}</span> from {j.city} just started 3-Day Trial</p>
       </div>
     </div>

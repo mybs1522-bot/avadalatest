@@ -93,7 +93,7 @@ export const triggerRazorpaySubscriptionCheckout = async (
       start_at: startAtUnix,
     },
     theme: {
-      color: '#059669', // Emerald theme for free trial
+      color: '#f97316', // Emerald theme for free trial
     },
   };
 

@@ -1003,8 +1003,8 @@ export default function StudentPortal() {
         <div className="max-w-md w-full">
           <Card className="border-border shadow-2xl overflow-hidden">
             <CardHeader className="bg-zinc-900 text-white p-6 text-center relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
-              <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-3">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="w-12 h-12 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center mx-auto mb-3">
                 <UserCheck size={24} />
               </div>
               <CardTitle className="text-2xl font-bold">Student Portal Login</CardTitle>
@@ -1051,7 +1051,7 @@ export default function StudentPortal() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-6 shadow-lg shadow-emerald-600/25"
+                  className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-6 shadow-lg shadow-orange-600/25"
                   disabled={loginLoading}
                 >
                   {loginLoading ? (
@@ -1064,11 +1064,11 @@ export default function StudentPortal() {
 
               <div className="mt-5 pt-5 border-t border-border">
                 <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
-                  <ShieldCheck size={14} className="text-emerald-500 shrink-0" />
+                  <ShieldCheck size={14} className="text-orange-500 shrink-0" />
                   <span>We verify your email & phone against our payment records</span>
                 </div>
                 <Button variant="outline" className="w-full text-xs font-semibold" onClick={() => navigate('/')}>
-                  <Sparkles size={14} className="mr-1 text-emerald-500" /> Start 3-Day Free Trial
+                  <Sparkles size={14} className="mr-1 text-orange-500" /> Start 3-Day Free Trial
                 </Button>
               </div>
             </CardContent>
@@ -1085,11 +1085,11 @@ export default function StudentPortal() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 max-w-7xl">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 mb-2">
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20 mb-2">
                 <Sparkles size={12} /> 3-DAY FREE TRIAL ACTIVE
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-                Welcome, <span className="text-emerald-400 capitalize">{user.name}</span>
+                Welcome, <span className="text-orange-400 capitalize">{user.name}</span>
               </h1>
               <p className="text-xs text-zinc-400 mt-1">Full unrestricted access to all architecture & rendering masterclasses.</p>
             </div>
@@ -1097,7 +1097,7 @@ export default function StudentPortal() {
             <div className="flex items-center gap-3">
               <div className="bg-zinc-800 border border-zinc-700 px-3 py-2 rounded-xl text-right">
                 <p className="text-[10px] text-zinc-400 font-mono">TRIAL STATUS</p>
-                <p className="text-xs font-bold text-emerald-400 flex items-center gap-1">
+                <p className="text-xs font-bold text-orange-400 flex items-center gap-1">
                   <Clock size={12} /> 72 Hours Remaining
                 </p>
               </div>
@@ -1126,7 +1126,7 @@ export default function StudentPortal() {
               {COURSES_PORTAL_DATA.map((course) => (
                 <Card 
                   key={course.id} 
-                  className="overflow-hidden flex flex-col group border-2 border-border hover:border-emerald-500/50 transition-all duration-300 shadow-md hover:shadow-2xl cursor-pointer"
+                  className="overflow-hidden flex flex-col group border-2 border-border hover:border-orange-500/50 transition-all duration-300 shadow-md hover:shadow-2xl cursor-pointer"
                   onClick={() => handleSelectCourse(course)}
                 >
                   <div className="aspect-video relative overflow-hidden bg-zinc-900">
@@ -1136,14 +1136,14 @@ export default function StudentPortal() {
                       className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
+                    <div className="absolute top-3 left-3 bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
                       <Sparkles size={12} /> {course.badge}
                     </div>
                     <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
                       <span className="text-xs font-semibold bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
                         {course.totalLessons} Videos Included
                       </span>
-                      <div className="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-emerald-600/50">
+                      <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-orange-600/50">
                         <PlayCircle size={20} className="text-white fill-white" />
                       </div>
                     </div>
@@ -1151,10 +1151,10 @@ export default function StudentPortal() {
 
                   <CardContent className="p-6 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-xl font-bold mb-1.5 group-hover:text-emerald-600 transition-colors leading-snug">
+                      <h3 className="text-xl font-bold mb-1.5 group-hover:text-orange-600 transition-colors leading-snug">
                         {course.title}
                       </h3>
-                      <p className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mb-3">
+                      <p className="text-xs font-semibold text-orange-600 dark:text-orange-400 mb-3">
                         {course.subtitle}
                       </p>
                       <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
@@ -1164,9 +1164,9 @@ export default function StudentPortal() {
 
                     <div className="pt-6 mt-4 border-t border-border flex items-center justify-between">
                       <span className="text-xs font-bold text-muted-foreground flex items-center gap-1">
-                        <CheckCircle2 size={14} className="text-emerald-500" /> Full HD 4K Stream
+                        <CheckCircle2 size={14} className="text-orange-500" /> Full HD 4K Stream
                       </span>
-                      <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md shadow-emerald-600/20">
+                      <Button size="sm" className="bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md shadow-orange-600/20">
                         Watch Course Videos <ChevronRight size={14} className="ml-1" />
                       </Button>
                     </div>
@@ -1188,7 +1188,7 @@ export default function StudentPortal() {
               >
                 <ArrowLeft size={16} className="mr-1.5" /> Back to Course Library
               </Button>
-              <span className="text-xs font-semibold text-emerald-600 bg-emerald-500/10 px-3 py-1 rounded-full">
+              <span className="text-xs font-semibold text-orange-600 bg-orange-500/10 px-3 py-1 rounded-full">
                 {selectedCourse.title}
               </span>
             </div>
@@ -1200,7 +1200,7 @@ export default function StudentPortal() {
                 {selectedLesson && (
                   <>
                     <div>
-                      <div className="flex items-center gap-2 text-xs font-bold uppercase text-emerald-600 mb-2">
+                      <div className="flex items-center gap-2 text-xs font-bold uppercase text-orange-600 mb-2">
                         <Video size={14} /> Currently Watching
                       </div>
                       <h2 className="text-xl sm:text-2xl font-bold text-foreground leading-tight mb-2">
@@ -1219,8 +1219,8 @@ export default function StudentPortal() {
                 )}
 
                 {/* Features & Security Shield Info */}
-                <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 flex items-start gap-3">
-                  <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                <div className="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4 flex items-start gap-3">
+                  <ShieldCheck className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
                   <div className="text-xs text-muted-foreground leading-relaxed">
                     <strong className="text-foreground">Anti-Download DRM Active:</strong> This video is streaming with single-stream anti-download protection, inspect element blocking, and user session watermark.
                   </div>
@@ -1232,9 +1232,9 @@ export default function StudentPortal() {
                 <div className="bg-card border border-border rounded-2xl p-4 sm:p-5 shadow-sm">
                   <div className="flex items-center justify-between pb-3 mb-3 border-b border-border">
                     <h3 className="font-bold text-base flex items-center gap-2">
-                      <BookOpen size={18} className="text-emerald-600" /> Course Lessons
+                      <BookOpen size={18} className="text-orange-600" /> Course Lessons
                     </h3>
-                    <span className="text-xs font-semibold bg-emerald-500/10 text-emerald-600 px-2.5 py-1 rounded-full">
+                    <span className="text-xs font-semibold bg-orange-500/10 text-orange-600 px-2.5 py-1 rounded-full">
                       {selectedCourse.totalLessons} Videos
                     </span>
                   </div>
@@ -1257,13 +1257,13 @@ export default function StudentPortal() {
                                 onClick={() => setSelectedLesson(lesson)}
                                 className={`w-full p-3 text-left flex items-start gap-3 transition-all ${
                                   isSelected 
-                                    ? 'bg-emerald-500/10 border-l-4 border-emerald-500 font-semibold' 
+                                    ? 'bg-orange-500/10 border-l-4 border-orange-500 font-semibold' 
                                     : 'hover:bg-muted/50'
                                 }`}
                               >
-                                <PlayCircle size={16} className={`shrink-0 mt-0.5 ${isSelected ? 'text-emerald-600' : 'text-muted-foreground'}`} />
+                                <PlayCircle size={16} className={`shrink-0 mt-0.5 ${isSelected ? 'text-orange-600' : 'text-muted-foreground'}`} />
                                 <div className="flex-1 min-w-0">
-                                  <p className={`text-xs leading-snug truncate ${isSelected ? 'text-emerald-700 dark:text-emerald-300 font-bold' : 'text-foreground'}`}>
+                                  <p className={`text-xs leading-snug truncate ${isSelected ? 'text-orange-700 dark:text-orange-300 font-bold' : 'text-foreground'}`}>
                                     {lesson.title}
                                   </p>
                                   <span className="text-[10px] text-muted-foreground mt-0.5 block">{lesson.duration} • HD Stream</span>

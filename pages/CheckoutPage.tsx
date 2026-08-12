@@ -89,8 +89,8 @@ export default function CheckoutPage() {
     <div className="min-h-screen bg-muted/20 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Trial Header Badge */}
-        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 mb-8 flex items-center gap-3 text-emerald-800 dark:text-emerald-300">
-          <Sparkles size={24} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
+        <div className="bg-orange-500/10 border border-orange-500/30 rounded-2xl p-4 mb-8 flex items-center gap-3 text-orange-800 dark:text-orange-300">
+          <Sparkles size={24} className="shrink-0 text-orange-600 dark:text-orange-400" />
           <div>
             <p className="font-bold text-sm sm:text-base">3-Day Free Trial Activated</p>
             <p className="text-xs opacity-90">Enjoy 72 hours of full access. Auto-renews at ₹399/month via UPI AutoPay starting Day 4. Cancel anytime before trial ends.</p>
@@ -176,7 +176,7 @@ export default function CheckoutPage() {
                     <img src={product.imageUrl} alt={product.name} className="w-20 h-14 object-cover rounded" />
                     <div>
                       <h3 className="font-bold text-sm leading-tight">{product.name}</h3>
-                      <p className="text-xs text-emerald-600 font-semibold mt-1">3 Days Free Trial Included</p>
+                      <p className="text-xs text-orange-600 font-semibold mt-1">3 Days Free Trial Included</p>
                     </div>
                   </div>
                 )}
@@ -184,7 +184,7 @@ export default function CheckoutPage() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Initial Trial (3 Days)</span>
-                    <span className="font-bold text-emerald-600">FREE (₹0)</span>
+                    <span className="font-bold text-orange-600">FREE (₹0)</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Recurring Billing (from Day 4)</span>
@@ -198,15 +198,15 @@ export default function CheckoutPage() {
 
                 <div className="pt-4 border-t border-border flex justify-between items-center text-lg font-extrabold">
                   <span>Due Today</span>
-                  <span className="text-emerald-600">₹0</span>
+                  <span className="text-orange-600">₹0</span>
                 </div>
               </CardContent>
               <CardFooter className="flex-col gap-4">
-                <Button type="submit" form="checkout-form" size="lg" className="w-full text-lg h-14 shadow-lg shadow-primary/25 bg-emerald-600 hover:bg-emerald-700 text-white">
+                <Button type="submit" form="checkout-form" size="lg" className="w-full text-lg h-14 shadow-lg shadow-primary/25 bg-orange-600 hover:bg-orange-700 text-white">
                   Start 3-Day Free Trial (₹0) <Lock size={16} className="ml-2" />
                 </Button>
                 <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground text-center">
-                  <ShieldCheck size={14} className="text-emerald-500 shrink-0" />
+                  <ShieldCheck size={14} className="text-orange-500 shrink-0" />
                   Razorpay UPI AutoPay • Mandate authorization only (Free Trial)
                 </div>
               </CardFooter>
@@ -214,15 +214,15 @@ export default function CheckoutPage() {
             
             <div className="mt-6 space-y-3">
               <div className="flex items-center gap-3 text-sm">
-                <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
+                <CheckCircle2 size={16} className="text-orange-500 shrink-0" />
                 <span><strong>3 days full unrestricted access</strong> to course materials.</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <Clock size={16} className="text-emerald-500 shrink-0" />
+                <Clock size={16} className="text-orange-500 shrink-0" />
                 <span>First ₹399 charge automatically applies in 72 hours.</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
+                <CheckCircle2 size={16} className="text-orange-500 shrink-0" />
                 <span>Cancel anytime effortlessly before trial expires.</span>
               </div>
             </div>
