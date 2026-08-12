@@ -5,7 +5,9 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../components/ui/card';
 import { triggerRazorpaySubscriptionCheckout } from '../lib/razorpay';
+import { sendStudentWelcomeEmail } from '../lib/email';
 import { Lock, ShieldCheck, CheckCircle2, Clock, Sparkles } from 'lucide-react';
+
 
 export default function CheckoutPage() {
   const location = useLocation();
@@ -52,9 +54,17 @@ export default function CheckoutPage() {
           name: formData.name,
           trialActive: true
         }));
+
+        // Send Welcome Email via Resend API
+        sendStudentWelcomeEmail({
+          studentEmail: formData.email,
+          studentName: formData.name,
+        });
+
         alert('2-Day Free Trial Activated! Welcome to your Student Portal.');
         navigate('/portal');
       },
+
 
       (err) => {
         console.error("Subscription setup failed", err);
