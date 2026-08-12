@@ -4,16 +4,16 @@ import { ArrowRight, ShieldCheck, Zap, CheckCircle, Users, X } from 'lucide-reac
 export const getDriveUrl = (id: string) => `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
 
 export const RAW_JOINERS = [
-  { name: "Aarav S.", city: "Mumbai", time: "2 min ago" },
-  { name: "Priya K.", city: "Delhi", time: "5 min ago" },
-  { name: "Rahul M.", city: "Bangalore", time: "8 min ago" },
-  { name: "Neha R.", city: "Pune", time: "12 min ago" },
-  { name: "Vikram S.", city: "Chennai", time: "15 min ago" },
-  { name: "Kavya T.", city: "Hyderabad", time: "18 min ago" },
-  { name: "Siddharth N.", city: "Ahmedabad", time: "22 min ago" },
-  { name: "Ananya B.", city: "Kolkata", time: "25 min ago" },
-  { name: "Rohan D.", city: "Jaipur", time: "30 min ago" },
-  { name: "Ishaan P.", city: "Surat", time: "33 min ago" },
+  { name: "Priya P.", city: "Mumbai", time: "2 min ago" },
+  { name: "Rahul V.", city: "Delhi", time: "5 min ago" },
+  { name: "Ananya G.", city: "Pune", time: "8 min ago" },
+  { name: "Vikram S.", city: "Jaipur", time: "12 min ago" },
+  { name: "Meera I.", city: "Chennai", time: "15 min ago" },
+  { name: "Aravind S.", city: "Bangalore", time: "18 min ago" },
+  { name: "Neha K.", city: "Lucknow", time: "22 min ago" },
+  { name: "Rohit M.", city: "Ahmedabad", time: "25 min ago" },
+  { name: "Simran P.", city: "Chandigarh", time: "30 min ago" },
+  { name: "Arjun D.", city: "Hyderabad", time: "33 min ago" },
 ];
 
 export const PROBLEM_POINTS = [
@@ -23,8 +23,8 @@ export const PROBLEM_POINTS = [
 ];
 
 export const TRANSFORMATION_STORIES = [
-  { name: "Priya K.", role: "Freelance Designer", before: "Struggling alone with YouTube tutorials. Designs looked fake, took days, and clients wouldn't pay well without arguments.", after: "Joined our community. With 24/7 team support, she mastered V-Ray + AI. She now charges premium rates and finishes in a fraction of the time.", emoji: "✨" },
-  { name: "Rahul M.", role: "Architecture Student", before: "Terrified of AI taking his future job. Felt his college degree wasn't teaching practical, modern software skills.", after: "We held his hand through the workflow. He now uses AI to generate concepts and V-Ray for final polish. Just landed a massive internship.", emoji: "🎓" }
+  { name: "Priya P.", role: "Freelance Designer", before: "Struggling alone with YouTube tutorials. Designs looked fake, took days, and clients wouldn't pay well without arguments.", after: "Joined our community. With 24/7 team support, she mastered V-Ray + AI. She now charges premium rates and finishes in a fraction of the time.", emoji: "✨" },
+  { name: "Rahul V.", role: "Architecture Student", before: "Terrified of AI taking his future job. Felt his college degree wasn't teaching practical, modern software skills.", after: "We held his hand through the workflow. He now uses AI to generate concepts and V-Ray for final polish. Just landed a massive internship.", emoji: "🎓" }
 ];
 
 export const PAGE_PREVIEWS_ROW1 = [
@@ -52,7 +52,7 @@ export const FEAR_STATS = [
 export const Logo = () => (
   <div className="flex flex-col items-center text-center cursor-pointer group" onClick={() => window.location.href = '/'}>
     <span className="font-display font-bold text-lg tracking-tight leading-none text-slate-900 whitespace-nowrap">Avada</span>
-    <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-orange-500 whitespace-nowrap mt-1">Design</span>
+    <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-emerald-600 whitespace-nowrap mt-1">Design</span>
   </div>
 );
 
@@ -68,7 +68,7 @@ export const CallToActionWidget = ({ timeLeft, onClick, headline, subtext }: { t
   return (
     <div className="relative py-12 md:py-20 px-6 overflow-hidden">
       <div className="absolute inset-0 bg-slate-900"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 blur-[150px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 blur-[150px] rounded-full pointer-events-none"></div>
       <div className="max-w-2xl mx-auto relative z-10 text-center">
         {headline && <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-2 tracking-tight">{headline}</h3>}
         {subtext && <p className="text-zinc-400 text-sm mb-6">{subtext}</p>}
@@ -81,20 +81,20 @@ export const CallToActionWidget = ({ timeLeft, onClick, headline, subtext }: { t
           <div className="flip-clock-group"><div className="flex gap-1"><FlipDigit value={s[0]} /><FlipDigit value={s[1]} /></div><span className="flip-clock-label">SEC</span></div>
         </div>
         <div className="mb-6">
-          <p className="text-red-400 font-semibold text-sm mt-2">Special Offer — Don't miss this $49 deal</p>
+          <p className="text-emerald-400 font-semibold text-sm mt-2">Special Offer — 3-Day Free Trial (₹0 Today)</p>
         </div>
         <div className="w-full max-w-md mx-auto">
-          <button onClick={onClick} className="cta-primary w-full text-white px-8 py-4 md:py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 group hover:scale-[1.03] active:scale-[0.98] premium-stroke" style={{ background: 'linear-gradient(135deg, #f7a440 0%, #f7931e 100%)', boxShadow: '0 6px 20px -4px rgba(247,164,68,0.5), 0 12px 40px -8px rgba(247,147,30,0.25)', border: '1px solid rgba(255,255,255,0.15)' }}>
-            <span className="text-lg md:text-xl font-display font-bold uppercase tracking-widest relative z-10">Claim Your High-Paying Career</span>
+          <button onClick={onClick} className="cta-primary w-full text-white px-8 py-4 md:py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 group hover:scale-[1.03] active:scale-[0.98] premium-stroke" style={{ background: 'linear-gradient(135deg, #059669 0%, #047857 100%)', boxShadow: '0 6px 20px -4px rgba(5,150,105,0.5)', border: '1px solid rgba(255,255,255,0.15)' }}>
+            <span className="text-lg md:text-xl font-display font-bold uppercase tracking-widest relative z-10">Start 3-Day Free Trial (₹0 Today)</span>
             <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
         <div className="mt-4 flex items-center justify-center gap-4 md:gap-8 text-[9px] md:text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500">
-          <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-orange-500" /> 7-Day Money-Back</div>
+          <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-emerald-500" /> ₹0 Due Today</div>
           <div className="w-[1px] h-3 bg-zinc-500"></div>
-          <div className="flex items-center gap-1.5"><Zap size={14} className="text-orange-500" /> Instant Access</div>
+          <div className="flex items-center gap-1.5"><Zap size={14} className="text-emerald-500" /> Instant Access</div>
           <div className="w-[1px] h-3 bg-zinc-500 hidden sm:block"></div>
-          <div className="hidden sm:flex items-center gap-1.5"><Users size={14} className="text-orange-500" /> All Software Included Free</div>
+          <div className="hidden sm:flex items-center gap-1.5"><Users size={14} className="text-emerald-500" /> 72 Hours Full Access</div>
         </div>
       </div>
     </div>
@@ -115,8 +115,8 @@ export const SocialProofToast: React.FC = () => {
   return (
     <div className={`fixed bottom-20 left-3 z-[70] transition-all duration-400 ${visible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
       <div className="bg-white/95 backdrop-blur-xl border border-slate-100 rounded-full px-3 py-1.5 shadow-md flex items-center gap-2">
-        <span className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0"></span>
-        <p className="text-[11px] font-medium text-slate-600 whitespace-nowrap"><span className="font-bold text-slate-800">{j.name}</span> from {j.city} just enrolled</p>
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+        <p className="text-[11px] font-medium text-slate-600 whitespace-nowrap"><span className="font-bold text-slate-800">{j.name}</span> from {j.city} just started 3-Day Trial</p>
       </div>
     </div>
   );
@@ -132,38 +132,38 @@ export const VALUE_STACK_ITEMS = [
   { name: 'AI Design & Rendering Course', value: 'Included' },
   { name: '10,000+ Premium Texture Library', value: 'Included' },
   { name: '2,000+ Drag-and-Drop 3D Models', value: 'Included' },
-  { name: 'Software Installation Hub', value: 'Included' },
+  { name: 'Software Download Links Hub', value: 'Included' },
   { name: '24/7 Team Access & Portfolio Review', value: 'Included' },
   { name: 'Freelancing Pricing Playbook', value: 'Included' },
   { name: 'Certified Digital Diploma', value: 'Included' },
 ];
 
 export const TESTIMONIALS_LANDING = [
-  { name: 'Priya K.', role: 'Freelance Designer', location: 'Mumbai, India', content: 'I used to cry when V-Ray crashed. Literally. The support team is so incredibly kind and patient. Now I use AI so well that I feel completely secure in my career.' },
-  { name: 'Rohan D.', role: 'Senior Architect', location: 'Delhi, India', content: 'I feared AI would replace my studio. But Avada held my hand through the transition. We now use it to generate gorgeous concepts for clients in minutes.' },
-  { name: 'Neha R.', role: '3D Visualizer', location: 'Bangalore, India', content: 'The step-by-step guidance is amazing for beginners. Whenever my scene looks dark or weird, I just ask the support team. They are absolute lifesavers.' },
-  { name: 'Rahul M.', role: 'Architecture Student', location: 'Pune, India', content: 'I felt so behind in college because they still teach completely outdated methods. Within two weeks here, I gained the confidence to start taking well-paying projects.' },
-  { name: 'Ananya B.', role: 'Interior Designer', location: 'Chennai, India', content: 'To have someone to actually look at your screen and say “Oh, simply press this button” saves weeks of frustration. Best ₹397 I ever spent.' },
-  { name: 'Vikram S.', role: 'Landscape Architect', location: 'Hyderabad, India', content: 'The continuous support makes learning stress-free. D5 Render combined with AI generation is just magical. It took away all my anxiety about falling behind.' },
-  { name: 'Kavya T.', role: 'Studio Owner', location: 'Ahmedabad, India', content: 'My team of 4 now works with zero stress because we integrated AI the way Avada taught us. No more late nights before client meetings.' },
-  { name: 'Siddharth N.', role: 'Freelance Visualizer', location: 'Kolkata, India', content: 'I almost quit 3D entirely because it felt too overwhelming. The friendly support team here broke it down to be so simple. I owe them my entire successful freelance business.' },
-  { name: 'Ishaan P.', role: 'Design Student', location: 'Jaipur, India', content: 'Started from absolute zero. I didn\'t even know what SketchUp was. 15 days later, thanks to their constant hand-holding, my portfolio landed me a paid studio gig.' },
-  { name: 'Aarav S.', role: 'Architect & Educator', location: 'Surat, India', content: 'I teach at a university, and sadly, we don\'t provide this level of modern, practical support. I genuinely recommend this to all my students to secure their futures.' },
+  { name: 'Priya P.', role: 'Freelance Designer', location: 'Mumbai, IN', content: 'I used to cry when V-Ray crashed. Literally. The support team is so incredibly kind and patient. Now I use AI so well that I feel completely secure in my career.' },
+  { name: 'Aravind S.', role: 'Senior Architect', location: 'Bangalore, IN', content: 'I feared AI would replace my studio. But Avada held my hand through the transition. We now use it to generate gorgeous concepts for clients in minutes.' },
+  { name: 'Meera I.', role: '3D Visualizer', location: 'Chennai, IN', content: 'The step-by-step guidance is amazing for beginners. Whenever my scene looks dark or weird, I just ask the support team. They are absolute lifesavers.' },
+  { name: 'Rahul V.', role: 'Architecture Student', location: 'Delhi, IN', content: 'I felt so behind in college because they still teach completely outdated methods. Within two weeks here, I gained the confidence to start taking well-paying projects.' },
+  { name: 'Ananya G.', role: 'Interior Designer', location: 'Pune, IN', content: 'To have someone to actually look at your screen and say "Oh, simply press this button" saves weeks of frustration. Best trial I ever signed up for.' },
+  { name: 'Vikram S.', role: 'Landscape Architect', location: 'Jaipur, IN', content: 'The continuous support makes learning stress-free. D5 Render combined with AI generation is just magical. It took away all my anxiety about falling behind.' },
+  { name: 'Neha K.', role: 'Studio Owner', location: 'Lucknow, IN', content: 'My team of 4 now works with zero stress because we integrated AI the way Avada taught us. No more late nights before client meetings.' },
+  { name: 'Rohit M.', role: 'Freelance Visualizer', location: 'Ahmedabad, IN', content: 'I almost quit 3D entirely because it felt too overwhelming. The friendly support team here broke it down to be so simple. I owe them my entire successful freelance business.' },
+  { name: 'Simran P.', role: 'Design Student', location: 'Chandigarh, IN', content: 'Started from absolute zero. I didn\'t even know what SketchUp was. 15 days later, thanks to their constant hand-holding, my portfolio landed me a paid studio gig.' },
+  { name: 'Arjun D.', role: 'Architect & Educator', location: 'Hyderabad, IN', content: 'I teach at a university, and sadly, we don\'t provide this level of modern, practical support. I genuinely recommend this to all my anxious students to secure their futures.' },
 ];
 
 export const FAQ_ITEMS_LANDING = [
+  { question: "How does the 3-Day Free Trial work?", answer: "When you sign up, you authorize a UPI AutoPay mandate with ₹0 debited today. You get immediate 72-hour unrestricted access to all 4 course masterclasses. Your subscription auto-renews at ₹399/month starting on Day 4 unless you cancel anytime during your trial." },
   { question: "I'm terrified of AI taking my job. Will this help?", answer: "We completely understand that fear! AI is scary if you ignore it, but it's an incredible superpower when you master it. We will hold your hand and teach you exactly how to use AI as your personal assistant, making you brilliantly fast and completely irreplaceable." },
-  { question: "I am a complete beginner and get overwhelmed easily. Is this for me?", answer: "Yes, this program was built exactly with you in mind. We know learning software can be intimidating. We start from the absolute basics ('how to click here') and our team is always a WhatsApp message away to hold your hand when you feel stuck." },
+  { question: "I am a complete beginner and get overwhelmed easily. Is this for me?", answer: "Yes, this program was built exactly with you in mind. We know learning software can be intimidating. We start from the absolute basics ('how to click here') and our team is always available to hold your hand when you feel stuck." },
   { question: "Are you really going to help me, or is this just another course?", answer: "This is a true 24/7 support community. When your render looks weird or your software crashes, you don't have to figure it out alone. You reach out to us, and we patiently help you fix it. Your success is our personal mission." },
-  { question: "Is it really just ₹397? What's the catch?", answer: "No catch! We simply want to make high-quality, supportive design education accessible to everyone. It's a one-time payment for lifetime access to the courses and our 24/7 support team." },
-  { question: "Do I need to buy expensive software subscriptions?", answer: "Not at all. We will show you exactly how to easily access official free or student versions of the software. We want you earning, not spending unnecessarily on expensive licenses." },
-  { question: "What if I feel like it's not working for me?", answer: "We want this to be completely stress-free for you. If you join and feel it's not a comforting and productive fit, just email us within 7 days. We will refund your amount immediately, no questions asked, and we'll still be rooting for you!" },
+  { question: "Do I need to buy expensive software subscriptions?", answer: "Not at all. We will show you exactly how to easily access official free or student versions of the software. We want you earning safely, not spending unnecessarily on expensive licenses." },
+  { question: "What is the cancellation policy?", answer: "You can cancel your subscription mandate anytime during the 3-day trial period directly from your UPI app (Google Pay / PhonePe / Paytm) or by clicking Change Password / Cancel in your Student Portal." },
   { question: "Can I access the training safely on my mobile?", answer: "Yes! All courses are hosted clearly online and work perfectly on any device — laptop, tablet, or phone. You can learn comfortably at your own pace anywhere." },
 ];
 
 export const INCOME_TIERS = [
-  { label: 'Single Render Charge', before: 'Struggling to ask ₹1,500', after: 'Confidently quoting ₹15,000+', icon: '🖼️' },
-  { label: 'Interior Design Project', before: 'Rejected for poor 3D quality', after: 'Winning ₹1.5L+ contracts', icon: '🏠' },
+  { label: 'Single Render Charge', before: 'Struggling to ask ₹1000', after: 'Confidently quoting ₹5,000+', icon: '🖼️' },
+  { label: 'Interior Design Project', before: 'Rejected for poor 3D quality', after: 'Winning ₹80,000+ contracts', icon: '🏠' },
   { label: 'Time to Finish a Room', before: '3 Frustrating, Sleepless Nights', after: '2 Easy Hours with our AI Workflow', icon: '⏱️' },
   { label: 'Your Career Confidence', before: 'Constantly Anxious & Overwhelmed', after: 'Relaxed, In-Demand Professional', icon: '🌟' },
 ];

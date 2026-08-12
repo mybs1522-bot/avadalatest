@@ -1,211 +1,504 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { PRODUCTS } from '../lib/data';
-import { Card, CardContent, CardFooter } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { TESTIMONIALS_LANDING, FAQ_ITEMS_LANDING, SocialProofToast, FEAR_STATS, COURSES_LANDING } from './LandingHelpers';
-import { Star, CheckCircle, ChevronDown, ArrowRight, Zap, ShieldCheck, Users, PlayCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Star, CheckCircle, CheckCircle2, X, ChevronDown, Sparkles, Eye, Download, ShieldCheck, Timer } from 'lucide-react';
+import { COURSES } from '../constants';
+import {
+  Logo, SocialProofToast,
+  PROBLEM_POINTS, TRANSFORMATION_STORIES, FEAR_STATS,
+  VALUE_STACK_ITEMS, TESTIMONIALS_LANDING, FAQ_ITEMS_LANDING, INCOME_TIERS,
+  PAGE_PREVIEWS_ROW1, PAGE_PREVIEWS_ROW2
+} from './LandingHelpers';
 
-const LandingPage: React.FC = () => {
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-  const navigate = useNavigate();
+/* ─── REUSABLE CTA WITH TIMER ─── */
+const CtaWithTimer = ({ timeLeft, onClick, variant = 'green' }: { timeLeft: { h: number; m: number; s: number }; onClick: () => void; variant?: 'green' | 'dark' | 'blue' }) => {
+  const f = (v: number) => v.toString().padStart(2, '0');
+  const bgClass = variant === 'dark'
+    ? 'bg-slate-900 border border-slate-800'
+    : 'bg-white border border-slate-200 shadow-md';
+  const btnClass = 'bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold';
+  const timerAccent = 'text-emerald-500';
+  const timerBg = variant === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-emerald-50 border-emerald-200';
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center">
-      <SocialProofToast />
-      
-      {/* ═══════ HERO ═══════ */}
-      <section className="w-full py-20 md:py-32 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/30 border-b border-border/40">
-        <div className="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest mb-6 bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">
-          <Zap size={14} className="fill-emerald-500 text-emerald-500" /> Trusted by 50,000+ architects & designers
-        </div>
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight lg:text-7xl mb-6 max-w-4xl leading-[1.1]">
-          Master <span className="text-emerald-600 dark:text-emerald-400">Architecture</span> Design & Visualization
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 leading-relaxed">
-          Learn SketchUp, V-Ray, D5 Render, Lumion, AI Design and more. 
-          Start your <strong>3-Day Free Trial (₹0 Today)</strong> with full unrestricted video access.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center gap-4 mb-8">
-          <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-emerald-600/30 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold" onClick={() => navigate('/checkout')}>
-            Start 3-Day Free Trial (₹0 Today) <ArrowRight size={18} className="ml-2" />
-          </Button>
-          <Button size="lg" variant="outline" className="text-lg px-8 py-6" onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}>
-            View Course Library
-          </Button>
-        </div>
-        <div className="flex items-center gap-6 text-xs font-medium text-muted-foreground">
-          <span className="flex items-center gap-1"><ShieldCheck size={14} className="text-emerald-500" /> 3-Day Free Trial</span>
-          <span className="flex items-center gap-1"><Zap size={14} className="text-emerald-500" /> Instant Access</span>
-          <span className="flex items-center gap-1"><Users size={14} className="text-emerald-500" /> 24/7 Support</span>
-        </div>
-      </section>
+    <div className={`${bgClass} rounded-2xl px-5 py-6 relative overflow-hidden max-w-sm mx-auto`}>
+      <div className="absolute top-0 right-0 w-60 h-60 bg-emerald-500/10 rounded-full blur-[80px] -mr-16 -mt-16 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-40 h-40 bg-emerald-500/10 rounded-full blur-[60px] -ml-10 -mb-10 pointer-events-none" />
 
-      {/* ═══════ STATS BAR ═══════ */}
-      <section className="w-full py-12 bg-zinc-900 text-white">
-        <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {FEAR_STATS.map((s, i) => (
-            <div key={i} className="text-center">
-              <div className="text-3xl md:text-4xl font-extrabold text-emerald-400 mb-1">{s.stat}</div>
-              <p className="text-xs md:text-sm text-zinc-400 leading-snug max-w-[200px] mx-auto">{s.label}</p>
-            </div>
+      <div className="relative z-10 flex flex-col items-center text-center gap-3">
+        {/* Timer label */}
+        <div className="flex items-center gap-1.5">
+          <Timer size={14} className={`${timerAccent} animate-pulse`} />
+          <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${timerAccent}`}>Limited 3-Day Trial</span>
+        </div>
+
+        {/* Timer digits */}
+        <div className="flex items-center gap-1">
+          {[{ val: f(timeLeft.h), label: 'HRS' }, { val: f(timeLeft.m), label: 'MIN' }, { val: f(timeLeft.s), label: 'SEC' }].map((unit, i) => (
+            <React.Fragment key={i}>
+              <div className="flex flex-col items-center">
+                <div className={`${timerBg} border rounded-md px-2 py-0.5`}>
+                  <span className={`text-sm font-black tabular-nums font-mono ${variant === 'dark' ? 'text-white' : 'text-slate-900'}`}>{unit.val}</span>
+                </div>
+                <span className={`text-[6px] font-bold uppercase tracking-widest mt-0.5 ${variant === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>{unit.label}</span>
+              </div>
+              {i < 2 && <span className={`text-xs font-bold ${variant === 'dark' ? 'text-slate-600' : 'text-slate-300'} -mt-3`}>:</span>}
+            </React.Fragment>
           ))}
         </div>
-      </section>
 
-      {/* ═══════ FEATURED PRODUCTS ═══════ */}
-      <section id="products" className="w-full py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest mb-3">Our Bundles</p>
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Choose Your Path</h2>
-            <p className="text-muted-foreground text-lg">Pick a bundle and start your 3-Day Free Trial (₹0 Today).</p>
+        {/* Price */}
+        <div className="flex items-baseline gap-2">
+          <span className="text-3xl font-display font-black text-emerald-600 dark:text-emerald-400">₹0 Today</span>
+          <span className="bg-emerald-100 text-emerald-700 text-[9px] font-bold px-2 py-0.5 rounded-full">3-DAY FREE TRIAL</span>
+        </div>
+
+        {/* Button */}
+        <button
+          onClick={onClick}
+          className={`${btnClass} text-sm px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 group hover:scale-[1.02] active:scale-[0.98] transition-all w-full shadow-lg shadow-emerald-600/30`}
+        >
+          <Sparkles size={16} className="shrink-0" />
+          <span>Start 3-Day Free Trial (₹0 Today)</span>
+          <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform shrink-0" />
+        </button>
+
+        <p className={`text-[10px] font-medium ${variant === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>72 Hours Full Access • Then ₹399/mo • Cancel Anytime</p>
+      </div>
+    </div>
+  );
+};
+
+const LandingPage: React.FC = () => {
+  const navigate = useNavigate();
+  const [timeLeft, setTimeLeft] = useState(() => { const D = (3 * 3600 + 36 * 60 + 20) * 1000, r = D - (Date.now() % D); return { h: Math.floor((r / 3600000) % 24), m: Math.floor((r / 60000) % 60), s: Math.floor((r / 1000) % 60) }; });
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  useEffect(() => {
+    const calc = () => { const D = (3 * 3600 + 36 * 60 + 20) * 1000, now = Date.now(), r = D - (now % D); setTimeLeft({ h: Math.floor((r / 3600000) % 24), m: Math.floor((r / 60000) % 60), s: Math.floor((r / 1000) % 60) }); };
+    const t = setInterval(calc, 1000); calc(); return () => clearInterval(t);
+  }, []);
+  useEffect(() => { const h = () => setShowStickyBar(window.scrollY > 600); window.addEventListener('scroll', h, { passive: true }); return () => window.removeEventListener('scroll', h); }, []);
+
+  const formatTime = (val: number) => val.toString().padStart(2, '0');
+
+  const goToCheckout = () => {
+    navigate('/checkout');
+  };
+
+  return (
+    <div className="min-h-screen bg-white text-gray-900 font-sans overflow-x-hidden selection:bg-emerald-100">
+      {/* ═══ STICKY HEADER ═══ */}
+      <header className="sticky top-0 z-[60] bg-white/80 backdrop-blur-2xl border-b border-slate-100/60 px-5 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <Logo />
+          <div className="flex items-center gap-4">
+            <button onClick={goToCheckout} className="hidden md:block text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all bg-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-600/30">
+              Start 3-Day Free Trial (₹0 Today)
+            </button>
           </div>
+        </div>
+      </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {PRODUCTS.map((product) => (
-              <Card key={product.id} className="overflow-hidden flex flex-col group border-2 border-border hover:border-emerald-500/50 transition-all duration-300 shadow-sm hover:shadow-xl">
-                <div className="aspect-video relative overflow-hidden bg-zinc-100">
-                  <img 
-                    src={product.imageUrl} 
-                    alt={product.name}
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 right-3 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                    3-DAY TRIAL
-                  </div>
+      <main>
+        {/* 1. HERO — The Hook */}
+        <section className="relative pt-0 pb-10 md:pb-20 overflow-hidden" style={{ background: '#ffffff' }}>
+          <div className="w-full px-4 md:max-w-4xl md:mx-auto relative z-10">
+            <div className="flex flex-col items-center text-center pt-7 md:pt-14">
+
+              {/* Top badge */}
+              <div className="mb-2 md:mb-3 inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full shadow-sm">
+                <CheckCircle2 size={12} className="text-emerald-600" />
+                <span className="text-[11px] md:text-xs font-semibold text-slate-700">Learn Interior & Exterior Design + <span className="text-emerald-600 font-bold">AI</span></span>
+              </div>
+
+              {/* Intro text */}
+              <p className="text-sm md:text-base text-slate-700 mb-3 md:mb-5 max-w-md font-medium">
+                Start charging <span className="underline underline-offset-2 decoration-emerald-400"><span className="text-emerald-600 font-bold">₹50,000</span>–<span className="text-emerald-600 font-bold">₹1,00,000</span></span> for designing and rendering.
+              </p>
+
+              {/* Big headline */}
+              <h1 className="tracking-tight mb-2 md:mb-3">
+                <span className="block text-[2.2rem] leading-tight md:text-6xl font-display font-black text-slate-900 mb-0.5">
+                  Learn to Design
+                </span>
+                <span className="block text-[2rem] leading-none md:text-5xl font-display font-black">
+                  <span className="text-emerald-600">Homes</span><span className="text-slate-400 font-light text-2xl md:text-3xl mx-1">,</span><span className="text-slate-900">Offices</span><span className="text-slate-400 font-light text-2xl md:text-3xl mx-1"> &</span><span className="text-slate-700">Villas</span>
+                </span>
+                <span className="block text-lg md:text-2xl font-serif italic text-slate-600 mt-1 md:mt-2">
+                  and show real 3D to clients.
+                </span>
+              </h1>
+
+              {/* PDR line */}
+              <p className="text-sm md:text-base font-bold text-slate-800 mt-2 md:mt-4 mb-1">
+                Learn <span className="text-emerald-600">PDR</span> — Planning, Designing & Rendering
+              </p>
+              <p className="text-xs md:text-sm text-slate-500 mb-5 md:mb-8 max-w-sm md:max-w-md">
+                One bundle. Everything included in your 3-Day Free Trial.
+              </p>
+
+              {/* Story Block */}
+              <div className="w-full max-w-3xl mx-auto mb-6 md:mb-10 text-left bg-white p-5 md:p-8 rounded-2xl shadow-sm border border-emerald-100 relative overflow-hidden">
+                <p className="text-sm md:text-lg font-serif text-slate-800 leading-relaxed mb-3 italic">
+                  "In our business of Architecture and Design, <span className="font-bold text-slate-900 border-b-2 border-emerald-400">Planning, Design and Rendering</span> matter the most."
+                </p>
+                <div className="w-10 h-1 bg-emerald-500 rounded-full mb-3"></div>
+                <p className="text-xs md:text-base text-slate-600 leading-relaxed mb-3 font-medium">
+                  The question isn't <em className="text-slate-800 font-bold">if</em> you can. It's...
+                </p>
+                <p className="text-base md:text-2xl font-display font-black text-emerald-600 mb-4">
+                  How to do it FASTER?
+                </p>
+                {/* Hero Video */}
+                <div className="w-full mb-4 overflow-hidden rounded-xl shadow-xl" style={{ position: 'relative', paddingTop: '56.25%' }}>
+                  <iframe src="https://iframe.mediadelivery.net/embed/489113/a214b199-e64a-4eaf-af70-edfbc586e5fd?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style={{ border: 0, position: 'absolute', top: 0, height: '100%', width: '100%' }} allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowFullScreen={true} />
                 </div>
-                <CardContent className="p-6 flex-1">
-                  <h3 className="text-2xl font-bold mb-2">{product.name}</h3>
-                  <p className="text-muted-foreground mb-4 line-clamp-2 text-sm leading-relaxed">
-                    {product.description}
+
+                <div className="flex items-start gap-3 p-3 md:p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                  <span className="text-xl md:text-2xl mt-0.5 shrink-0">🚀</span>
+                  <p className="text-slate-700 font-medium leading-relaxed text-xs md:text-base">
+                    That's exactly why we built this. A complete blueprint — from software basics to client-ready renders — designed to make you <strong className="text-emerald-600">job or business ready in just one month.</strong>
                   </p>
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">₹0 Today</span>
-                    <span className="text-sm text-muted-foreground font-semibold">Then ₹399/mo after 3 days</span>
+                </div>
+              </div>
+
+              {/* HERO CTA BUTTON */}
+              <div className="flex flex-col sm:flex-row gap-3 items-center mb-3 w-full sm:w-auto">
+                <button onClick={goToCheckout} className="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-extrabold text-sm md:text-lg shadow-xl shadow-emerald-600/30 hover:scale-[1.03] transition-all flex items-center justify-center gap-3 group">
+                  <Sparkles size={20} className="shrink-0" />
+                  Start 3-Day Free Trial (₹0 Today) <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+                </button>
+              </div>
+              <p className="text-[10px] md:text-xs text-slate-500 mb-7 md:mb-10 font-bold">₹0 Due Today • 72 Hours Full Access • Cancel Anytime</p>
+
+              {/* Banners below First CTA */}
+              <div className="w-full max-w-3xl mx-auto flex flex-col gap-4 md:gap-6 mb-8 md:mb-12">
+                <div className="overflow-hidden rounded-2xl shadow-lg border border-slate-100">
+                  <img
+                    src="/banner-1.jpg"
+                    alt="Learn to Design Home, Offices & Villas"
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-2xl shadow-lg border border-slate-100">
+                  <img
+                    src="/banner-2.jpg"
+                    alt="Design for Clients From US, UK, Europe"
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Outcome strip */}
+              <div className="w-full mb-6 flex gap-2">
+                <div className="flex-1 bg-emerald-50/50 border border-emerald-200 rounded-xl px-3 py-3 text-left">
+                  <p className="text-base font-black text-slate-900">💼 Get a Better Job</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Higher-paying design roles</p>
+                </div>
+                <div className="flex-1 bg-emerald-50/50 border border-emerald-200 rounded-xl px-3 py-3 text-left">
+                  <p className="text-base font-black text-slate-900">🏢 Own Design Firm</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Freelance & studio projects</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════ COURSE SLIDESHOW — Master Every Tool ═══════ */}
+        <section className="py-8 md:py-16 bg-white border-b border-gray-100 overflow-hidden relative">
+           <div className="container mx-auto px-4 mb-8">
+             <div className="text-center">
+                 <div className="inline-flex items-center gap-2 text-emerald-600 text-xs font-bold uppercase tracking-widest mb-2">
+                   <Sparkles size={14} />
+                   All Masterclasses Included
+                 </div>
+                 <h2 className="text-2xl md:text-4xl font-display font-black text-gray-900 leading-tight">Master Every Tool Needed<br/>For Professional Design</h2>
+             </div>
+           </div>
+           
+           <div className="flex flex-col gap-3 md:gap-4 relative w-full overflow-hidden pb-4">
+            {/* ROW 1: Courses 1 to 6 */}
+            <div className="flex gap-3 md:gap-4 animate-scroll-right hover:pause w-max pl-4 md:pl-6">
+              {[...COURSES.slice(0, 6), ...COURSES.slice(0, 6)].map((course, i) => {
+                const globalIndex = i % 6;
+                return (
+                  <div key={`row1-${course.id}-${i}`} className="w-[140px] md:w-[150px] shrink-0 bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div className="relative aspect-square overflow-hidden bg-gray-100">
+                      <img src={course.imageUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      
+                      <div className="absolute top-1.5 left-1.5 w-6 h-6 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center font-display font-bold text-gray-900 shadow-sm text-[10px] border border-gray-200">
+                        {globalIndex + 1}
+                      </div>
+                      
+                      <div className="absolute top-1.5 right-1.5 bg-white/95 backdrop-blur-sm text-gray-900 text-[8px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200">
+                        {course.software}
+                      </div>
+                    </div>
+                    
+                    <div className="p-2">
+                      <h3 className="font-display font-bold text-gray-900 text-xs md:text-sm mb-1 line-clamp-1 leading-tight" title={course.title}>{course.title}</h3>
+                      <div className="mt-1 pt-1 border-t border-gray-100">
+                        <div className="bg-emerald-50 text-emerald-600 text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center justify-center gap-1 border border-emerald-100 w-full">
+                          <CheckCircle2 size={8}/> Included
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </CardContent>
-                <CardFooter className="p-6 pt-0 flex flex-col gap-3">
-                  <Button className="w-full text-base py-5 shadow-md shadow-emerald-600/20 bg-emerald-600 hover:bg-emerald-700 text-white font-bold" onClick={() => navigate(`/checkout?product=${product.id}`)}>
-                    Start 3-Day Free Trial (₹0) <ArrowRight size={16} className="ml-2" />
-                  </Button>
-                  <Button asChild variant="outline" className="w-full">
-                    <Link to={`/product/${product.id}`}>View Course Details</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ═══════ WHAT'S INCLUDED ═══════ */}
-      <section className="w-full py-20 px-4 sm:px-6 lg:px-8 bg-background border-y border-border/40">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest mb-3">Courses Included</p>
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Learn Every Tool You Need</h2>
-            <p className="text-muted-foreground text-lg">From beginner drafting to AI-powered design — all in one bundle.</p>
+        {/* ═══════ CTA #1 — After Course Showcase ═══════ */}
+        <section className="py-8 md:py-10 px-4 md:px-5">
+          <div className="max-w-3xl mx-auto">
+            <CtaWithTimer timeLeft={timeLeft} onClick={goToCheckout} variant="green" />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {COURSES_LANDING.map((course) => (
-              <div key={course.id} className="bg-card rounded-2xl border border-border overflow-hidden group hover:shadow-lg hover:border-emerald-500/30 transition-all duration-300">
-                <div className="aspect-[4/3] relative overflow-hidden bg-zinc-100">
-                  <img src={course.imageUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm text-xs font-bold px-2 py-1 rounded-full text-foreground border border-border">{course.software}</div>
-                  <div className="absolute bottom-2 right-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">{course.students} students</div>
+        </section>
+
+        {/* 4. STUDENT WORK CAROUSEL — Visual Proof */}
+        <section className="py-16 md:py-24 bg-slate-50 overflow-hidden border-b border-slate-200 grid-bg">
+          <div className="max-w-5xl mx-auto px-5 mb-12 text-center">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">See What Our <span className="text-emerald-600">Students Have Created</span></h2>
+              <p className="text-slate-600 text-lg max-w-2xl mx-auto italic font-serif">"With 24/7 team support, these students transformed their portfolios and confidence."</p>
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 md:gap-8">
+            <div className="flex gap-3 md:gap-8 animate-scroll-left hover:pause">
+              {[...PAGE_PREVIEWS_ROW1, ...PAGE_PREVIEWS_ROW1].map((img, i) => (
+                <div key={i} className="w-[200px] md:w-[400px] shrink-0 aspect-video rounded-xl md:rounded-2xl overflow-hidden border border-slate-200 shadow-2xl relative group bg-slate-100">
+                  <img src={img} alt="Student Work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
-                <div className="p-5">
-                  <h3 className="font-bold text-lg mb-2">{course.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-3 line-clamp-2">{course.description}</p>
-                  <ul className="space-y-1.5">
-                    {course.learningPoints.map((pt, j) => (
-                      <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground">
-                        <CheckCircle size={12} className="text-emerald-500 mt-0.5 shrink-0" />
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
+              ))}
+            </div>
+            <div className="flex gap-3 md:gap-8 animate-scroll-right hover:pause">
+              {[...PAGE_PREVIEWS_ROW2, ...PAGE_PREVIEWS_ROW2].map((img, i) => (
+                <div key={i} className="w-[200px] md:w-[400px] shrink-0 aspect-video rounded-xl md:rounded-2xl overflow-hidden border border-slate-200 shadow-2xl relative group bg-slate-100">
+                  <img src={img} alt="Student Work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 6. INCOME TIERS — The ROI */}
+        <section className="py-16 bg-white border-b border-slate-200">
+          <div className="max-w-5xl mx-auto px-5">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Invest in Yourself Today. <br className="hidden md:block" /><span className="text-emerald-600">Start making money in the industry.</span></h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {INCOME_TIERS.map((tier, i) => (
+                <div key={i} className="bg-white border border-slate-200 rounded-2xl p-6 hover:border-emerald-600/40 transition-all shadow-soft flex flex-col justify-between">
+                  <div className="flex items-center justify-between mb-4"><span className="text-sm font-bold text-slate-900 leading-tight w-2/3">{tier.label}</span><span className="text-3xl">{tier.icon}</span></div>
+                  <div className="flex items-center justify-between">
+                    <div><p className="text-[10px] font-mono text-slate-500 uppercase">Before</p><p className="text-slate-400 text-sm line-through">{tier.before}</p></div>
+                    <ArrowRight size={16} className="text-emerald-600" />
+                    <div className="text-right"><p className="text-[10px] font-mono text-emerald-500 uppercase">After</p><p className="text-emerald-600 text-sm font-bold">{tier.after}</p></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 7. WHAT YOU GET — The Offer */}
+        <section className="py-16 md:py-20 bg-slate-50 border-y border-slate-200 grid-bg">
+          <div className="max-w-5xl mx-auto px-5">
+            <div className="text-center mb-10">
+              <p className="text-emerald-600 text-xs font-mono uppercase tracking-widest mb-3">Included with 3-Day Free Trial</p>
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Everything You Need to Succeed, <span className="text-emerald-600">Included Today</span></h2>
+              <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">Full 72 hours of unrestricted access to all 4 course masterclasses + support team.</p>
+            </div>
+            <div className="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-soft">
+              {VALUE_STACK_ITEMS.map((item, i) => (
+                <div key={i} className={`flex justify-between items-center px-6 py-4 ${i !== VALUE_STACK_ITEMS.length - 1 ? 'border-b border-slate-100' : ''}`}>
+                  <div className="flex items-center gap-3"><CheckCircle size={16} className="text-emerald-500 shrink-0" /><span className="text-sm text-slate-800 font-medium">{item.name}</span></div>
+                  <span className="text-sm font-bold text-slate-500">{item.value}</span>
+                </div>
+              ))}
+              
+              <div className="bg-emerald-50 border-t border-emerald-100 px-6 py-4 flex flex-col sm:flex-row gap-3 justify-between items-center">
+                <div className="flex items-center gap-3"><CheckCircle2 size={16} className="text-emerald-600 shrink-0" /><span className="text-sm text-emerald-900 font-bold">3-Day Free Trial (₹0 Today)</span></div>
+                <span className="text-sm font-black text-emerald-600">INCLUDED</span>
+              </div>
+
+              <div className="bg-emerald-50/50 border-t border-emerald-200 px-6 py-6 flex flex-col items-center gap-6 justify-center">
+                <button onClick={goToCheckout} className="w-full sm:w-auto px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-extrabold text-lg shadow-xl shadow-emerald-600/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-3 group">
+                  <Sparkles size={18} /> Start 3-Day Free Trial (₹0 Today) <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════ CTA #2 — After Value Stack ═══════ */}
+        <section className="py-8 md:py-10 px-4 md:px-5 bg-white">
+          <div className="max-w-3xl mx-auto">
+            <CtaWithTimer timeLeft={timeLeft} onClick={goToCheckout} variant="green" />
+          </div>
+        </section>
+
+        {/* 2. PROOF STATS */}
+        <section className="py-10 bg-slate-50 border-y border-slate-200 grid-bg">
+          <div className="max-w-5xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-6">
+            {FEAR_STATS.map((s, i) => (
+              <div key={i} className="text-center">
+                <span className="text-2xl mb-2 block">{s.icon}</span>
+                <span className="text-3xl md:text-4xl font-display font-black text-emerald-600">{s.stat}</span>
+                <p className="text-xs text-slate-500 mt-1 leading-snug">{s.label}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ═══════ TESTIMONIALS ═══════ */}
-      <section className="w-full py-16 md:py-24 bg-muted/20 overflow-hidden border-b border-border/40">
-        <div className="max-w-5xl mx-auto px-5 mb-12 text-center">
-          <p className="text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest mb-4">Student Reviews</p>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight mb-4">
-            Loved by <span className="text-emerald-600 dark:text-emerald-400">50,000+</span> Students
-          </h2>
-          <p className="text-muted-foreground text-lg">Real stories from architects and designers across India.</p>
-        </div>
-
-        <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory px-4 md:px-0 max-w-6xl mx-auto no-scrollbar">
-          {TESTIMONIALS_LANDING.map((t, i) => (
-            <div key={i} className="w-[300px] md:w-[350px] shrink-0 snap-center bg-card border border-border p-8 rounded-2xl hover:border-emerald-500/30 transition-all shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, j) => <Star key={j} size={14} className="fill-emerald-500 text-emerald-500" />)}
-                </div>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6 italic">"{t.content}"</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-bold text-emerald-500">{t.name[0]}</div>
-                <div className="text-left">
-                  <p className="text-sm font-bold text-foreground flex items-center gap-1">{t.name} <CheckCircle size={12} className="text-emerald-500" /></p>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest">{t.role} • {t.location}</p>
+        {/* 3. MANIFESTO — The Story */}
+        <section className="py-16 md:py-28 grid-bg bg-white border-b border-slate-200">
+          <div className="max-w-3xl mx-auto px-5">
+            <div className="text-center mb-12">
+              <p className="text-emerald-600 text-xs font-mono uppercase tracking-widest mb-4">A Supportive Message from Our Team</p>
+              <h2 className="text-3xl md:text-5xl font-serif italic text-slate-900 mb-8 leading-snug">"We believe in practical, hands-on learning with experts who are always ready to help you."</h2>
+            </div>
+            <div className="space-y-6 text-slate-600 text-base md:text-lg leading-relaxed">
+              <p>Learning complex software can feel overwhelming <strong className="text-slate-900">when you're doing it alone.</strong></p>
+              <p>That's why our program is built differently. You aren't just getting tutorial videos; you're joining a community where our team reviews your work, answers your technical questions, and cheers you on as you improve.</p>
+              
+              <div className="my-10 bg-gradient-to-br from-emerald-50 to-emerald-50/50 border border-emerald-200 rounded-2xl p-6 md:p-8 shadow-soft">
+                <p className="font-bold text-slate-900 text-xl mb-4">Here is How We Support You:</p>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3"><CheckCircle size={18} className="text-emerald-500 shrink-0" /><span className="text-slate-800">Full 3-Day Free Trial (₹0 Today) to explore all video streams.</span></li>
+                  <li className="flex items-center gap-3"><CheckCircle size={18} className="text-emerald-500 shrink-0" /><span className="text-slate-800">4 Complete Masterclasses: SketchUp, V-Ray, D5 Render & AutoCAD.</span></li>
+                  <li className="flex items-center gap-3"><CheckCircle size={18} className="text-emerald-500 shrink-0" /><span className="text-slate-800">24/7 team support whenever you feel stuck.</span></li>
+                </ul>
+                <div className="mt-6 pt-6 border-t border-emerald-100 flex items-center justify-between">
+                  <span className="text-slate-600 text-sm italic font-bold">Start your 3-Day Trial today for ₹0.</span>
+                  <button onClick={goToCheckout} className="text-emerald-600 font-bold text-sm hover:text-emerald-700 flex items-center gap-1 group">Start Trial Now <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ═══════ FAQ ═══════ */}
-      <section className="w-full py-16 md:py-24 bg-background border-t border-border/40">
-        <div className="max-w-3xl mx-auto px-5">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight mb-4">Common Questions</h2>
-            <p className="text-muted-foreground text-base">Everything you need to know before getting started.</p>
           </div>
-          <div className="space-y-3">
-            {FAQ_ITEMS_LANDING.map((faq, i) => (
-              <div key={i} className="bg-card border border-border rounded-xl overflow-hidden shadow-sm hover:border-emerald-500/30 transition-all">
-                <button
-                  onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 text-left"
-                >
-                  <span className="text-sm md:text-base font-semibold text-foreground pr-6">{faq.question}</span>
-                  <ChevronDown size={18} className={`text-muted-foreground transition-transform shrink-0 ${openFaqIndex === i ? 'rotate-180' : ''}`} />
-                </button>
-                <div className={`px-5 text-muted-foreground text-sm leading-relaxed transition-all duration-300 overflow-hidden ${openFaqIndex === i ? 'max-h-40 pb-5 opacity-100' : 'max-h-0 opacity-0'}`}>
-                  {faq.answer}
+        </section>
+
+        {/* 8. TESTIMONIALS */}
+        <section className="py-16 md:py-24 bg-white overflow-hidden grid-bg">
+          <div className="max-w-5xl mx-auto px-5 mb-12">
+            <div className="text-center mb-12">
+              <p className="text-emerald-600 text-xs font-mono uppercase tracking-widest mb-4">Student Reviews</p>
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Students & <span className="text-emerald-600">Professionals</span></h2>
+              <p className="text-slate-600 text-lg">50,000+ learners • 4.9★ average rating</p>
+            </div>
+
+            {/* Featured Transformations */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+              {TRANSFORMATION_STORIES.map((story, i) => (
+                <div key={i} className="bg-gradient-to-br from-slate-50 to-emerald-50/50 border border-slate-200 rounded-2xl p-8 shadow-soft relative overflow-hidden transition-all hover:border-emerald-300">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                  <span className="text-4xl mb-4 block">{story.emoji}</span>
+                  <div className="flex items-center gap-2 mb-6"><span className="font-bold text-slate-900 text-lg">{story.name}</span><span className="text-sm font-medium text-emerald-600">• {story.role}</span></div>
+                  <div className="mb-4"><p className="text-[10px] font-mono uppercase text-slate-400 mb-1 tracking-wider">Before</p><p className="text-slate-600 text-sm leading-relaxed">{story.before}</p></div>
+                  <div><p className="text-[10px] font-mono uppercase text-emerald-600 mb-1 tracking-wider">After</p><p className="text-slate-900 text-base font-bold leading-relaxed">{story.after}</p></div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* ═══════ FINAL CTA ═══════ */}
-      <section className="w-full py-20 bg-zinc-900 text-white text-center px-4">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Start Your 3-Day Free Trial Today</h2>
-          <p className="text-zinc-400 mb-8 text-lg">Join 50,000+ professionals. ₹0 Due Today • Instant access to all courses.</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="text-lg px-10 py-6 shadow-lg shadow-emerald-600/30 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold" onClick={() => navigate('/checkout')}>
-              Start 3-Day Free Trial (₹0 Today) <ArrowRight size={18} className="ml-2" />
-            </Button>
+          <div className="flex flex-col gap-6">
+            <div className="flex gap-6 animate-scroll-left hover:pause">
+              {[...TESTIMONIALS_LANDING, ...TESTIMONIALS_LANDING].map((t, i) => (
+                <div key={i} className="w-[350px] shrink-0 bg-white border border-slate-200 p-8 rounded-3xl hover:border-emerald-200 transition-all shadow-soft">
+                  <div className="flex gap-1 mb-4">{[...Array(5)].map((_, j) => <Star key={j} size={14} className="fill-emerald-500 text-emerald-500" />)}</div>
+                  <p className="text-slate-700 text-sm leading-relaxed mb-6 italic">"{t.content}"</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center font-bold text-emerald-600">{t.name[0]}</div>
+                    <div className="text-left">
+                      <p className="text-sm font-bold text-slate-900 flex items-center gap-1">{t.name} <CheckCircle size={12} className="text-emerald-600" /></p>
+                      <p className="text-[10px] text-slate-500 uppercase tracking-widest">{t.role} • {t.location}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <p className="text-zinc-500 text-xs mt-6">🔒 Mandate authorization only • ₹0 debited today • Cancel anytime</p>
+        </section>
+
+        {/* 9. FAQ + FINAL CTA */}
+        <section className="py-16 md:py-24 bg-slate-50 border-t border-slate-200 grid-bg">
+          <div className="max-w-3xl mx-auto px-5 mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Common Questions</h2>
+              <p className="text-slate-600 text-base">Everything you need to know before starting your 3-day trial.</p>
+            </div>
+            <div className="space-y-3">
+              {FAQ_ITEMS_LANDING.map((faq, i) => (
+                <details key={i} className="group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-soft" open={openFaqIndex === i}>
+                  <summary className="flex items-center justify-between p-5 cursor-pointer list-none" onClick={(e) => { e.preventDefault(); setOpenFaqIndex(openFaqIndex === i ? null : i); }}>
+                    <span className="text-sm md:text-base font-semibold text-slate-900 pr-6">{faq.question}</span>
+                    <ChevronDown size={18} className={`text-slate-400 transition-transform shrink-0 ${openFaqIndex === i ? 'rotate-180' : ''}`} />
+                  </summary>
+                  <div className="px-5 pb-5"><p className="text-slate-600 text-sm leading-relaxed">{faq.answer}</p></div>
+                </details>
+              ))}
+            </div>
+          </div>
+
+          {/* ═══════ CTA #3 — Final CTA ═══════ */}
+          <div className="max-w-3xl mx-auto px-4 md:px-5">
+            <div className="text-center mb-6 md:mb-8">
+              <h3 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-2">Let us hold your hand towards a brighter future.</h3>
+              <p className="text-slate-500 text-xs md:text-sm">Start your 3-Day Free Trial (₹0 Today) and explore all masterclasses.</p>
+            </div>
+            <CtaWithTimer timeLeft={timeLeft} onClick={goToCheckout} variant="dark" />
+          </div>
+        </section>
+      </main>
+
+      <footer className="bg-slate-900 pt-12 pb-28 px-6 text-center border-t border-slate-800 text-white/70">
+        <p className="text-xs uppercase tracking-[0.2em] mb-4">Avada Design & Architecture • 2026</p>
+        <div className="flex justify-center gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+          <a href="/refund-policy" className="hover:text-white transition-colors">Refund Policy</a>
+          <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy</a>
+          <a href="/terms" className="hover:text-white transition-colors">Terms</a>
+          <a href="/contact" className="hover:text-white transition-colors">Support</a>
         </div>
-      </section>
+      </footer>
+
+      {/* ═══ STICKY BOTTOM BAR ═══ */}
+      <div className={`fixed bottom-0 left-0 right-0 z-[70] transition-transform duration-500 ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}>
+        <button onClick={goToCheckout} className="w-full bg-white/98 backdrop-blur-2xl border-t border-slate-100 shadow-[0_-1px_40px_rgba(15,23,42,0.12)] px-4 py-2.5 flex items-center gap-3 active:bg-slate-50 transition-colors group">
+
+          {/* Left: price + label + timer */}
+          <div className="flex flex-col items-start gap-0.5 shrink-0">
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-base font-black text-emerald-600">₹0 Today</span>
+              <span className="text-[10px] font-black text-slate-900 uppercase tracking-wide">3-Day Trial ends in</span>
+            </div>
+            <div className="flex items-center gap-0.5">
+              {[formatTime(timeLeft.h), formatTime(timeLeft.m), formatTime(timeLeft.s)].map((val, i) => (
+                <span key={i} className="flex items-center gap-0.5">
+                  <span className="bg-slate-900 text-white text-[11px] font-black font-mono px-1.5 py-0.5 rounded tabular-nums">{val}</span>
+                  {i < 2 && <span className="text-slate-400 text-[10px] font-bold mx-0.5">:</span>}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Start 3-Day Trial button */}
+          <div className="flex-1 flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 rounded-xl transition-all shadow-md shadow-emerald-600/30">
+            Start 3-Day Free Trial (₹0)
+            <ArrowRight size={13} />
+          </div>
+
+        </button>
+      </div>
+
+      <SocialProofToast />
     </div>
   );
 };
 
 export default LandingPage;
-
