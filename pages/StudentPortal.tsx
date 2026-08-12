@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SecureVideoPlayer } from '../components/SecureVideoPlayer';
 import { verifySubscriptionStatus } from '../lib/razorpay';
+import { verifyStudentLogin } from '../lib/students';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { 
   PlayCircle, ShieldCheck, Clock, BookOpen, UserCheck, 
   Sparkles, LogOut, Video, ArrowLeft, ChevronRight, CheckCircle2,
-  Key, Lock, X, Check, AlertTriangle
+  Lock, AlertTriangle, Loader2
 } from 'lucide-react';
 
 
@@ -530,26 +531,18 @@ export default function StudentPortal() {
 
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPhone, setLoginPhone] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
-
-  // Password Modal state
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordMsg, setPasswordMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [loginError, setLoginError] = useState('');
+  const [loginLoading, setLoginLoading] = useState(false);
 
   // Selected course state (null = show course thumbnail grid view)
   const [selectedCourse, setSelectedCourse] = useState<CourseItem | null>(null);
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [subStatusInfo, setSubStatusInfo] = useState<{ active: boolean; status: string }>({ active: true, status: 'active' });
 
-  // METHOD 2: Check Razorpay Subscription status on student portal load
+  // Check Razorpay Subscription status on student portal load
   useEffect(() => {
     if (user) {
       const activeSubId = import.meta.env.VITE_RAZORPAY_SUBSCRIPTION_ID || 'sub_TOx4ouvDuHpWat';
-
-
       verifySubscriptionStatus(activeSubId).then((res) => {
         setSubStatusInfo(res);
         if (!res.active) {
@@ -561,28 +554,48 @@ export default function StudentPortal() {
     }
   }, [user?.email]);
 
-
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!loginEmail.trim() || !loginPhone.trim()) {
-      alert('Please enter your registered Email and Phone number');
+    setLoginError('');
+
+    const trimmedEmail = loginEmail.trim();
+    const trimmedPhone = loginPhone.trim().replace(/\D/g, '');
+
+    if (!trimmedEmail) {
+      setLoginError('Please enter your registered email address.');
+      return;
+    }
+    if (!trimmedPhone || trimmedPhone.length < 10) {
+      setLoginError('Please enter a valid 10-digit mobile number.');
       return;
     }
 
-    const savedPassword = localStorage.getItem('student_password');
-    if (savedPassword && loginPassword && savedPassword !== loginPassword) {
-      alert('Incorrect password. Please try again.');
-      return;
+    setLoginLoading(true);
+
+    try {
+      const result = await verifyStudentLogin(trimmedEmail, trimmedPhone);
+
+      if (!result.verified || !result.student) {
+        setLoginError(result.reason);
+        setLoginLoading(false);
+        return;
+      }
+
+      // Verified! Create session
+      const newUser = {
+        email: result.student.email,
+        phone: result.student.phone,
+        name: result.student.name || trimmedEmail.split('@')[0],
+        trialActive: result.student.trial_active,
+      };
+
+      localStorage.setItem('student_session', JSON.stringify(newUser));
+      setUser(newUser);
+    } catch (err) {
+      setLoginError('Something went wrong. Please try again.');
+    } finally {
+      setLoginLoading(false);
     }
-
-    const newUser = {
-      email: loginEmail.trim(),
-      name: loginEmail.split('@')[0],
-      trialActive: true,
-    };
-
-    localStorage.setItem('student_session', JSON.stringify(newUser));
-    setUser(newUser);
   };
 
   const handleLogout = () => {
@@ -598,38 +611,6 @@ export default function StudentPortal() {
     }
   };
 
-  const handleChangePassword = (e: React.FormEvent) => {
-    e.preventDefault();
-    setPasswordMsg(null);
-
-    const savedPassword = localStorage.getItem('student_password');
-    if (savedPassword && currentPassword !== savedPassword) {
-      setPasswordMsg({ type: 'error', text: 'Current password is incorrect.' });
-      return;
-    }
-
-    if (newPassword.length < 6) {
-      setPasswordMsg({ type: 'error', text: 'New password must be at least 6 characters long.' });
-      return;
-    }
-
-    if (newPassword !== confirmPassword) {
-      setPasswordMsg({ type: 'error', text: 'New passwords do not match.' });
-      return;
-    }
-
-    localStorage.setItem('student_password', newPassword);
-    setPasswordMsg({ type: 'success', text: 'Password updated successfully! Your account is now secured.' });
-    setCurrentPassword('');
-    setNewPassword('');
-    setConfirmPassword('');
-
-    setTimeout(() => {
-      setShowPasswordModal(false);
-      setPasswordMsg(null);
-    }, 2000);
-  };
-
   // If user is not logged in, show student login form
   if (!user) {
     return (
@@ -642,10 +623,17 @@ export default function StudentPortal() {
                 <UserCheck size={24} />
               </div>
               <CardTitle className="text-2xl font-bold">Student Portal Login</CardTitle>
-              <p className="text-xs text-zinc-400 mt-1">Access your 3-Day Trial Course Library & Video Stream</p>
+              <p className="text-xs text-zinc-400 mt-1">Enter your registered email & phone to access courses</p>
             </CardHeader>
 
             <CardContent className="p-6">
+              {loginError && (
+                <div className="p-3 rounded-lg text-xs font-semibold mb-4 flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400">
+                  <AlertTriangle size={16} className="shrink-0" />
+                  <span>{loginError}</span>
+                </div>
+              )}
+
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1">
@@ -655,43 +643,45 @@ export default function StudentPortal() {
                     type="email"
                     placeholder="you@example.com"
                     value={loginEmail}
-                    onChange={(e) => setLoginEmail(e.target.value)}
+                    onChange={(e) => { setLoginEmail(e.target.value); setLoginError(''); }}
                     required
+                    disabled={loginLoading}
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1">
-                    UPI Linked Mobile Number
+                    Registered Mobile Number
                   </label>
                   <Input
                     type="tel"
                     placeholder="10-digit mobile number"
                     value={loginPhone}
-                    onChange={(e) => setLoginPhone(e.target.value)}
+                    onChange={(e) => { setLoginPhone(e.target.value.replace(/\D/g, '').slice(0, 10)); setLoginError(''); }}
                     required
+                    disabled={loginLoading}
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1">
-                    Account Password (Optional if first time)
-                  </label>
-                  <Input
-                    type="password"
-                    placeholder="Enter your password"
-                    value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                  />
-                </div>
-
-                <Button type="submit" size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-6 shadow-lg shadow-emerald-600/25">
-                  Sign In To Access Courses <ChevronRight size={18} className="ml-1" />
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-6 shadow-lg shadow-emerald-600/25"
+                  disabled={loginLoading}
+                >
+                  {loginLoading ? (
+                    <><Loader2 size={18} className="animate-spin mr-2" /> Verifying...</>
+                  ) : (
+                    <>Sign In To Access Courses <ChevronRight size={18} className="ml-1" /></>
+                  )}
                 </Button>
               </form>
 
-              <div className="mt-6 pt-6 border-t border-border text-center">
-                <p className="text-xs text-muted-foreground mb-3">Haven't started your 3-Day Free Trial yet?</p>
+              <div className="mt-5 pt-5 border-t border-border">
+                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+                  <ShieldCheck size={14} className="text-emerald-500 shrink-0" />
+                  <span>We verify your email & phone against our payment records</span>
+                </div>
                 <Button variant="outline" className="w-full text-xs font-semibold" onClick={() => navigate('/')}>
                   <Sparkles size={14} className="mr-1 text-emerald-500" /> Start 3-Day Free Trial
                 </Button>
@@ -727,17 +717,6 @@ export default function StudentPortal() {
                 </p>
               </div>
 
-
-              {/* Change Password Button */}
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => setShowPasswordModal(true)}
-                className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 transition-colors"
-              >
-                <Key size={14} className="mr-1 text-emerald-400" /> Change Password
-              </Button>
-
               <Button variant="outline" size="sm" onClick={handleLogout} className="border-zinc-700 text-zinc-300 hover:bg-zinc-800">
                 <LogOut size={14} className="mr-1" /> Sign Out
               </Button>
@@ -746,103 +725,6 @@ export default function StudentPortal() {
         </div>
       </div>
 
-      {/* ═══════ CHANGE PASSWORD MODAL POPUP ═══════ */}
-      {showPasswordModal && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <Card className="max-w-md w-full border-border shadow-2xl overflow-hidden bg-card animate-in fade-in zoom-in duration-200">
-            <CardHeader className="bg-zinc-900 text-white p-5 flex flex-row items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                  <Lock size={16} />
-                </div>
-                <div>
-                  <CardTitle className="text-lg font-bold">Change Password</CardTitle>
-                  <p className="text-xs text-zinc-400">Update your student portal login password</p>
-                </div>
-              </div>
-              <button 
-                onClick={() => setShowPasswordModal(false)}
-                className="text-zinc-400 hover:text-white p-1 rounded-lg transition-colors"
-              >
-                <X size={20} />
-              </button>
-            </CardHeader>
-
-            <CardContent className="p-6">
-              {passwordMsg && (
-                <div className={`p-3 rounded-lg text-xs font-semibold mb-4 flex items-center gap-2 ${
-                  passwordMsg.type === 'success' 
-                    ? 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400' 
-                    : 'bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400'
-                }`}>
-                  {passwordMsg.type === 'success' ? <Check size={16} /> : <Lock size={16} />}
-                  <span>{passwordMsg.text}</span>
-                </div>
-              )}
-
-              <form onSubmit={handleChangePassword} className="space-y-4">
-                {localStorage.getItem('student_password') && (
-                  <div>
-                    <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1">
-                      Current Password
-                    </label>
-                    <Input
-                      type="password"
-                      placeholder="Enter current password"
-                      value={currentPassword}
-                      onChange={(e) => setCurrentPassword(e.target.value)}
-                      required
-                    />
-                  </div>
-                )}
-
-                <div>
-                  <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1">
-                    New Password
-                  </label>
-                  <Input
-                    type="password"
-                    placeholder="Min 6 characters"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1">
-                    Confirm New Password
-                  </label>
-                  <Input
-                    type="password"
-                    placeholder="Re-enter new password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className="flex items-center gap-3 pt-2">
-                  <Button 
-                    type="button" 
-                    variant="outline" 
-                    className="w-1/2"
-                    onClick={() => setShowPasswordModal(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button 
-                    type="submit" 
-                    className="w-1/2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
-                  >
-                    Update Password
-                  </Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
-      )}
 
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl">

@@ -4,6 +4,7 @@ import { ArrowRight, Star, CheckCircle, CheckCircle2, X, ChevronDown, Sparkles, 
 import { COURSES } from '../constants';
 import { triggerRazorpaySubscriptionCheckout } from '../lib/razorpay';
 import { sendStudentWelcomeEmail } from '../lib/email';
+import { registerStudent } from '../lib/students';
 import {
   Logo, SocialProofToast,
   PROBLEM_POINTS, TRANSFORMATION_STORIES, FEAR_STATS,
@@ -119,14 +120,26 @@ const LandingPage: React.FC = () => {
         trialDays: 3,
         productName: 'Avada Architecture Masterclass Pass',
       },
-      (res) => {
+      async (res) => {
         setIsLoading(false);
+
+        // 1. Save student to Supabase database for login verification
+        await registerStudent({
+          email: email.trim(),
+          phone: phone.trim(),
+          name: name.trim() || email.split('@')[0],
+          subscriptionId: res.razorpay_subscription_id || '',
+        });
+
+        // 2. Save session locally for immediate portal access
         localStorage.setItem('student_session', JSON.stringify({
           email: email.trim(),
+          phone: phone.trim(),
           name: name.trim() || email.split('@')[0],
           trialActive: true
         }));
 
+        // 3. Send welcome email
         sendStudentWelcomeEmail({
           studentEmail: email.trim(),
           studentName: name.trim() || email.split('@')[0],
