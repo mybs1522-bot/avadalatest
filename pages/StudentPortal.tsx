@@ -6,8 +6,10 @@ import { Input } from '../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { 
   PlayCircle, ShieldCheck, Clock, BookOpen, UserCheck, 
-  Sparkles, LogOut, Video, ArrowLeft, ChevronRight, CheckCircle2
+  Sparkles, LogOut, Video, ArrowLeft, ChevronRight, CheckCircle2,
+  Key, Lock, X, Check
 } from 'lucide-react';
+
 
 interface Lesson {
   id: string;
@@ -526,6 +528,14 @@ export default function StudentPortal() {
 
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPhone, setLoginPhone] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+
+  // Password Modal state
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordMsg, setPasswordMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Selected course state (null = show course thumbnail grid view)
   const [selectedCourse, setSelectedCourse] = useState<CourseItem | null>(null);
@@ -535,6 +545,12 @@ export default function StudentPortal() {
     e.preventDefault();
     if (!loginEmail.trim() || !loginPhone.trim()) {
       alert('Please enter your registered Email and Phone number');
+      return;
+    }
+
+    const savedPassword = localStorage.getItem('student_password');
+    if (savedPassword && loginPassword && savedPassword !== loginPassword) {
+      alert('Incorrect password. Please try again.');
       return;
     }
 
@@ -559,6 +575,38 @@ export default function StudentPortal() {
     if (course.modules.length > 0 && course.modules[0].lessons.length > 0) {
       setSelectedLesson(course.modules[0].lessons[0]);
     }
+  };
+
+  const handleChangePassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPasswordMsg(null);
+
+    const savedPassword = localStorage.getItem('student_password');
+    if (savedPassword && currentPassword !== savedPassword) {
+      setPasswordMsg({ type: 'error', text: 'Current password is incorrect.' });
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      setPasswordMsg({ type: 'error', text: 'New password must be at least 6 characters long.' });
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setPasswordMsg({ type: 'error', text: 'New passwords do not match.' });
+      return;
+    }
+
+    localStorage.setItem('student_password', newPassword);
+    setPasswordMsg({ type: 'success', text: 'Password updated successfully! Your account is now secured.' });
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+
+    setTimeout(() => {
+      setShowPasswordModal(false);
+      setPasswordMsg(null);
+    }, 2000);
   };
 
   // If user is not logged in, show student login form
@@ -604,6 +652,18 @@ export default function StudentPortal() {
                   />
                 </div>
 
+                <div>
+                  <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1">
+                    Account Password (Optional if first time)
+                  </label>
+                  <Input
+                    type="password"
+                    placeholder="Enter your password"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                  />
+                </div>
+
                 <Button type="submit" size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-6 shadow-lg shadow-emerald-600/25">
                   Sign In To Access Courses <ChevronRight size={18} className="ml-1" />
                 </Button>
@@ -645,6 +705,17 @@ export default function StudentPortal() {
                   <Clock size={12} /> 48 Hours Remaining
                 </p>
               </div>
+
+              {/* Change Password Button */}
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setShowPasswordModal(true)}
+                className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 transition-colors"
+              >
+                <Key size={14} className="mr-1 text-emerald-400" /> Change Password
+              </Button>
+
               <Button variant="outline" size="sm" onClick={handleLogout} className="border-zinc-700 text-zinc-300 hover:bg-zinc-800">
                 <LogOut size={14} className="mr-1" /> Sign Out
               </Button>
@@ -652,6 +723,105 @@ export default function StudentPortal() {
           </div>
         </div>
       </div>
+
+      {/* ═══════ CHANGE PASSWORD MODAL POPUP ═══════ */}
+      {showPasswordModal && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <Card className="max-w-md w-full border-border shadow-2xl overflow-hidden bg-card animate-in fade-in zoom-in duration-200">
+            <CardHeader className="bg-zinc-900 text-white p-5 flex flex-row items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                  <Lock size={16} />
+                </div>
+                <div>
+                  <CardTitle className="text-lg font-bold">Change Password</CardTitle>
+                  <p className="text-xs text-zinc-400">Update your student portal login password</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowPasswordModal(false)}
+                className="text-zinc-400 hover:text-white p-1 rounded-lg transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </CardHeader>
+
+            <CardContent className="p-6">
+              {passwordMsg && (
+                <div className={`p-3 rounded-lg text-xs font-semibold mb-4 flex items-center gap-2 ${
+                  passwordMsg.type === 'success' 
+                    ? 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400' 
+                    : 'bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400'
+                }`}>
+                  {passwordMsg.type === 'success' ? <Check size={16} /> : <Lock size={16} />}
+                  <span>{passwordMsg.text}</span>
+                </div>
+              )}
+
+              <form onSubmit={handleChangePassword} className="space-y-4">
+                {localStorage.getItem('student_password') && (
+                  <div>
+                    <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1">
+                      Current Password
+                    </label>
+                    <Input
+                      type="password"
+                      placeholder="Enter current password"
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                )}
+
+                <div>
+                  <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1">
+                    New Password
+                  </label>
+                  <Input
+                    type="password"
+                    placeholder="Min 6 characters"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1">
+                    Confirm New Password
+                  </label>
+                  <Input
+                    type="password"
+                    placeholder="Re-enter new password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="flex items-center gap-3 pt-2">
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    className="w-1/2"
+                    onClick={() => setShowPasswordModal(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button 
+                    type="submit" 
+                    className="w-1/2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
+                  >
+                    Update Password
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl">
         
