@@ -41,6 +41,11 @@ export const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center gap-4">
+            <Link to="/portal">
+              <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs shadow-sm">
+                Student Portal
+              </Button>
+            </Link>
             <Link to="/cart">
               <Button variant="ghost" size="icon" className="relative">
                 <ShoppingCartIcon className="h-5 w-5" />
@@ -48,6 +53,7 @@ export const Navbar = () => {
               </Button>
             </Link>
           </div>
+
 
           <div className="-mr-2 flex md:hidden">
             <Button

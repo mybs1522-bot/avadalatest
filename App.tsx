@@ -10,6 +10,7 @@ import TermsAndConditions from './pages/TermsAndConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import RefundPolicy from './pages/RefundPolicy';
 import ShippingPolicy from './pages/ShippingPolicy';
+import StudentPortal from './pages/StudentPortal';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ShoppingCartDemo } from './pages/ShoppingCartDemo';
@@ -33,6 +34,8 @@ const App: React.FC = () => {
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/cart" element={<ShoppingCartDemo />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/portal" element={<StudentPortal />} />
+          <Route path="/login" element={<StudentPortal />} />
           <Route path="/terms" element={<TermsAndConditions />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
@@ -43,5 +46,6 @@ const App: React.FC = () => {
     </div>
   );
 };
+
 
 export default App;

@@ -47,9 +47,15 @@ export default function CheckoutPage() {
         productName: product ? product.name : 'Avada Architecture Pass',
       },
       (res) => {
-        alert('Trial activated successfully! Mandate ID / Payment ID: ' + (res.razorpay_payment_id || res.razorpay_subscription_id || 'SUCCESS'));
-        navigate('/');
+        localStorage.setItem('student_session', JSON.stringify({
+          email: formData.email,
+          name: formData.name,
+          trialActive: true
+        }));
+        alert('2-Day Free Trial Activated! Welcome to your Student Portal.');
+        navigate('/portal');
       },
+
       (err) => {
         console.error("Subscription setup failed", err);
       },
