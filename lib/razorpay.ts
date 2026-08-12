@@ -35,9 +35,10 @@ export const triggerRazorpaySubscriptionCheckout = async (
     return;
   }
 
-  // Priority: passed ID -> env variable -> default sub_TOwuFjnx13aQvv
-  let subId = subscriptionDetails.subscriptionId || import.meta.env.VITE_RAZORPAY_SUBSCRIPTION_ID || 'sub_TOwuFjnx13aQvv';
+  // Priority: passed ID -> env variable -> default sub_TOx4ouvDuHpWat
+  let subId = subscriptionDetails.subscriptionId || import.meta.env.VITE_RAZORPAY_SUBSCRIPTION_ID || 'sub_TOx4ouvDuHpWat';
   const activePlanId = subscriptionDetails.planId || import.meta.env.VITE_RAZORPAY_PLAN_ID || 'plan_TOwcG0UPdKNApw';
+
 
 
 

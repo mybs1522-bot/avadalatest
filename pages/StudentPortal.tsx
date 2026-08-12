@@ -547,7 +547,8 @@ export default function StudentPortal() {
   // METHOD 2: Check Razorpay Subscription status on student portal load
   useEffect(() => {
     if (user) {
-      const activeSubId = import.meta.env.VITE_RAZORPAY_SUBSCRIPTION_ID || 'sub_TOwuFjnx13aQvv';
+      const activeSubId = import.meta.env.VITE_RAZORPAY_SUBSCRIPTION_ID || 'sub_TOx4ouvDuHpWat';
+
 
       verifySubscriptionStatus(activeSubId).then((res) => {
         setSubStatusInfo(res);
