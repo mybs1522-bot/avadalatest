@@ -26,7 +26,8 @@ export const sendStudentWelcomeEmail = async ({
         'Authorization': `Bearer ${resendApiKey}`,
       },
       body: JSON.stringify({
-        from: 'Avada Design <onboarding@resend.dev>', // Replace with your verified domain email
+        from: 'Avada Design <onboarding@ragegrow.com>',
+
         to: [studentEmail],
         subject: '🚀 Your 2-Day Free Trial is Active! Access Your Course Library',
         html: `
