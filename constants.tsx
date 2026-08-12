@@ -218,24 +218,8 @@ const RAW_COURSES: Course[] = [
   }
 ];
 
-// --- AUTO-FIX LOGIC ---
-const DEFAULT_ARCHITECTURE_IMAGES: Record<string, string> = {
-  '1': 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80', // AutoCAD
-  '2': 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80', // Revit
-  '3': 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80', // SketchUp
-  '4': 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80', // 3ds Max
-  '5': 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80', // V-Ray
-  '6': 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=800&q=80', // Lumion
-  '7': 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80', // D5 Render
-  '8': 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80', // Enscape
-  '9': 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80', // AI Architecture
-  '10': 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80', // Generative
-  '11': 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=800&q=80', // Unreal Engine
-  '12': 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80' // Photoshop
-};
-
 export const COURSES = RAW_COURSES.map(course => {
-  let url = DEFAULT_ARCHITECTURE_IMAGES[course.id] || course.imageUrl;
+  let url = course.imageUrl;
   if (url.includes('drive.google.com') || url.includes('lh3.googleusercontent.com')) {
     const idMatch = url.match(/\/d\/([^/]+)/);
     if (idMatch && idMatch[1]) {
