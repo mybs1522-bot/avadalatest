@@ -163,18 +163,6 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans overflow-x-hidden selection:bg-orange-100">
-      {/* ═══ STICKY HEADER ═══ */}
-      <header className="sticky top-0 z-[60] bg-white/80 backdrop-blur-2xl border-b border-slate-100/60 px-5 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Logo />
-          <div className="flex items-center gap-4">
-            <button onClick={openPaymentModal} className="hidden md:block text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all bg-orange-600 hover:bg-orange-700 shadow-lg shadow-orange-600/30">
-              Start 3-Day Free Trial
-            </button>
-          </div>
-        </div>
-      </header>
-
       <main>
         {/* 1. HERO — The Hook */}
         <section className="relative pt-0 pb-10 md:pb-20 overflow-hidden" style={{ background: '#ffffff' }}>

@@ -42,24 +42,29 @@ export const Navbar = () => {
           
           <div className="hidden md:flex items-center gap-4">
             <Link to="/portal">
-              <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs shadow-sm">
-                Student Portal
+              <Button size="sm" className="bg-orange-600 hover:bg-orange-700 text-white font-extrabold text-xs px-4 py-2 rounded-full shadow-md shadow-orange-600/20">
+                Login / Portal
               </Button>
             </Link>
             <Link to="/cart">
               <Button variant="ghost" size="icon" className="relative">
                 <ShoppingCartIcon className="h-5 w-5" />
-                <span className="absolute top-1 right-1 flex h-2 w-2 rounded-full bg-primary"></span>
+                <span className="absolute top-1 right-1 flex h-2 w-2 rounded-full bg-orange-600"></span>
               </Button>
             </Link>
           </div>
 
-
-          <div className="-mr-2 flex md:hidden">
+          <div className="-mr-2 flex items-center gap-2 md:hidden">
+            <Link to="/portal">
+              <Button size="sm" className="bg-orange-600 hover:bg-orange-700 text-white font-extrabold text-xs px-3.5 py-1.5 rounded-full shadow-sm">
+                Login
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-slate-700 hover:text-slate-900"
             >
               {isMobileMenuOpen ? (
                 <X className="block h-6 w-6" aria-hidden="true" />
