@@ -74,7 +74,8 @@ export const triggerRazorpaySubscriptionCheckout = async (
     key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Wh4xEHePkQXqRO',
     subscription_id: subId, // Mandates Razorpay to open the UPI AutoPay screen!
     name: 'Avada Design',
-    description: `${subscriptionDetails.productName} — 2-Day Free Trial, then ₹${subscriptionDetails.monthlyPrice}/mo`,
+    description: `${subscriptionDetails.productName} — 3-Day Free Trial, then ₹${subscriptionDetails.monthlyPrice}/mo`,
+
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=100&q=80',
     handler: function (response: any) {
       onSuccess(response);
