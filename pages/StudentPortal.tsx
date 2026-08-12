@@ -764,7 +764,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     title: '1. SketchUp + V-Ray Complete Masterclass',
     subtitle: 'Full 3D Architectural Modeling & Photorealistic Rendering',
     description: 'Complete masterclass covering SketchUp 3D modeling, V-Ray exterior/interior sunlighting, realistic textures, PBR shading, and commercial render polish.',
-    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/renders/RENDER-1.jpg',
     badge: '5 Modules • 22 Videos',
     totalLessons: 22,
     modules: [
@@ -802,7 +802,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     title: '2. D5 Render Real-Time Visualization',
     subtitle: 'Real-Time Raytracing, Foliage Scatter & Cinematic Animations',
     description: 'Learn real-time raytracing in D5 Render, high-poly foliage scattering, atmospheric fog, god rays, and smooth 60FPS walkthrough camera animations.',
-    imageUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/renders/RENDER-7.jpg',
     badge: '1 Module • 7 Videos',
     totalLessons: 7,
     modules: [
@@ -820,7 +820,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     title: '3. AutoCAD 2D Drafting & Architectural Blueprints',
     subtitle: '2D Floor Plans, Blueprints & Construction Documentation',
     description: 'Master precision 2D drafting in AutoCAD, floor plans, furniture layouts, dimensioning standards, scaling, and printing construction blueprints.',
-    imageUrl: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/renders/RENDER-12.jpg',
     badge: '1 Module • 9 Videos',
     totalLessons: 9,
     modules: [
@@ -838,7 +838,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     title: '4. Lumion Landscape Architecture & Walkthroughs',
     subtitle: '3D Exterior Landscape, Vegetation & Walkthrough Movies',
     description: 'Build immersive 3D exterior environments in Lumion, terrain sculpting, outdoor plant scattering, water reflections, and cinematic walkthrough videos.',
-    imageUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/renders/RENDER-6.jpg',
     badge: '1 Module • 15 Videos',
     totalLessons: 15,
     modules: [
@@ -856,7 +856,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     title: '5. Revit Complete Course',
     subtitle: 'BIM modeling & Architectural documentation',
     description: 'BIM modeling, architectural documentation, 3D building design, and parametric families in Autodesk Revit.',
-    imageUrl: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/renders/RENDER-2.jpg',
     badge: '1 Module • 29 Videos',
     totalLessons: 29,
     modules: [
@@ -874,7 +874,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     title: '6. Enscape Real-Time Rendering',
     subtitle: 'Real-time rendering & VR walkthroughs',
     description: 'Real-time rendering, VR walkthroughs, material editing, and atmospheric lighting in Enscape.',
-    imageUrl: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/renders/RENDER-8.jpg',
     badge: '1 Module • 4 Videos',
     totalLessons: 4,
     modules: [
@@ -892,7 +892,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     title: '7. 3ds Max + V-Ray',
     subtitle: 'Professional 3D modeling & V-Ray rendering',
     description: 'Professional 3D modeling, photorealistic V-Ray rendering, interior/exterior visualization in 3ds Max.',
-    imageUrl: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/renders/RENDER-4.jpg',
     badge: '1 Module • 13 Videos',
     totalLessons: 13,
     modules: [
