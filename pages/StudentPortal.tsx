@@ -29,72 +29,93 @@ const DRIVE_FOLDER_ID = '10O3hKlhf_grkBH4KRbJ0vxxCBk4im0kw';
 const COURSE_MODULES: CourseModule[] = [
   {
     id: 'module-1',
-    name: 'Module 1: SketchUp & V-Ray Essentials',
+    name: 'Module 1: SketchUp Essentials',
     lessons: [
       {
         id: 'l1',
         title: '01. SketchUp Workspace & 3D Modeling Fundamentals',
         duration: '18 min',
-        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
+        videoUrl: 'https://drive.google.com/file/d/1QBgN98YL4hdIgB7J9wyc8OpNOYeYMvxO/preview',
         description: 'Complete guide to setting up your SketchUp 3D workspace, camera controls, and shortcut keys.'
       },
       {
         id: 'l2',
-        title: '02. V-Ray Exterior Sunlight & HDRI Environment Setup',
+        title: '02. V-Ray Exterior Sunlight & HDRI Setup',
         duration: '24 min',
-        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
+        videoUrl: 'https://drive.google.com/file/d/1EmKelOgblDsBTdm7_PrXytEOMTdwItcm/preview',
         description: 'Master photorealistic exterior sunlighting, dome lights, and HDRI sky maps.'
       },
       {
         id: 'l3',
-        title: '03. V-Ray Materials & Realistic Surface Texturing',
+        title: '03. V-Ray Materials & Realistic Textures',
         duration: '31 min',
-        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
+        videoUrl: 'https://drive.google.com/file/d/1v3RSZOwwMk3bdLEVnsRASNuW6-fWTq_w/preview',
         description: 'Creating realistic glass, polished concrete, wood grains, and metallic surfaces.'
       }
     ]
   },
   {
     id: 'module-2',
-    name: 'Module 2: D5 Render Real-Time Visualization',
+    name: 'Module 2: Advanced Rendering & Lighting',
     lessons: [
       {
         id: 'l4',
-        title: '04. D5 Render Real-Time Lighting & Asset Library',
+        title: '04. Interior Lighting & Camera Exposure',
         duration: '22 min',
-        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
-        description: 'Importing models into D5 Render, setting up real-time raytracing, and scattering foliage.'
+        videoUrl: 'https://drive.google.com/file/d/156QUihh-1d1f0wZ6boXclQlDPFAtUAhY/preview',
+        description: 'Set up artificial interior lights, IES profiles, and camera exposure.'
       },
       {
         id: 'l5',
-        title: '05. Creating Cinematic Walkthrough Animations in D5',
+        title: '05. High-Resolution Rendering & Denoising',
         duration: '29 min',
-        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
-        description: 'Setting up keyframe animation paths, depth of field, and rendering 4K video walkthroughs.'
+        videoUrl: 'https://drive.google.com/file/d/10AgJvh6Ezoi3XdgYlF6VhV7mNQ7KyE-I/preview',
+        description: 'Render settings for crisp 4K outputs, GPU acceleration, and AI denoising.'
       }
     ]
   },
   {
     id: 'module-3',
-    name: 'Module 3: Complete Architecture Master Library',
+    name: 'Module 3: D5 Render Real-Time Visualization',
     lessons: [
       {
         id: 'l6',
-        title: '06. AutoCAD 2D Blueprints to 3D Revit BIM Model',
+        title: '06. Real-Time Environment & Foliage Scattering',
         duration: '35 min',
-        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
-        description: 'Convert 2D CAD floor plans into parametric 3D Revit BIM models ready for construction.'
+        videoUrl: 'https://drive.google.com/file/d/10tFTa6jtLOJrBRGdsJlVE234GJsVMV6p/preview',
+        description: 'Real-time raytracing, scattering trees, grass, and dynamic weather effects.'
       },
       {
         id: 'l7',
-        title: '07. Photoshop Post-Production & Final Render Polish',
+        title: '07. Cinematic Walkthrough Camera Paths',
         duration: '20 min',
-        videoUrl: `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`,
-        description: 'Color correction, adding scale figures, sky replacements, and portfolio post-processing.'
+        videoUrl: 'https://drive.google.com/file/d/1Hgl_oHb-ZMDWS2bevBrqbxV3qMZLiHcb/preview',
+        description: 'Keyframe camera movement, depth of field, and video export settings.'
+      }
+    ]
+  },
+  {
+    id: 'module-4',
+    name: 'Module 4: Photoshop Post-Production',
+    lessons: [
+      {
+        id: 'l8',
+        title: '08. Photoshop Compositing & Sky Replacement',
+        duration: '25 min',
+        videoUrl: 'https://drive.google.com/file/d/117WzsGZzwN5419Fo1gDWyowx56Dv5uoOL/preview',
+        description: 'Adding realistic skies, scale human figures, vegetation, and lighting passes.'
+      },
+      {
+        id: 'l9',
+        title: '09. Final Portfolio Presentation & Color Grading',
+        duration: '28 min',
+        videoUrl: 'https://drive.google.com/file/d/1XXcEbzH3pedqDpkGkXhgPfqQkqDKrUJ2/preview',
+        description: 'Color grading, Camera Raw filters, contrast tuning, and architectural portfolio design.'
       }
     ]
   }
 ];
+
 
 
 
