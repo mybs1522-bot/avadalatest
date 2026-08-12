@@ -432,21 +432,6 @@ export default function StudentPortal() {
                 ))}
               </div>
             </div>
-
-            {/* Direct Google Drive Resource Link */}
-            <div className="bg-zinc-900 text-white rounded-2xl p-5 border border-zinc-800">
-              <h4 className="font-bold text-sm mb-1 flex items-center gap-2 text-emerald-400">
-                <FileText size={16} /> Drive Resource Folder
-              </h4>
-              <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
-                Access exercise files, 3D SketchUp assets, and project materials directly in your stream.
-              </p>
-              <Button size="sm" variant="outline" className="w-full border-zinc-700 text-zinc-200 hover:bg-zinc-800 text-xs" asChild>
-                <a href={`https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}`} target="_blank" rel="noreferrer">
-                  Open Project Materials Folder
-                </a>
-              </Button>
-            </div>
           </div>
 
         </div>
@@ -454,3 +439,4 @@ export default function StudentPortal() {
     </div>
   );
 }
+
