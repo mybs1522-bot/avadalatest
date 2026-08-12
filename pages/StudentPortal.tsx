@@ -29,7 +29,7 @@ const DRIVE_FOLDER_ID = '10O3hKlhf_grkBH4KRbJ0vxxCBk4im0kw';
 const COURSE_MODULES: CourseModule[] = [
   {
     id: 'module-1',
-    name: 'Module 1: SketchUp Essentials',
+    name: 'Module 1: SketchUp & V-Ray Core Workflow (3 Videos)',
     lessons: [
       {
         id: 'l1',
@@ -47,7 +47,7 @@ const COURSE_MODULES: CourseModule[] = [
       },
       {
         id: 'l3',
-        title: '03. V-Ray Materials & Realistic Textures',
+        title: '03. V-Ray Materials & Realistic Surface Textures',
         duration: '31 min',
         videoUrl: 'https://drive.google.com/file/d/1v3RSZOwwMk3bdLEVnsRASNuW6-fWTq_w/preview',
         description: 'Creating realistic glass, polished concrete, wood grains, and metallic surfaces.'
@@ -56,65 +56,163 @@ const COURSE_MODULES: CourseModule[] = [
   },
   {
     id: 'module-2',
-    name: 'Module 2: Advanced Rendering & Lighting',
+    name: 'Module 2: Advanced Rendering & Lighting Pass (4 Videos)',
     lessons: [
       {
         id: 'l4',
-        title: '04. Interior Lighting & Camera Exposure',
+        title: '04. Interior Lighting & Camera Exposure Control',
         duration: '22 min',
         videoUrl: 'https://drive.google.com/file/d/156QUihh-1d1f0wZ6boXclQlDPFAtUAhY/preview',
         description: 'Set up artificial interior lights, IES profiles, and camera exposure.'
       },
       {
         id: 'l5',
-        title: '05. High-Resolution Rendering & Denoising',
+        title: '05. High-Resolution Rendering & AI Denoising',
         duration: '29 min',
         videoUrl: 'https://drive.google.com/file/d/10AgJvh6Ezoi3XdgYlF6VhV7mNQ7KyE-I/preview',
         description: 'Render settings for crisp 4K outputs, GPU acceleration, and AI denoising.'
+      },
+      {
+        id: 'l6',
+        title: '06. Complex Material Layering & Reflection Maps',
+        duration: '26 min',
+        videoUrl: 'https://drive.google.com/file/d/10tFTa6jtLOJrBRGdsJlVE234GJsVMV6p/preview',
+        description: 'Advanced reflection, bump maps, roughness, and subsurface scattering.'
+      },
+      {
+        id: 'l7',
+        title: '07. Complex Architectural Geometry Modeling',
+        duration: '32 min',
+        videoUrl: 'https://drive.google.com/file/d/1Hgl_oHb-ZMDWS2bevBrqbxV3qMZLiHcb/preview',
+        description: 'Building curved facades, organic structures, and detailed architectural joinery.'
       }
     ]
   },
   {
     id: 'module-3',
-    name: 'Module 3: D5 Render Real-Time Visualization',
+    name: 'Module 3: Master Visualization Series 6 (7 Videos)',
     lessons: [
       {
-        id: 'l6',
-        title: '06. Real-Time Environment & Foliage Scattering',
-        duration: '35 min',
-        videoUrl: 'https://drive.google.com/file/d/10tFTa6jtLOJrBRGdsJlVE234GJsVMV6p/preview',
-        description: 'Real-time raytracing, scattering trees, grass, and dynamic weather effects.'
+        id: 'l8',
+        title: '08. Master Series 6.1 — Lighting & Scene Setup',
+        duration: '25 min',
+        videoUrl: 'https://drive.google.com/file/d/1Ov1R2dYA9XAs0FRMLJYk7qY5jRXMxTpg/preview',
+        description: 'Setting up master scene environment, camera composition, and sun angles.'
       },
       {
-        id: 'l7',
-        title: '07. Cinematic Walkthrough Camera Paths',
-        duration: '20 min',
-        videoUrl: 'https://drive.google.com/file/d/1Hgl_oHb-ZMDWS2bevBrqbxV3qMZLiHcb/preview',
-        description: 'Keyframe camera movement, depth of field, and video export settings.'
+        id: 'l9',
+        title: '09. Master Series 6.2 — Environment & Landscape',
+        duration: '27 min',
+        videoUrl: 'https://drive.google.com/file/d/1dFKiQ9Pq2HfrwFwxyDw4YTVy7GNLMZl8/preview',
+        description: 'Adding 3D trees, grass assets, terrain modeling, and outdoor hardscaping.'
+      },
+      {
+        id: 'l10',
+        title: '10. Master Series 6.3 — Material & Shading Workflows',
+        duration: '30 min',
+        videoUrl: 'https://drive.google.com/file/d/19RsFIFgrJCKbd28wDLLeVghvDoPojiHi/preview',
+        description: 'PBR shading workflows, PBR textures, and realistic displacement maps.'
+      },
+      {
+        id: 'l11',
+        title: '11. Master Series 6.4 — Camera Angles & Framing',
+        duration: '21 min',
+        videoUrl: 'https://drive.google.com/file/d/1O7oR1PEaafFI8vSKHM12H0S8pwPJGT8H/preview',
+        description: 'Architectural photography principles, two-point perspective, and rule of thirds.'
+      },
+      {
+        id: 'l12',
+        title: '12. Master Series 6.5 — Atmospheric & Fog Effects',
+        duration: '28 min',
+        videoUrl: 'https://drive.google.com/file/d/1vmH4winaH1qkjX_fRqzZnTYUdY5RKxOc/preview',
+        description: 'Volumetric fog, god rays, atmospheric haze, and realistic cloud layers.'
+      },
+      {
+        id: 'l13',
+        title: '13. Master Series 6.6 — D5 Realtime Render Pipeline',
+        duration: '34 min',
+        videoUrl: 'https://drive.google.com/file/d/1uMJ4PnOu61_-_74KHWzLAHacYtxZlFeG/preview',
+        description: 'Real-time raytracing setup, asset scattering, and 4K animation output.'
+      },
+      {
+        id: 'l14',
+        title: '14. Master Series 6.7 — Cinematic Walkthrough Paths',
+        duration: '23 min',
+        videoUrl: 'https://drive.google.com/file/d/1VQ9YvGCJ9TtfAgy-YrMiMPnmSMQ27O0L/preview',
+        description: 'Smooth camera animation paths, transition cuts, and 60FPS video rendering.'
       }
     ]
   },
   {
     id: 'module-4',
-    name: 'Module 4: Photoshop Post-Production',
+    name: 'Module 4: Post-Production & Color Tuning (2 Videos)',
     lessons: [
       {
-        id: 'l8',
-        title: '08. Photoshop Compositing & Sky Replacement',
+        id: 'l15',
+        title: '15. Post-Production — Sky & Human Figures',
         duration: '25 min',
-        videoUrl: 'https://drive.google.com/file/d/117WzsGZzwN5419Fo1gDWyowx56Dv5uoOL/preview',
-        description: 'Adding realistic skies, scale human figures, vegetation, and lighting passes.'
+        videoUrl: 'https://drive.google.com/file/d/17WzsGZzwN5419Fo1gDWyowx56Dv5uoOL/preview',
+        description: 'Adding realistic skies, scale figures, vegetation, and lighting passes in Photoshop.'
       },
       {
-        id: 'l9',
-        title: '09. Final Portfolio Presentation & Color Grading',
+        id: 'l16',
+        title: '16. Portfolio Presentation & Camera Raw Grading',
         duration: '28 min',
         videoUrl: 'https://drive.google.com/file/d/1XXcEbzH3pedqDpkGkXhgPfqQkqDKrUJ2/preview',
-        description: 'Color grading, Camera Raw filters, contrast tuning, and architectural portfolio design.'
+        description: 'Color grading, Camera Raw filters, contrast tuning, and architectural portfolio layout.'
+      }
+    ]
+  },
+  {
+    id: 'module-5',
+    name: 'Module 5: Advanced Masterclass Series 8 (6 Videos)',
+    lessons: [
+      {
+        id: 'l17',
+        title: '17. Series 8.1 — Exterior Architectural Design',
+        duration: '31 min',
+        videoUrl: 'https://drive.google.com/file/d/1-koPhy3_o9wffoEsTmgyVo89VLvNJbfl/preview',
+        description: 'Modern luxury residential facade modeling, glass curtain walls, and exterior details.'
+      },
+      {
+        id: 'l18',
+        title: '18. Series 8.2 — Interior Lighting Masterclass',
+        duration: '29 min',
+        videoUrl: 'https://drive.google.com/file/d/1qXgyjH12P30uvXUvhQ7PXNO1jW2ZhpRD/preview',
+        description: 'Cozy mood lighting, cove LED strips, spotlighting art, and realistic interior ambiance.'
+      },
+      {
+        id: 'l19',
+        title: '19. Series 8.3 — Parametric Geometry & Curved Surfaces',
+        duration: '27 min',
+        videoUrl: 'https://drive.google.com/file/d/1zh8Ms7tiaHW4ww3Xo8AySxDwpA1lTbIa/preview',
+        description: 'Modeling complex parametric ceilings, acoustic wall panels, and custom furniture.'
+      },
+      {
+        id: 'l20',
+        title: '20. Series 8.4 — Advanced Vegetation & Site Landscape',
+        duration: '33 min',
+        videoUrl: 'https://drive.google.com/file/d/1WD98jJznJhTY-eXIom14dERFzX6Ju2eD/preview',
+        description: 'High-poly 3D plant scatter, garden landscaping, water features, and pool reflection.'
+      },
+      {
+        id: 'l21',
+        title: '21. Series 8.5 — Dusk & Night Lighting Scene',
+        duration: '26 min',
+        videoUrl: 'https://drive.google.com/file/d/1W_IgwFKYKl9i3tYCACkc7qsmVqpEgEkk/preview',
+        description: 'Dusk sky lighting setup, artificial interior glow, and exterior garden landscape lights.'
+      },
+      {
+        id: 'l22',
+        title: '22. Series 8.6 — Commercial Render Polish & Final Output',
+        duration: '36 min',
+        videoUrl: 'https://drive.google.com/file/d/1bgajytPRjkAzbWPRrDanOn28lasZGmWu/preview',
+        description: 'Final 8K commercial rendering, EXR element passes, glare/bloom effects, and client delivery.'
       }
     ]
   }
 ];
+
 
 
 
@@ -289,8 +387,9 @@ export default function StudentPortal() {
                   <BookOpen size={18} className="text-emerald-600" /> Course Curriculum
                 </h3>
                 <span className="text-xs font-semibold bg-emerald-500/10 text-emerald-600 px-2.5 py-1 rounded-full">
-                  7 Lessons
+                  22 Video Masterclasses
                 </span>
+
               </div>
 
               {/* Module Accordions */}
