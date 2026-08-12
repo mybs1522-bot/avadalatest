@@ -1,0 +1,330 @@
+const REVIT_LESSONS: Lesson[] = [
+  {
+    "id": "rev-1",
+    "title": "1. Introduction",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/15xUxRJxsMwC-bGz3Klq7eeU60P3CFdhm/preview",
+    "description": "Video tutorial covering 1. Introduction"
+  },
+  {
+    "id": "rev-2",
+    "title": "2. Creating Walls and Drawing Walls",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1UtNjNaxIJZRFRrAO3W95ze7ZFrAiyaaw/preview",
+    "description": "Video tutorial covering 2. Creating Walls and Drawing Walls"
+  },
+  {
+    "id": "rev-3",
+    "title": "3. Floors, Placing Doors, Windows and Elevation",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1YbVsqSWH37oNSAfdmhM8yud4gqw9UZol/preview",
+    "description": "Video tutorial covering 3. Floors, Placing Doors, Windows and Elevation"
+  },
+  {
+    "id": "rev-4",
+    "title": "4. Edit Profile and Edit Boundary",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1ylQm9017s8cHeDcvI3peh383buDlpwd9/preview",
+    "description": "Video tutorial covering 4. Edit Profile and Edit Boundary"
+  },
+  {
+    "id": "rev-5",
+    "title": "5. Creating Levels and Making a Multi Story Building",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1_VhSY3qXVjgmm_hFL0Dyc7pvoN0eLLw9/preview",
+    "description": "Video tutorial covering 5. Creating Levels and Making a Multi Story Building"
+  },
+  {
+    "id": "rev-6",
+    "title": "6. Adding Skirting to walls - Sweep and Reveals",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1aUqjt1s7XDGJuqxNW3lTSWkp_bM5kE-v/preview",
+    "description": "Video tutorial covering 6. Adding Skirting to walls - Sweep and Reveals"
+  },
+  {
+    "id": "rev-7",
+    "title": "7. Wall Sweep and Reveals 2",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1QQ5656Dqhoj3HQocHz6tHeUd3zNQqJEB/preview",
+    "description": "Video tutorial covering 7. Wall Sweep and Reveals 2"
+  },
+  {
+    "id": "rev-8",
+    "title": "8. Simple Roof and Gable Roof",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1nFaoh4wg57JF23OqD6_2z7HEEzK96hgd/preview",
+    "description": "Video tutorial covering 8. Simple Roof and Gable Roof"
+  },
+  {
+    "id": "rev-9",
+    "title": "9. Curtain Wall",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1F-MtIulRK1YR7P9oFEh1msEqa55fcpKh/preview",
+    "description": "Video tutorial covering 9. Curtain Wall"
+  },
+  {
+    "id": "rev-10",
+    "title": "10. How to Make Louvers",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/19xVh2NqfukHVERGScQ028nixtcN-d5Mw/preview",
+    "description": "Video tutorial covering 10. How to Make Louvers"
+  },
+  {
+    "id": "rev-11",
+    "title": "11. Components, Ceiling and Materials",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/10Tg6zbIo2ip4_8Zl_UjoLOgYLSS4dj5T/preview",
+    "description": "Video tutorial covering 11. Components, Ceiling and Materials"
+  },
+  {
+    "id": "rev-12",
+    "title": "12. Family Creation - Extrude, Blend, Revolve, Sweep and Void",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1XWI70hZ97DMhnKz_d7frWKuwEsGAi_XD/preview",
+    "description": "Video tutorial covering 12. Family Creation - Extrude, Blend, Revolve, Sweep and Void"
+  },
+  {
+    "id": "rev-13",
+    "title": "13. How to Make Table with Parameters",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1PFFIpeaYPSCjVKH3uZKeoSK_5m_Z-pjG/preview",
+    "description": "Video tutorial covering 13. How to Make Table with Parameters"
+  },
+  {
+    "id": "rev-14",
+    "title": "14. Work Planes - How to make a Wall Cupboard",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1WG6GzwSzR7Xu88_zGdrTtgwb_-kV1-Qk/preview",
+    "description": "Video tutorial covering 14. Work Planes - How to make a Wall Cupboard"
+  },
+  {
+    "id": "rev-15",
+    "title": "15. How to Make Sink",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1WQK9bvza_CXkmna645Qt10p2hbyUiJN1/preview",
+    "description": "Video tutorial covering 15. How to Make Sink"
+  },
+  {
+    "id": "rev-16",
+    "title": "16. Designed Table",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1bmHgjp3andp6BITR_khAwLRwLrzz1T0K/preview",
+    "description": "Video tutorial covering 16. Designed Table"
+  },
+  {
+    "id": "rev-17",
+    "title": "17. Stairs",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/119OLorvLngLXTqSwCwX43aMo2wfcijiR/preview",
+    "description": "Video tutorial covering 17. Stairs"
+  },
+  {
+    "id": "rev-18",
+    "title": "18. Spiral Stairs",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1VnKESHhClayzZQz6r2UMGsvVKTdAYr-s/preview",
+    "description": "Video tutorial covering 18. Spiral Stairs"
+  },
+  {
+    "id": "rev-19",
+    "title": "19. Stairs by Sketch",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1la_wEmmp9rLFosdRZss9lWA2tob8DQAG/preview",
+    "description": "Video tutorial covering 19. Stairs by Sketch"
+  },
+  {
+    "id": "rev-20",
+    "title": "20. RAMP",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1ITYm6tAwKa18pn0Xi0KUqe8txxN5WWnh/preview",
+    "description": "Video tutorial covering 20. RAMP"
+  },
+  {
+    "id": "rev-21",
+    "title": "21. Wall, Floor Structure and Materials",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1XbgCf85UPd7BP0MyN7yFElJFQPW-6Hde/preview",
+    "description": "Video tutorial covering 21. Wall, Floor Structure and Materials"
+  },
+  {
+    "id": "rev-22",
+    "title": "22. Roof - Fascia, Gutter and Soffit",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/13vjdFt6FBKYYY6kgloipX7NCGIBCtlhZ/preview",
+    "description": "Video tutorial covering 22. Roof - Fascia, Gutter and Soffit"
+  },
+  {
+    "id": "rev-23",
+    "title": "23. Classic Windows Frame Family Creation",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1McQlS_XA16ufW8G-IPPZ2wPgn-0NBXiN/preview",
+    "description": "Video tutorial covering 23. Classic Windows Frame Family Creation"
+  },
+  {
+    "id": "rev-24",
+    "title": "24. Windows Family Creation Place Windows in the Corner of a Wall",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1sS11i6463CQqWxXPQ6DLB2014pH4ZNv6/preview",
+    "description": "Video tutorial covering 24. Windows Family Creation Place Windows in the Corner of a Wall"
+  },
+  {
+    "id": "rev-25",
+    "title": "25. How to make a door family Open and close in different angles",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1MJ14L09RM46A73IFzxHbXBtUfucqY5cb/preview",
+    "description": "Video tutorial covering 25. How to make a door family Open and close in different angles"
+  },
+  {
+    "id": "rev-26",
+    "title": "26. Topo Surface - 1",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/12f680IpMPxDwBSOQbfglYmjaZipTwvaR/preview",
+    "description": "Video tutorial covering 26. Topo Surface - 1"
+  },
+  {
+    "id": "rev-27",
+    "title": "27. Topo Surface - 2",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1cz1AXr6X0uCwt5d2SThCwanBTnK-CrXZ/preview",
+    "description": "Video tutorial covering 27. Topo Surface - 2"
+  },
+  {
+    "id": "rev-28",
+    "title": "28. Masses",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1wo_pjjefcRJzNdfMRuBzQcPi0YIPTYLk/preview",
+    "description": "Video tutorial covering 28. Masses"
+  },
+  {
+    "id": "rev-29",
+    "title": "29. Conceptual Mass",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/18uhpOOPjhjQSDqYn82tGwqdxjmZuC6ku/preview",
+    "description": "Video tutorial covering 29. Conceptual Mass"
+  }
+];
+
+const ENSCAPE_LESSONS: Lesson[] = [
+  {
+    "id": "ens-1",
+    "title": "1 - Introduction Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1xWF_nY58tcn2nQ7WCv6Jsrvl-Y3PgegK/preview",
+    "description": "Video tutorial covering 1 - Introduction Shared folder"
+  },
+  {
+    "id": "ens-2",
+    "title": "2 - Sketchup Basics for Absolute Beginners Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1ZsaUK23VKTxo6G4dDfkLZPfKceCiRMcP/preview",
+    "description": "Video tutorial covering 2 - Sketchup Basics for Absolute Beginners Shared folder"
+  },
+  {
+    "id": "ens-3",
+    "title": "3 - Building the Model with Sketchup Flextools Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1PDopvnlDWPhy9n5Oh94Qnm3wuU5gvGJ1/preview",
+    "description": "Video tutorial covering 3 - Building the Model with Sketchup Flextools Shared folder"
+  },
+  {
+    "id": "ens-4",
+    "title": "4 - Visualizing our Residence with Enscape Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/171v6V_PStFgxkO_zWGr2wySG3O8802rh/preview",
+    "description": "Video tutorial covering 4 - Visualizing our Residence with Enscape Shared folder"
+  }
+];
+
+const TDSMAX_VRAY_LESSONS: Lesson[] = [
+  {
+    "id": "max-1",
+    "title": "1 - Course Introduction Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1wEMg9ttFeX3J0Ul2hYB06rVSrq0ykH8f/preview",
+    "description": "Video tutorial covering 1 - Course Introduction Shared folder"
+  },
+  {
+    "id": "max-2",
+    "title": "2 - Advanced Modeling For Architecture in 3ds Max Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1rWYclSxbI_CmUqhTbJIVRYF5sQ2J6LFL/preview",
+    "description": "Video tutorial covering 2 - Advanced Modeling For Architecture in 3ds Max Shared folder"
+  },
+  {
+    "id": "max-3",
+    "title": "3 - Intro to Marvelous Designer for Creating Organic 3d Models Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1beVPlLaZiDQkJqn3GsnsB7N1Oc5k0gQj/preview",
+    "description": "Video tutorial covering 3 - Intro to Marvelous Designer for Creating Organic 3d Models Shared folder"
+  },
+  {
+    "id": "max-4",
+    "title": "4 - Modeling Wrap Up Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/16kb_lPYhAgXPadsz5hJ4RHVLiZepJVIl/preview",
+    "description": "Video tutorial covering 4 - Modeling Wrap Up Shared folder"
+  },
+  {
+    "id": "max-5",
+    "title": "5 - Cameras and Composition Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1T81WvSwpLFVHne3GlMf0WOYxK4_7Hyiq/preview",
+    "description": "Video tutorial covering 5 - Cameras and Composition Shared folder"
+  },
+  {
+    "id": "max-6",
+    "title": "6 - Advanced Lighting Using Vray Lights Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1ZgNM3A6pf-L6QwWGrCzAQki1HxNfC5bb/preview",
+    "description": "Video tutorial covering 6 - Advanced Lighting Using Vray Lights Shared folder"
+  },
+  {
+    "id": "max-7",
+    "title": "7 - Advanced Materials Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/12-t9VU7PUljnxvCuwCmaFdfqR4YDVF_K/preview",
+    "description": "Video tutorial covering 7 - Advanced Materials Shared folder"
+  },
+  {
+    "id": "max-8",
+    "title": "8 - Advanced Rendering Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1-K5OG-Uy7e29ddrIshNHx1NHggwpYdGb/preview",
+    "description": "Video tutorial covering 8 - Advanced Rendering Shared folder"
+  },
+  {
+    "id": "max-9",
+    "title": "9 - Atmospherics Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/19_gCUFCWG94GXpqCI_7Bvg5qAVy0u59A/preview",
+    "description": "Video tutorial covering 9 - Atmospherics Shared folder"
+  },
+  {
+    "id": "max-10",
+    "title": "10 - Advanced PostProcessing Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1upFHbeBV4AzKVprSp2x8cunTNUx-QL5-/preview",
+    "description": "Video tutorial covering 10 - Advanced PostProcessing Shared folder"
+  },
+  {
+    "id": "max-11",
+    "title": "11 - VRay Updates for VRay 5 and Above Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/17Um4-V8nXoBK22YteU21VOaxlO0s1bzY/preview",
+    "description": "Video tutorial covering 11 - VRay Updates for VRay 5 and Above Shared folder"
+  },
+  {
+    "id": "max-12",
+    "title": "12 - Interior Project II With Latest VRay Features Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1Ki6Q8eVSZXzVXA7Iesy2EWQG1J8sEoya/preview",
+    "description": "Video tutorial covering 12 - Interior Project II With Latest VRay Features Shared folder"
+  },
+  {
+    "id": "max-13",
+    "title": "13 - ADDITIONAL PROJECTS Shared folder",
+    "duration": "20-30 min",
+    "videoUrl": "https://drive.google.com/file/d/1w77XGK2gvMTNm7VQOpV3avg2DMqrDNND/preview",
+    "description": "Video tutorial covering 13 - ADDITIONAL PROJECTS Shared folder"
+  }
+];
