@@ -634,58 +634,58 @@ const LandingPage: React.FC = () => {
               {/* Form Input Fields */}
               <form onSubmit={handleModalSubmit} className="space-y-4 pt-1">
                 <div>
-                  <label className="block text-xs font-extrabold text-slate-600 uppercase tracking-wider mb-1.5">
+                  <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">
                     Full Name
                   </label>
-                  <div className="relative flex items-center">
-                    <User size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                  <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all" style={nameError ? {borderColor:'#ef4444', backgroundColor:'#fef2f2'} : {}}>
+                    <User size={18} className="text-slate-400 shrink-0" strokeWidth={1.8} />
                     <input
                       type="text"
                       placeholder="Your full name"
                       value={name}
                       onChange={(e) => { setName(e.target.value); setNameError(false); }}
-                      className={`w-full pl-11 pr-4 py-3 bg-slate-50 border ${nameError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all`}
+                      className="w-full bg-transparent text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none"
                       required
                     />
                   </div>
-                  {nameError && <p className="text-red-500 text-xs mt-1 font-semibold">Please enter your full name</p>}
+                  {nameError && <p className="text-red-500 text-[11px] mt-1 font-semibold">Please enter your full name</p>}
                 </div>
 
                 <div>
-                  <label className="block text-xs font-extrabold text-slate-600 uppercase tracking-wider mb-1.5">
+                  <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">
                     Phone Number (UPI Linked)
                   </label>
-                  <div className="relative flex items-center">
-                    <Phone size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
-                    <span className="absolute left-11 top-1/2 -translate-y-1/2 text-slate-600 font-bold text-sm pointer-events-none">+91</span>
+                  <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all" style={phoneError ? {borderColor:'#ef4444', backgroundColor:'#fef2f2'} : {}}>
+                    <Phone size={18} className="text-slate-400 shrink-0" strokeWidth={1.8} />
+                    <span className="text-slate-500 font-semibold text-sm shrink-0 select-none">+91</span>
                     <input
                       type="tel"
                       placeholder="10-digit mobile number"
                       value={phone}
                       onChange={(e) => { setPhone(e.target.value.replace(/\D/g, '').slice(0, 10)); setPhoneError(false); }}
-                      className={`w-full pl-20 pr-4 py-3 bg-slate-50 border ${phoneError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all`}
+                      className="w-full bg-transparent text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none"
                       required
                     />
                   </div>
-                  {phoneError && <p className="text-red-500 text-xs mt-1 font-semibold">Enter a valid 10-digit number</p>}
+                  {phoneError && <p className="text-red-500 text-[11px] mt-1 font-semibold">Enter a valid 10-digit number</p>}
                 </div>
 
                 <div>
-                  <label className="block text-xs font-extrabold text-slate-600 uppercase tracking-wider mb-1.5">
+                  <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">
                     Email Address
                   </label>
-                  <div className="relative flex items-center">
-                    <Mail size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                  <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all" style={emailError ? {borderColor:'#ef4444', backgroundColor:'#fef2f2'} : {}}>
+                    <Mail size={18} className="text-slate-400 shrink-0" strokeWidth={1.8} />
                     <input
                       type="email"
                       placeholder="your@email.com"
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); setEmailError(false); }}
-                      className={`w-full pl-11 pr-4 py-3 bg-slate-50 border ${emailError ? 'border-red-500 bg-red-50' : 'border-slate-200'} rounded-xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all`}
+                      className="w-full bg-transparent text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none"
                       required
                     />
                   </div>
-                  {emailError && <p className="text-red-500 text-xs mt-1 font-semibold">Enter a valid email address</p>}
+                  {emailError && <p className="text-red-500 text-[11px] mt-1 font-semibold">Enter a valid email address</p>}
                 </div>
 
                 {/* Main Action Button */}
