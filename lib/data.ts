@@ -7,7 +7,7 @@ export const PRODUCTS = [
     billingPeriod: 'month',
     trialText: '2-Day Free Trial (₹0 Today)',
     description: 'Master the ultimate architectural visualization workflow with this comprehensive bundle. Learn to model in SketchUp, create photorealistic renders in V-Ray, and produce stunning real-time walkthroughs with D5 Render.',
-    imageUrl: 'https://lh3.googleusercontent.com/d/1vbV4j6K9sgzbbZ7qlRdgqPTXWiHBPLsr',
+    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
     topics: [
       'Introduction to SketchUp Pro Workspace',
       'Advanced 3D Modeling Techniques & Shortcuts',
@@ -26,7 +26,7 @@ export const PRODUCTS = [
     billingPeriod: 'month',
     trialText: '2-Day Free Trial (₹0 Today)',
     description: 'Get access to our entire library of architecture and design courses at a massive discount. This bundle includes everything you need from drafting to advanced parametric modeling.',
-    imageUrl: 'https://lh3.googleusercontent.com/d/1aHEt_z78tYD_0Cn66DiduAnhwn-o8El8',
+    imageUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
     topics: [
       'AutoCAD for Architecture: 2D Drafting',
       'Revit BIM Masterclass: From concept to documentation',
@@ -38,4 +38,5 @@ export const PRODUCTS = [
     ]
   }
 ];
+
 
