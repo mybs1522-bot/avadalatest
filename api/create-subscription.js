@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
     const payload = JSON.stringify({
       plan_id: planId,
-      total_count: 120,
+      total_count: 12,
       quantity: 1,
       start_at: startAt,
       customer_notify: 1
