@@ -43,36 +43,27 @@ export const triggerRazorpaySubscriptionCheckout = async (
   // Generate a fresh, unique Razorpay Subscription Mandate ID for every checkout attempt
   if (!subId) {
     try {
-      const auth = btoa('rzp_live_Wh4xEHePkQXqRO:555SgeR7nJYsI76SZ200lN8W');
-      const createRes = await fetch('https://api.razorpay.com/v1/subscriptions', {
+      const createRes = await fetch('/api/create-subscription', {
         method: 'POST',
         headers: {
-          'Authorization': `Basic ${auth}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           plan_id: activePlanId,
-          total_count: 120,
-          quantity: 1,
-          start_at: startAtUnix,
-          customer_notify: 1
+          trial_days: subscriptionDetails.trialDays,
+          monthly_amount: subscriptionDetails.monthlyPrice
         })
       });
 
       if (createRes.ok) {
         const subData = await createRes.json();
-        if (subData && subData.id) {
-          subId = subData.id;
+        if (subData && subData.subscriptionId) {
+          subId = subData.subscriptionId;
         }
       }
     } catch (err) {
       console.warn("Could not create dynamic Razorpay subscription ID:", err);
     }
-  }
-
-  // Fallback to environment variable if dynamic creation fails
-  if (!subId) {
-    subId = import.meta.env.VITE_RAZORPAY_SUBSCRIPTION_ID || 'sub_TOzqlrIULqdtIB';
   }
 
 
