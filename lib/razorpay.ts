@@ -38,16 +38,13 @@ export const triggerRazorpaySubscriptionCheckout = async (
   let subId = subscriptionDetails.subscriptionId;
   const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Wh4xEHePkQXqRO';
   const activePlanId = subscriptionDetails.planId || import.meta.env.VITE_RAZORPAY_PLAN_ID || 'plan_TOwcG0UPdKNApw';
-  const startAtUnix = Math.floor(Date.now() / 1000) + (subscriptionDetails.trialDays * 24 * 60 * 60);
 
   // Generate a fresh, unique Razorpay Subscription Mandate ID for every checkout attempt
   if (!subId) {
     try {
       const createRes = await fetch('/api/create-subscription', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           plan_id: activePlanId,
           trial_days: subscriptionDetails.trialDays,
@@ -55,28 +52,30 @@ export const triggerRazorpaySubscriptionCheckout = async (
         })
       });
 
-      if (createRes.ok) {
-        const subData = await createRes.json();
-        if (subData && subData.subscriptionId) {
-          subId = subData.subscriptionId;
-        }
+      const subData = await createRes.json();
+      if (createRes.ok && subData.subscriptionId) {
+        subId = subData.subscriptionId;
+      } else {
+        console.error('Subscription creation failed:', subData);
       }
     } catch (err) {
-      console.warn("Could not create dynamic Razorpay subscription ID:", err);
+      console.error("Could not create Razorpay subscription:", err);
     }
   }
 
-
-
-
-
+  // CRITICAL: Do NOT open checkout without a valid subscription_id
+  // Without it, Razorpay opens a regular ₹1 payment instead of UPI AutoPay mandate
+  if (!subId) {
+    alert('Could not set up subscription mandate. Please try again.');
+    if (onFailure) onFailure({ error: { description: 'Subscription ID could not be generated' } });
+    return;
+  }
 
   const options: any = {
-    key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Wh4xEHePkQXqRO',
-    subscription_id: subId, // Mandates Razorpay to open the UPI AutoPay screen!
+    key: keyId,
+    subscription_id: subId,
     name: 'Avada Design',
     description: `${subscriptionDetails.productName} — 3-Day Free Trial, then ₹${subscriptionDetails.monthlyPrice}/mo`,
-
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=100&q=80',
     handler: function (response: any) {
       onSuccess(response);
@@ -91,10 +90,9 @@ export const triggerRazorpaySubscriptionCheckout = async (
       subscription_id: subId,
       trial_days: `${subscriptionDetails.trialDays} days`,
       recurring_amount: `₹${subscriptionDetails.monthlyPrice}/month`,
-      start_at: startAtUnix,
     },
     theme: {
-      color: '#f97316', // Emerald theme for free trial
+      color: '#f97316',
     },
   };
 

@@ -1,5 +1,3 @@
-import https from 'https';
-
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -23,39 +21,24 @@ export default async function handler(req, res) {
       customer_notify: 1
     });
 
-    const razorpayReq = https.request('https://api.razorpay.com/v1/subscriptions', {
+    const response = await fetch('https://api.razorpay.com/v1/subscriptions', {
       method: 'POST',
       headers: {
         'Authorization': `Basic ${auth}`,
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    }, (razorpayRes) => {
-      let body = '';
-      razorpayRes.on('data', chunk => body += chunk);
-      razorpayRes.on('end', () => {
-        try {
-          const data = JSON.parse(body);
-          if (razorpayRes.statusCode >= 200 && razorpayRes.statusCode < 300 && data.id) {
-            return res.status(200).json({ subscriptionId: data.id });
-          } else {
-            return res.status(razorpayRes.statusCode || 400).json({ error: data.error?.description || 'Failed to create Razorpay subscription' });
-          }
-        } catch (e) {
-          return res.status(500).json({ error: 'Invalid JSON response from Razorpay' });
-        }
-      });
+        'Content-Type': 'application/json'
+      },
+      body: payload
     });
 
-    razorpayReq.on('error', (err) => {
-      console.error('Error connecting to Razorpay API:', err);
-      return res.status(500).json({ error: err.message });
-    });
+    const data = await response.json();
 
-    razorpayReq.write(payload);
-    razorpayReq.end();
+    if (response.ok && data.id) {
+      return res.status(200).json({ subscriptionId: data.id });
+    } else {
+      return res.status(400).json({ error: data.error?.description || 'Failed to create subscription' });
+    }
   } catch (error) {
-    console.error('Error handling subscription request:', error);
+    console.error('Error creating subscription:', error);
     return res.status(500).json({ error: error.message });
   }
 }
