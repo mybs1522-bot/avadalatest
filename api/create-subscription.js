@@ -13,11 +13,13 @@ export default async function handler(req, res) {
     const planId = process.env.VITE_RAZORPAY_PLAN_ID || 'plan_TOwcG0UPdKNApw';
 
     const auth = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
+    const startAt = Math.floor(Date.now() / 1000) + (3 * 24 * 60 * 60); // 3-day free trial
 
     const payload = JSON.stringify({
       plan_id: planId,
       total_count: 120,
       quantity: 1,
+      start_at: startAt,
       customer_notify: 1
     });
 
