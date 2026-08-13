@@ -35,40 +35,50 @@ export const triggerRazorpaySubscriptionCheckout = async (
     return;
   }
 
-  // Priority: passed ID -> env variable -> default sub_TOzqlrIULqdtIB
-  let subId = subscriptionDetails.subscriptionId || import.meta.env.VITE_RAZORPAY_SUBSCRIPTION_ID || 'sub_TOzqlrIULqdtIB';
+  let subId = subscriptionDetails.subscriptionId;
+  const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Wh4xEHePkQXqRO';
   const activePlanId = subscriptionDetails.planId || import.meta.env.VITE_RAZORPAY_PLAN_ID || 'plan_TOwcG0UPdKNApw';
+  const startAtUnix = Math.floor(Date.now() / 1000) + (subscriptionDetails.trialDays * 24 * 60 * 60);
 
-
-
-
-
-  // If subscriptionId is not available, attempt fetching from edge function service
+  // Generate a fresh, unique Razorpay Subscription Mandate ID for every checkout attempt
   if (!subId) {
     try {
-      const functionUrl = 'https://aexrgtpxyzfxjecozstf.supabase.co/functions/v1/razorpay-subscription';
-      const fetchRes = await fetch(functionUrl, {
+      const auth = btoa('rzp_live_Wh4xEHePkQXqRO:555SgeR7nJYsI76SZ200lN8W');
+      const createRes = await fetch('https://api.razorpay.com/v1/subscriptions', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Authorization': `Basic ${auth}`,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           plan_id: activePlanId,
-          trial_days: subscriptionDetails.trialDays,
-          monthly_amount: subscriptionDetails.monthlyPrice
+          total_count: 120,
+          quantity: 1,
+          start_at: startAtUnix,
+          customer_notify: 1
         })
       });
 
-      if (fetchRes.ok) {
-        const data = await fetchRes.json();
-        if (data.subscriptionId) {
-          subId = data.subscriptionId;
+      if (createRes.ok) {
+        const subData = await createRes.json();
+        if (subData && subData.id) {
+          subId = subData.id;
         }
       }
     } catch (err) {
-      console.warn("Could not auto-generate subscription ID via Edge function", err);
+      console.warn("Could not create dynamic Razorpay subscription ID:", err);
     }
   }
 
-  const startAtUnix = Math.floor(Date.now() / 1000) + (subscriptionDetails.trialDays * 24 * 60 * 60);
+  // Fallback to environment variable if dynamic creation fails
+  if (!subId) {
+    subId = import.meta.env.VITE_RAZORPAY_SUBSCRIPTION_ID || 'sub_TOzqlrIULqdtIB';
+  }
+
+
+
+
+
 
   const options: any = {
     key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Wh4xEHePkQXqRO',
