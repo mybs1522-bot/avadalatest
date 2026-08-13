@@ -42,7 +42,6 @@ const App: React.FC = () => {
           <Route path="/shipping-policy" element={<ShippingPolicy />} />
         </Routes>
       </main>
-      <Footer />
     </div>
   );
 };
