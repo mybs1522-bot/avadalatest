@@ -214,8 +214,15 @@ const LandingPage: React.FC = () => {
                   How to do it FASTER?
                 </p>
                 {/* Hero Video */}
-                <div className="w-full mb-4 overflow-hidden rounded-xl shadow-xl" style={{ position: 'relative', paddingTop: '56.25%' }}>
-                  <iframe src="https://iframe.mediadelivery.net/embed/489113/a214b199-e64a-4eaf-af70-edfbc586e5fd?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style={{ border: 0, position: 'absolute', top: 0, height: '100%', width: '100%' }} allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowFullScreen={true} />
+                <div className="w-full mb-4 overflow-hidden rounded-xl shadow-xl bg-slate-900 border border-slate-200" style={{ position: 'relative', paddingTop: '56.25%' }}>
+                  <iframe
+                    src="https://drive.google.com/file/d/1QBgN98YL4hdIgB7J9wyc8OpNOYeYMvxO/preview"
+                    title="Avada Masterclass Preview"
+                    loading="lazy"
+                    style={{ border: 0, position: 'absolute', top: 0, height: '100%', width: '100%' }}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen={true}
+                  />
                 </div>
 
                 <div className="flex items-start gap-3 p-3 md:p-4 bg-orange-50 border border-orange-100 rounded-xl">
