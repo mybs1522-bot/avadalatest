@@ -50,11 +50,19 @@ export default defineConfig(({ mode }) => {
                 let body = '';
                 razorpayRes.on('data', chunk => body += chunk);
                 razorpayRes.on('end', () => {
-                  res.writeHead(razorpayRes.statusCode || 200, {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                  });
-                  res.end(body);
+                  try {
+                    const data = JSON.parse(body);
+                    if (razorpayRes.statusCode >= 200 && razorpayRes.statusCode < 300 && data.id) {
+                      res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+                      res.end(JSON.stringify({ subscriptionId: data.id }));
+                    } else {
+                      res.writeHead(400, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+                      res.end(JSON.stringify({ error: data.error?.description || 'Failed' }));
+                    }
+                  } catch (e) {
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: 'Invalid response from Razorpay' }));
+                  }
                 });
               });
 
