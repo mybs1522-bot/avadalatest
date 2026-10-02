@@ -38,7 +38,8 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
         </div>
-        <div className="border-t border-zinc-800 pt-6 text-center text-xs">
+        <div className="border-t border-zinc-800 pt-6 text-center text-xs text-zinc-500 space-y-2">
+          <p>Legal Name: Adriders LLP, Phone number: 8127645066, Email id: adridersllp@gmail.com</p>
           <p>&copy; {new Date().getFullYear()} Adriders LLP. All rights reserved.</p>
         </div>
       </div>
