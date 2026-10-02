@@ -32,13 +32,14 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-bold text-sm mb-3">Contact</h4>
             <ul className="space-y-2 text-xs">
-              <li>support@astrojeevan.in</li>
-              <li>WhatsApp: +91 8545015333</li>
+              <li><strong>Legal Name:</strong> Adriders LLP</li>
+              <li>adridersllp@gmail.com</li>
+              <li>Phone/WhatsApp: +91 8127645066</li>
             </ul>
           </div>
         </div>
         <div className="border-t border-zinc-800 pt-6 text-center text-xs">
-          <p>&copy; {new Date().getFullYear()} Astrojeevan Design. All rights reserved. All prices are inclusive of GST.</p>
+          <p>&copy; {new Date().getFullYear()} Adriders LLP. All rights reserved.</p>
         </div>
       </div>
     </footer>

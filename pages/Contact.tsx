@@ -26,7 +26,7 @@ export default function Contact() {
               <CardTitle>Email Us</CardTitle>
             </CardHeader>
             <CardContent className="text-muted-foreground text-sm">
-              support@astrojeevan.in
+              adridersllp@gmail.com
             </CardContent>
           </Card>
           
@@ -38,7 +38,7 @@ export default function Contact() {
               <CardTitle>Call or WhatsApp</CardTitle>
             </CardHeader>
             <CardContent className="text-muted-foreground text-sm">
-              +91 8545015333
+              +91 8127645066
             </CardContent>
           </Card>
 
@@ -47,9 +47,10 @@ export default function Contact() {
               <div className="mx-auto bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <MapPin className="w-6 h-6 text-primary" />
               </div>
-              <CardTitle>Office Location</CardTitle>
+              <CardTitle>Company Details</CardTitle>
             </CardHeader>
             <CardContent className="text-muted-foreground text-sm leading-relaxed">
+              <strong>Legal Name:</strong> Adriders LLP<br/>
               E-36, Coregano, Sector 8, Noida - 201301
             </CardContent>
           </Card>

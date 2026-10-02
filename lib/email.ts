@@ -76,8 +76,8 @@ export const sendStudentWelcomeEmail = async ({
 
 
                 <div class="footer">
-                  Need help? Contact support at <a href="mailto:support@astrojeevan.com" style="color: #059669;">support@astrojeevan.com</a><br/>
-                  © ${new Date().getFullYear()} Astrojeevan Design. All rights reserved.
+                  Need help? Contact support at <a href="mailto:adridersllp@gmail.com" style="color: #059669;">adridersllp@gmail.com</a><br/>
+                  © ${new Date().getFullYear()} Adriders LLP. All rights reserved.
                 </div>
               </div>
             </body>

@@ -12,14 +12,14 @@ export default function TermsAndConditions() {
           <section>
             <h2 className="text-2xl font-bold mb-3">1. Introduction</h2>
             <p>
-              Welcome to Astrojeevan Design ("Company", "we", "our", "us"). These Terms and Conditions govern your use of our website and all digital products, courses, downloadable resources, and services offered by us (collectively, the "Services"). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use our Services.
+              Welcome to Adriders LLP ("Company", "we", "our", "us"). These Terms and Conditions govern your use of our website and all digital products, courses, downloadable resources, and services offered by us (collectively, the "Services"). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use our Services.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold mb-3">2. Free Access</h2>
             <p>
-              Astrojeevan Design provides all educational courses and digital resources completely free of charge. There are no hidden fees, subscriptions, or payment requirements to access our core materials.
+              Adriders LLP provides all educational courses and digital resources completely free of charge. There are no hidden fees, subscriptions, or payment requirements to access our core materials.
             </p>
           </section>
 
@@ -33,7 +33,7 @@ export default function TermsAndConditions() {
           <section>
             <h2 className="text-2xl font-bold mb-3">4. Intellectual Property</h2>
             <p>
-              All course content, videos, images, textures, 3D models, and other materials provided are the intellectual property of Astrojeevan Design. You are granted a personal, non-transferable, non-exclusive license to access and use the materials for your own educational and professional purposes. You may not redistribute, resell, or share access to any enrolled materials.
+              All course content, videos, images, textures, 3D models, and other materials provided are the intellectual property of Adriders LLP. You are granted a personal, non-transferable, non-exclusive license to access and use the materials for your own educational and professional purposes. You may not redistribute, resell, or share access to any enrolled materials.
             </p>
           </section>
 
@@ -47,7 +47,7 @@ export default function TermsAndConditions() {
           <section>
             <h2 className="text-2xl font-bold mb-3">6. Limitation of Liability</h2>
             <p>
-              To the fullest extent permitted by applicable law, Astrojeevan Design shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from your use of our Services.
+              To the fullest extent permitted by applicable law, Adriders LLP shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from your use of our Services.
             </p>
           </section>
 
@@ -55,7 +55,7 @@ export default function TermsAndConditions() {
             <h2 className="text-2xl font-bold mb-3">7. Contact Information</h2>
             <p>If you have any questions about these Terms, please contact us at:</p>
             <ul className="list-disc pl-6 mt-2">
-              <li><strong>Email:</strong> support@astrojeevan.in</li>
+              <li><strong>Email:</strong> adridersllp@gmail.com</li>
             </ul>
           </section>
         </div>
