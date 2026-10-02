@@ -168,7 +168,7 @@ export default function CheckoutPage() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Course Bundle</span>
-                    <span className="font-bold">Free</span>
+                    <span className="font-bold">₹299</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Access Method</span>
@@ -178,7 +178,7 @@ export default function CheckoutPage() {
 
                 <div className="pt-4 border-t border-border flex justify-between items-center text-lg font-extrabold">
                   <span>Status</span>
-                  <span className="text-primary">Free</span>
+                  <span className="text-primary">₹299</span>
                 </div>
               </CardContent>
               <CardFooter className="flex-col gap-4">

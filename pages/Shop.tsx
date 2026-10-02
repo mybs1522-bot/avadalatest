@@ -40,7 +40,7 @@ export default function Shop() {
                 </p>
                 <div className="flex flex-col gap-1">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-extrabold text-emerald-600">Free</span>
+                    <span className="text-3xl font-extrabold text-emerald-600">₹299</span>
                     <span className="text-sm font-semibold text-muted-foreground">Today (2-Day Access)</span>
                   </div>
                   <span className="text-xs text-muted-foreground font-medium">Lifetime Free Access</span>

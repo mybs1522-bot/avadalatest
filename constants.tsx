@@ -20,7 +20,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://lh3.googleusercontent.com/d/1aHEt_z78tYD_0Cn66DiduAnhwn-o8El8',
     color: 'from-blue-600 to-indigo-500',
     students: '48k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'Set up realistic sunlight and night lighting',
@@ -37,7 +37,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/1fV5bz4JDugh8HxLMJ0fXu5K5sDj3qlSR/view?usp=drive_link',
     color: 'from-red-500 to-red-400',
     students: '42.5k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'Draw floor plans and furniture layouts easily',
@@ -54,7 +54,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/1N_BbG9kAEwIk541Id53_RV0CWjO1jzAt/view?usp=drive_link',
     color: 'from-red-600 to-red-500',
     students: '38k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'Create 3D buildings with automatic floor plans',
@@ -71,7 +71,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/1wl6by5AO5MiPeoYsZ8F6Zi5AJahoeTQo/view?usp=drive_link',
     color: 'from-blue-500 to-cyan-400',
     students: '55k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'Pull simple shapes into 3D houses instantly',
@@ -88,7 +88,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/1DgmIvkeC2dxGpRpzbIthHQsSdlCty2Xg/view?usp=drive_link',
     color: 'from-cyan-600 to-blue-500',
     students: '22k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'Model complex shapes like twisted towers',
@@ -105,7 +105,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/1XW2DDHVa1Qc15NcZ3wUKMFRT7LkyZMCt/view?usp=drive_link',
     color: 'from-teal-500 to-emerald-400',
     students: '31k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'Add grass, trees, and water instantly',
@@ -122,7 +122,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/1vbV4j6K9sgzbbZ7qlRdgqPTXWiHBPLsr/view?usp=drive_link',
     color: 'from-purple-500 to-pink-500',
     students: '19k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'Real-time lighting (see it as you work)',
@@ -139,7 +139,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/1SmezP6LwT3yo9aE3oivpGkqS-xycSOyx/view?usp=drive_link',
     color: 'from-blue-500 to-indigo-600',
     students: '25k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'One-click to start walking inside your model',
@@ -156,7 +156,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/1s-HzZVKpc9F92mLW2gMOPk0kVrKAqUIS/view?usp=drive_link',
     color: 'from-fuchsia-600 to-purple-600',
     students: '60k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'How to write text to get amazing house images',
@@ -173,7 +173,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/1xSzSjuL4imlbXwEYMwKw_vhuueDcFtHm/view?usp=drive_link',
     color: 'from-indigo-500 to-purple-500',
     students: '15k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'Turn hand sketches into realistic renders',
@@ -190,7 +190,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/14EfKoC7BfxXmYxd6t6qIE470yQaX0toW/view?usp=drive_link',
     color: 'from-gray-600 to-gray-400',
     students: '18k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'Create interactive lights and doors',
@@ -207,7 +207,7 @@ const RAW_COURSES: Course[] = [
     imageUrl: 'https://drive.google.com/file/d/1FkzIhdu7K5JeRFq7BM1wGV5MND_fLMKe/view?usp=drive_link',
     color: 'from-blue-800 to-blue-600',
     students: '72k',
-    price: 0,
+    price: 299,
     originalPrice: 0,
     learningPoints: [
       'Fix lighting and colors easily',
@@ -249,7 +249,7 @@ export const COURSE_CATEGORIES = [
   }
 ];
 
-export const BUNDLE_PRICE = 0;
+export const BUNDLE_PRICE = 299;
 export const BUNDLE_ORIGINAL_PRICE = 588; // 12 × Free
 
 export const PRICING_PLANS = [
@@ -257,7 +257,7 @@ export const PRICING_PLANS = [
     id: 'lifetime-basic',
     duration: 'Lifetime Access',
     period: 'One-time payment',
-    price: 'Free',
+    price: '₹299',
     originalPrice: '',
     label: 'Best Value'
   }
@@ -309,7 +309,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     question: "Can I buy individual courses or only the bundle?",
-    answer: "Both options are available! Each course is Free individually, or get all 12 for for free — saving over $59. The bundle is by far the best deal."
+    answer: "Both options are available! Each course is ₹299 individually, or get all 12 for ₹299 — saving over $59. The bundle is by far the best deal."
   },
   {
     question: "Are project files included?",

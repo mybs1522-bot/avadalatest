@@ -351,7 +351,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, ini
                             <div className="text-right sm:text-right flex flex-row sm:flex-col justify-between items-center sm:items-end w-full sm:w-auto mt-2 sm:mt-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100 sm:border-none">
                               <div className="text-sm text-gray-400 sm:hidden">Status Price</div>
                               <div>
-                                <div className="text-xl font-bold font-display text-gray-900">Free</div>
+                                <div className="text-xl font-bold font-display text-gray-900">₹299</div>
                                 <div className="text-[10px] text-gray-400 line-through"></div>
                               </div>
                             </div>

@@ -66,7 +66,7 @@ export default function ProductPage() {
               {/* Price + CTA for desktop (visible alongside the card) */}
               <div className="hidden lg:flex flex-col gap-1 mb-6">
                 <div className="flex items-baseline gap-3">
-                  <span className="text-5xl font-extrabold text-emerald-400">Free</span>
+                  <span className="text-5xl font-extrabold text-emerald-400">₹299</span>
                   <span className="text-xl text-zinc-300 font-semibold">Today (Lifetime Access)</span>
                   <span className="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">UPI AUTOPAY</span>
                 </div>
@@ -237,7 +237,7 @@ export default function ProductPage() {
           <div className="flex items-center gap-3">
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-xl md:text-2xl font-extrabold text-emerald-600">Free</span>
+                <span className="text-xl md:text-2xl font-extrabold text-emerald-600">₹299</span>
                 <span className="text-sm font-semibold text-muted-foreground">Today (Lifetime Access)</span>
               </div>
               <p className="text-xs text-muted-foreground hidden sm:block">Lifetime Accessnth via UPI AutoPay • Lifetime Access</p>

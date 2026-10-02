@@ -112,7 +112,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                                         <div className="font-bold text-gray-900 text-sm truncate">{course.title}</div>
                                     </div>
                                     <div className="text-right shrink-0 flex items-center gap-2">
-                                        <span className="font-display font-bold text-gray-900">Free</span>
+                                        <span className="font-display font-bold text-gray-900">₹299</span>
                                         <button
                                             onClick={() => onRemove(course.id)}
                                             aria-label={`Remove ${course.title}`}
@@ -136,7 +136,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                                     <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">Best Deal</span>
                                 </div>
                                 <div className="font-display font-bold text-base mb-1">
-                                    Get all 12 courses for Free
+                                    Get all 12 courses for ₹299
                                 </div>
                                 <div className="text-gray-400 text-[10px] mb-3 leading-tight">
                                     All courses included
