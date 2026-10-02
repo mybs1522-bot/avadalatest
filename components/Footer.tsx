@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h4 className="text-white font-bold text-sm mb-3">Astrojeevan Design</h4>
+            <h4 className="text-white font-bold text-sm mb-3">Adriders LLP</h4>
             <p className="text-xs leading-relaxed">
               Premium architecture & design courses trusted by 50,000+ professionals across India.
             </p>
