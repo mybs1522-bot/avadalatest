@@ -31,7 +31,7 @@ const CtaWithTimer = ({ timeLeft, onClick, variant = 'green' }: { timeLeft: { h:
         {/* Timer label */}
         <div className="flex items-center gap-1.5">
           <Timer size={14} className={`${timerAccent} animate-pulse`} />
-          <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${timerAccent}`}>Limited 3-Day Trial</span>
+          <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${timerAccent}`}>Limited Lifetime Access</span>
         </div>
 
         {/* Timer digits */}
@@ -51,7 +51,7 @@ const CtaWithTimer = ({ timeLeft, onClick, variant = 'green' }: { timeLeft: { h:
 
         {/* Price */}
         <div className="flex items-baseline gap-2">
-          <span className="text-3xl font-display font-black text-orange-600 dark:text-orange-400">Free Trial</span>
+          <span className="text-3xl font-display font-black text-orange-600 dark:text-orange-400">Lifetime Access</span>
           <span className="bg-orange-100 text-orange-700 text-[9px] font-bold px-2 py-0.5 rounded-full">3 DAYS ACCESS</span>
         </div>
 
@@ -61,11 +61,11 @@ const CtaWithTimer = ({ timeLeft, onClick, variant = 'green' }: { timeLeft: { h:
           className={`${btnClass} text-sm px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 group hover:scale-[1.02] active:scale-[0.98] transition-all w-full shadow-lg shadow-orange-600/30`}
         >
           <Sparkles size={16} className="shrink-0" />
-          <span>Start 3-Day Free Trial</span>
+          <span>Start Lifetime Access</span>
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform shrink-0" />
         </button>
 
-        <p className={`text-[10px] font-medium ${variant === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>72 Hours Full Access • Then ₹399/mo • Cancel Anytime</p>
+        <p className={`text-[10px] font-medium ${variant === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>lifetime Full Access • Lifetime Access • Lifetime Access</p>
       </div>
     </div>
   );
@@ -117,8 +117,8 @@ const LandingPage: React.FC = () => {
     triggerRazorpaySubscriptionCheckout(
       {
         monthlyPrice: 399,
-        trialDays: 3,
-        productName: 'Avada Architecture Masterclass Pass',
+        AccessDays: 3,
+        productName: 'Astrojeevan Architecture Masterclass Pass',
       },
       async (res) => {
         setIsLoading(false);
@@ -136,7 +136,7 @@ const LandingPage: React.FC = () => {
           email: email.trim(),
           phone: phone.trim(),
           name: name.trim() || email.split('@')[0],
-          trialActive: true
+          AccessActive: true
         }));
 
         // 3. Send welcome email
@@ -145,7 +145,7 @@ const LandingPage: React.FC = () => {
           studentName: name.trim() || email.split('@')[0],
         });
 
-        alert('3-Day Free Trial Activated! Welcome to your Student Portal.');
+        alert('Lifetime Access Activated! Welcome to your Student Portal.');
         setShowPaymentModal(false);
         navigate('/portal');
       },
@@ -198,7 +198,7 @@ const LandingPage: React.FC = () => {
                 Learn <span className="text-orange-600">PDR</span> — Planning, Designing & Rendering
               </p>
               <p className="text-xs md:text-sm text-slate-500 mb-5 md:mb-8 max-w-sm md:max-w-md">
-                One bundle. Everything included in your 3-Day Free Trial.
+                One bundle. Everything included in your Lifetime Access.
               </p>
 
               {/* Story Block */}
@@ -230,10 +230,10 @@ const LandingPage: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-3 items-center mb-3 w-full sm:w-auto">
                 <button onClick={openPaymentModal} className="w-full sm:w-auto px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-2xl font-extrabold text-sm md:text-lg shadow-xl shadow-orange-600/30 hover:scale-[1.03] transition-all flex items-center justify-center gap-3 group">
                   <Sparkles size={20} className="shrink-0" />
-                  Start 3-Day Free Trial <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+                  Start Lifetime Access <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
                 </button>
               </div>
-              <p className="text-[10px] md:text-xs text-slate-500 mb-7 md:mb-10 font-bold">72 Hours Full Access • Mandate Authorization • Cancel Anytime</p>
+              <p className="text-[10px] md:text-xs text-slate-500 mb-7 md:mb-10 font-bold">lifetime Full Access • Mandate Authorization • Lifetime Access</p>
 
               {/* Banners below First CTA */}
               <div className="w-full max-w-3xl mx-auto flex flex-col gap-4 md:gap-6 mb-8 md:mb-12">
@@ -373,9 +373,9 @@ const LandingPage: React.FC = () => {
         <section className="py-16 md:py-20 bg-slate-50 border-y border-slate-200 grid-bg">
           <div className="max-w-5xl mx-auto px-5">
             <div className="text-center mb-10">
-              <p className="text-orange-600 text-xs font-mono uppercase tracking-widest mb-3">Included with 3-Day Free Trial</p>
+              <p className="text-orange-600 text-xs font-mono uppercase tracking-widest mb-3">Included with Lifetime Access</p>
               <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Everything You Need to Succeed, <span className="text-orange-600">Included Today</span></h2>
-              <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">Full 72 hours of unrestricted access to all 7 course masterclasses + support team.</p>
+              <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">Full lifetime of unrestricted access to all 7 course masterclasses + support team.</p>
             </div>
             <div className="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-soft">
               {VALUE_STACK_ITEMS.map((item, i) => (
@@ -386,13 +386,13 @@ const LandingPage: React.FC = () => {
               ))}
               
               <div className="bg-orange-50 border-t border-orange-100 px-6 py-4 flex flex-col sm:flex-row gap-3 justify-between items-center">
-                <div className="flex items-center gap-3"><CheckCircle2 size={16} className="text-orange-600 shrink-0" /><span className="text-sm text-orange-900 font-bold">3-Day Free Trial</span></div>
+                <div className="flex items-center gap-3"><CheckCircle2 size={16} className="text-orange-600 shrink-0" /><span className="text-sm text-orange-900 font-bold">Lifetime Access</span></div>
                 <span className="text-sm font-black text-orange-600">INCLUDED</span>
               </div>
 
               <div className="bg-orange-50/50 border-t border-orange-200 px-6 py-6 flex flex-col items-center gap-6 justify-center">
                 <button onClick={openPaymentModal} className="w-full sm:w-auto px-10 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-extrabold text-lg shadow-xl shadow-orange-600/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-3 group">
-                  <Sparkles size={18} /> Start 3-Day Free Trial <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
+                  <Sparkles size={18} /> Start Lifetime Access <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
                 </button>
               </div>
             </div>
@@ -433,13 +433,13 @@ const LandingPage: React.FC = () => {
               <div className="my-10 bg-gradient-to-br from-orange-50 to-orange-50/50 border border-orange-200 rounded-2xl p-6 md:p-8 shadow-soft">
                 <p className="font-bold text-slate-900 text-xl mb-4">Here is How We Support You:</p>
                 <ul className="space-y-3">
-                  <li className="flex items-center gap-3"><CheckCircle size={18} className="text-orange-500 shrink-0" /><span className="text-slate-800">Full 3-Day Free Trial to explore all video streams.</span></li>
+                  <li className="flex items-center gap-3"><CheckCircle size={18} className="text-orange-500 shrink-0" /><span className="text-slate-800">Full Lifetime Access to explore all video streams.</span></li>
                   <li className="flex items-center gap-3"><CheckCircle size={18} className="text-orange-500 shrink-0" /><span className="text-slate-800">4 Complete Masterclasses: SketchUp, V-Ray, D5 Render & AutoCAD.</span></li>
                   <li className="flex items-center gap-3"><CheckCircle size={18} className="text-orange-500 shrink-0" /><span className="text-slate-800">24/7 team support whenever you feel stuck.</span></li>
                 </ul>
                 <div className="mt-6 pt-6 border-t border-orange-100 flex items-center justify-between">
-                  <span className="text-slate-600 text-sm italic font-bold">Start your 3-Day Trial today.</span>
-                  <button onClick={openPaymentModal} className="text-orange-600 font-bold text-sm hover:text-orange-700 flex items-center gap-1 group">Start Trial Now <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
+                  <span className="text-slate-600 text-sm italic font-bold">Start your Lifetime Access today.</span>
+                  <button onClick={openPaymentModal} className="text-orange-600 font-bold text-sm hover:text-orange-700 flex items-center gap-1 group">Get Access Now <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
                 </div>
               </div>
             </div>
@@ -493,7 +493,7 @@ const LandingPage: React.FC = () => {
           <div className="max-w-3xl mx-auto px-5 mb-16">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Common Questions</h2>
-              <p className="text-slate-600 text-base">Everything you need to know before starting your 3-day trial.</p>
+              <p className="text-slate-600 text-base">Everything you need to know before starting your Lifetime Access.</p>
             </div>
             <div className="space-y-3">
               {FAQ_ITEMS_LANDING.map((faq, i) => (
@@ -512,7 +512,7 @@ const LandingPage: React.FC = () => {
           <div className="max-w-3xl mx-auto px-4 md:px-5">
             <div className="text-center mb-6 md:mb-8">
               <h3 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-2">Let us hold your hand towards a brighter future.</h3>
-              <p className="text-slate-500 text-xs md:text-sm">Start your 3-Day Free Trial and explore all masterclasses.</p>
+              <p className="text-slate-500 text-xs md:text-sm">Start your Lifetime Access and explore all masterclasses.</p>
             </div>
             <CtaWithTimer timeLeft={timeLeft} onClick={openPaymentModal} variant="dark" />
           </div>
@@ -520,7 +520,7 @@ const LandingPage: React.FC = () => {
       </main>
 
       <footer className="bg-slate-900 pt-12 pb-28 px-6 text-center border-t border-slate-800 text-white/70">
-        <p className="text-xs uppercase tracking-[0.2em] mb-4">Avada Design & Architecture • 2026</p>
+        <p className="text-xs uppercase tracking-[0.2em] mb-4">Astrojeevan Design & Architecture • 2026</p>
         <div className="flex justify-center gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
           <a href="/refund-policy" className="hover:text-white transition-colors">Refund Policy</a>
           <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy</a>
@@ -536,8 +536,8 @@ const LandingPage: React.FC = () => {
           {/* Left: price + label + timer */}
           <div className="flex flex-col items-start gap-0.5 shrink-0">
             <div className="flex items-baseline gap-1.5">
-              <span className="text-base font-black text-orange-600">Free Trial</span>
-              <span className="text-[10px] font-black text-slate-900 uppercase tracking-wide">3-Day Trial ends in</span>
+              <span className="text-base font-black text-orange-600">Lifetime Access</span>
+              <span className="text-[10px] font-black text-slate-900 uppercase tracking-wide">Lifetime Access ends in</span>
             </div>
             <div className="flex items-center gap-0.5">
               {[formatTime(timeLeft.h), formatTime(timeLeft.m), formatTime(timeLeft.s)].map((val, i) => (
@@ -549,9 +549,9 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Right: Start 3-Day Trial button */}
+          {/* Right: Start Lifetime Access button */}
           <div className="flex-1 flex items-center justify-center gap-1.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold py-3 rounded-xl transition-all shadow-md shadow-orange-600/30">
-            Start 3-Day Free Trial
+            Start Lifetime Access
             <ArrowRight size={13} />
           </div>
 
@@ -592,8 +592,8 @@ const LandingPage: React.FC = () => {
                 </div>
                 <h3 className="text-2xl font-display font-black tracking-tight mb-1">All 7 Masterclass Courses</h3>
                 <div className="flex items-baseline gap-2.5">
-                  <span className="text-3xl font-display font-black text-orange-400 whitespace-nowrap">Free Trial</span>
-                  <span className="text-slate-400 text-xs font-semibold">Then ₹399/mo after 3 days</span>
+                  <span className="text-3xl font-display font-black text-orange-400 whitespace-nowrap">Lifetime Access</span>
+                  <span className="text-slate-400 text-xs font-semibold">One-time Payment</span>
                 </div>
               </div>
             </div>
@@ -603,7 +603,7 @@ const LandingPage: React.FC = () => {
               
               {/* Feature Checklist */}
               <div className="grid grid-cols-2 gap-2">
-                {["7 Premium Courses", "10,000+ Textures", "Official Certificate", "24/7 Team Support", "72 Hours Full Access"].map((item, i) => (
+                {["7 Premium Courses", "10,000+ Textures", "Official Certificate", "24/7 Team Support", "lifetime Full Access"].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs text-slate-700 font-semibold">
                     <CheckCircle2 size={13} className="text-orange-500 shrink-0" />
                     <span>{item}</span>
@@ -696,11 +696,11 @@ const LandingPage: React.FC = () => {
                   className="w-full py-4 px-6 bg-orange-600 hover:bg-orange-700 text-white font-extrabold rounded-2xl text-base flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-orange-600/30 active:scale-[0.98] disabled:opacity-70 cursor-pointer mt-4"
                 >
                   {isLoading ? (
-                    <><Loader2 className="animate-spin" size={20} /> Setting up trial mandate...</>
+                    <><Loader2 className="animate-spin" size={20} /> Setting up Access mandate...</>
                   ) : (
                     <>
                       <Sparkles size={18} className="shrink-0 text-amber-300 fill-amber-300" />
-                      <span className="leading-none">Start 3-Day Free Trial</span>
+                      <span className="leading-none">Start Lifetime Access</span>
                       <ArrowRight size={18} className="shrink-0" />
                     </>
                   )}

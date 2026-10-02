@@ -10,7 +10,7 @@ interface SecureVideoPlayerProps {
 export const SecureVideoPlayer: React.FC<SecureVideoPlayerProps> = ({
   videoUrl,
   title,
-  userEmail = 'trial.student@avada.com',
+  userEmail = 'Access.student@astrojeevan.com',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -96,7 +96,7 @@ export const SecureVideoPlayer: React.FC<SecureVideoPlayerProps> = ({
         {/* Dynamic User Watermark overlay across player */}
         <div className="absolute inset-0 pointer-events-none z-10 flex flex-col justify-around p-8 opacity-20 rotate-[-12deg]">
           <div className="text-xs font-mono font-bold text-white tracking-widest uppercase">
-            AVADA TRIAL PASS • {userEmail} • DO NOT COPY
+            AVADA Access PASS • {userEmail} • DO NOT COPY
           </div>
           <div className="text-xs font-mono font-bold text-white tracking-widest uppercase text-right">
             DRM PROTECTED • {new Date().toLocaleDateString()}

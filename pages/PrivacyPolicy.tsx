@@ -72,7 +72,7 @@ export default function PrivacyPolicy() {
               <li>Request a copy of your data in a portable format</li>
             </ul>
             <p className="text-muted-foreground leading-relaxed mt-3">
-              To exercise any of these rights, please contact us at <strong>support@avada.in</strong>.
+              To exercise any of these rights, please contact us at <strong>support@astrojeevan.in</strong>.
             </p>
           </section>
 
@@ -96,7 +96,7 @@ export default function PrivacyPolicy() {
               If you have any questions about this Privacy Policy, please contact us:
             </p>
             <ul className="list-none space-y-1 text-muted-foreground mt-3">
-              <li><strong>Email:</strong> support@avada.in</li>
+              <li><strong>Email:</strong> support@astrojeevan.in</li>
               <li><strong>Address:</strong> E-36, Coregano, Sector 8, Noida - 201301</li>
               <li><strong>WhatsApp:</strong> +91 8545015333</li>
               <li><strong>Page:</strong> <Link to="/contact" className="text-primary hover:underline">Contact Us</Link></li>

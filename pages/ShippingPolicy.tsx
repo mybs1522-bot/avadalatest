@@ -15,7 +15,7 @@ export default function ShippingPolicy() {
           <div>
             <h2 className="text-2xl font-extrabold text-blue-800 mb-2">100% Digital Delivery — Instant Access</h2>
             <p className="text-blue-700 text-base leading-relaxed">
-              All Avada Design products are <strong>digital products</strong> delivered electronically. There is no physical shipping involved. Upon successful payment, you will receive <strong>instant access</strong> to your purchased courses and materials via email and on-screen confirmation.
+              All Astrojeevan Design products are <strong>digital products</strong> delivered electronically. There is no physical shipping involved. Upon successful payment, you will receive <strong>instant access</strong> to your purchased courses and materials via email and on-screen confirmation.
             </p>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function ShippingPolicy() {
             <ul className="list-disc list-inside text-muted-foreground space-y-1 mt-3 ml-4">
               <li>Check your spam/junk email folder</li>
               <li>Ensure you entered the correct email address during checkout</li>
-              <li>Contact us at <strong>support@avada.in</strong> or WhatsApp <strong>+91 8545015333</strong></li>
+              <li>Contact us at <strong>support@astrojeevan.in</strong> or WhatsApp <strong>+91 8545015333</strong></li>
             </ul>
             <p className="text-muted-foreground leading-relaxed mt-3">
               Our support team is available 24/7 and will resolve your issue promptly.
@@ -89,7 +89,7 @@ export default function ShippingPolicy() {
               For any questions about shipping and delivery, please reach out:
             </p>
             <ul className="list-none space-y-1 text-muted-foreground mt-3">
-              <li><strong>Email:</strong> support@avada.in</li>
+              <li><strong>Email:</strong> support@astrojeevan.in</li>
               <li><strong>Address:</strong> E-36, Coregano, Sector 8, Noida - 201301</li>
               <li><strong>WhatsApp:</strong> +91 8545015333</li>
               <li><strong>Page:</strong> <Link to="/contact" className="text-primary hover:underline">Contact Us</Link></li>

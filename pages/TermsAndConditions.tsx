@@ -13,7 +13,7 @@ export default function TermsAndConditions() {
           <section>
             <h2 className="text-2xl font-bold mb-3">1. Introduction</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Welcome to Avada Design ("Company", "we", "our", "us"). These Terms and Conditions govern your use of our website located at <strong>avada.in</strong> (the "Site") and all digital products, courses, downloadable resources, and services offered by us (collectively, the "Services"). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use our Services.
+              Welcome to Astrojeevan Design ("Company", "we", "our", "us"). These Terms and Conditions govern your use of our website located at <strong>astrojeevan.in</strong> (the "Site") and all digital products, courses, downloadable resources, and services offered by us (collectively, the "Services"). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use our Services.
             </p>
           </section>
 
@@ -27,7 +27,7 @@ export default function TermsAndConditions() {
           <section>
             <h2 className="text-2xl font-bold mb-3">3. Products & Services</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Avada Design offers digital educational courses, downloadable resources (textures, 3D models), and community access related to architecture, interior design, and 3D visualization software. All products are delivered digitally. No physical goods are shipped.
+              Astrojeevan Design offers digital educational courses, downloadable resources (textures, 3D models), and community access related to architecture, interior design, and 3D visualization software. All products are delivered digitally. No physical goods are shipped.
             </p>
           </section>
 
@@ -41,7 +41,7 @@ export default function TermsAndConditions() {
           <section>
             <h2 className="text-2xl font-bold mb-3">5. Intellectual Property</h2>
             <p className="text-muted-foreground leading-relaxed">
-              All course content, videos, images, textures, 3D models, and other materials provided are the intellectual property of Avada Design. You are granted a personal, non-transferable, non-exclusive license to access and use the materials for your own educational and professional purposes. You may not redistribute, resell, or share access to any purchased materials.
+              All course content, videos, images, textures, 3D models, and other materials provided are the intellectual property of Astrojeevan Design. You are granted a personal, non-transferable, non-exclusive license to access and use the materials for your own educational and professional purposes. You may not redistribute, resell, or share access to any purchased materials.
             </p>
           </section>
 
@@ -62,7 +62,7 @@ export default function TermsAndConditions() {
           <section>
             <h2 className="text-2xl font-bold mb-3">8. Limitation of Liability</h2>
             <p className="text-muted-foreground leading-relaxed">
-              To the fullest extent permitted by applicable law, Avada Design shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from your use of our Services.
+              To the fullest extent permitted by applicable law, Astrojeevan Design shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from your use of our Services.
             </p>
           </section>
 
@@ -79,7 +79,7 @@ export default function TermsAndConditions() {
               If you have any questions about these Terms and Conditions, please contact us at:
             </p>
             <ul className="list-none space-y-1 text-muted-foreground mt-3">
-              <li><strong>Email:</strong> support@avada.in</li>
+              <li><strong>Email:</strong> support@astrojeevan.in</li>
               <li><strong>Address:</strong> E-36, Coregano, Sector 8, Noida - 201301</li>
               <li><strong>WhatsApp:</strong> +91 8545015333</li>
               <li><strong>Page:</strong> <Link to="/contact" className="text-primary hover:underline">Contact Us</Link></li>

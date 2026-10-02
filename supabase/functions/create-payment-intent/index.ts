@@ -23,7 +23,7 @@ serve(async (req: Request) => {
       amount: 4900,
       currency: 'usd',
       receipt_email: email || undefined,
-      metadata: { product: 'Avada Design Bundle' },
+      metadata: { product: 'Astrojeevan Design Bundle' },
       automatic_payment_methods: { enabled: true },
     });
 

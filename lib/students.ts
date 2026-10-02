@@ -2,7 +2,7 @@ import { supabase } from '../services/supabase';
 
 /**
  * Register a new student in the database after successful Razorpay payment.
- * Uses upsert so if the same email+phone pays again, it refreshes their trial.
+ * Uses upsert so if the same email+phone pays again, it refreshes their Access.
  */
 export async function registerStudent(data: {
   email: string;
@@ -18,8 +18,8 @@ export async function registerStudent(data: {
         phone: data.phone.trim(),
         name: data.name.trim(),
         subscription_id: data.subscriptionId || null,
-        trial_start: new Date().toISOString(),
-        trial_active: true,
+        Access_start: new Date().toISOString(),
+        Access_active: true,
       },
       { onConflict: 'email,phone' }
     );
@@ -40,7 +40,7 @@ export async function verifyStudentLogin(
   phone: string
 ): Promise<{
   verified: boolean;
-  student: { id: string; email: string; phone: string; name: string; trial_active: boolean; trial_start: string } | null;
+  student: { id: string; email: string; phone: string; name: string; Access_active: boolean; Access_start: string } | null;
   reason: string;
 }> {
   const { data, error } = await supabase
@@ -61,15 +61,15 @@ export async function verifyStudentLogin(
     return {
       verified: false,
       student: null,
-      reason: 'No account found with this email and phone number. Please check your details or start a free trial first.',
+      reason: 'No account found with this email and phone number. Please check your details or start a Lifetime Access first.',
     };
   }
 
-  if (!data.trial_active) {
+  if (!data.Access_active) {
     return {
       verified: false,
       student: data,
-      reason: 'Your subscription has been cancelled or expired. Please start a new trial.',
+      reason: 'Your subscription has been cancelled or expired. Please start a new Access.',
     };
   }
 

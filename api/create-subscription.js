@@ -8,12 +8,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const keyId = process.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Wh4xEHePkQXqRO';
+    const keyId = process.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_dummykey';
     const keySecret = process.env.RAZORPAY_KEY_SECRET || '555SgeR7nJYsI76SZ200lN8W';
     const planId = process.env.VITE_RAZORPAY_PLAN_ID || 'plan_TOwcG0UPdKNApw';
 
     const auth = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
-    const startAt = Math.floor(Date.now() / 1000) + (3 * 24 * 60 * 60); // 3-day free trial
+    const startAt = Math.floor(Date.now() / 1000) + (3 * 24 * 60 * 60); // Lifetime Access
 
     const payload = JSON.stringify({
       plan_id: planId,

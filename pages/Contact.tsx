@@ -26,7 +26,7 @@ export default function Contact() {
               <CardTitle>Email Us</CardTitle>
             </CardHeader>
             <CardContent className="text-muted-foreground text-sm">
-              support@avada.in
+              support@astrojeevan.in
             </CardContent>
           </Card>
           

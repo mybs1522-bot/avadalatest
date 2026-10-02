@@ -51,7 +51,7 @@ export const FEAR_STATS = [
 /* ─── LOGO ─── */
 export const Logo = () => (
   <div className="flex flex-col items-center text-center cursor-pointer group" onClick={() => window.location.href = '/'}>
-    <span className="font-display font-bold text-lg tracking-tight leading-none text-slate-900 whitespace-nowrap">Avada</span>
+    <span className="font-display font-bold text-lg tracking-tight leading-none text-slate-900 whitespace-nowrap">Astrojeevan</span>
     <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-orange-600 whitespace-nowrap mt-1">Design</span>
   </div>
 );
@@ -81,20 +81,20 @@ export const CallToActionWidget = ({ timeLeft, onClick, headline, subtext }: { t
           <div className="flip-clock-group"><div className="flex gap-1"><FlipDigit value={s[0]} /><FlipDigit value={s[1]} /></div><span className="flip-clock-label">SEC</span></div>
         </div>
         <div className="mb-6">
-          <p className="text-orange-400 font-semibold text-sm mt-2">Special Offer — 3-Day Free Trial</p>
+          <p className="text-orange-400 font-semibold text-sm mt-2">Special Offer — Lifetime Access</p>
         </div>
         <div className="w-full max-w-md mx-auto">
           <button onClick={onClick} className="cta-primary w-full text-white px-8 py-4 md:py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 group hover:scale-[1.03] active:scale-[0.98] premium-stroke" style={{ background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)', boxShadow: '0 6px 20px -4px rgba(5,150,105,0.5)', border: '1px solid rgba(255,255,255,0.15)' }}>
-            <span className="text-lg md:text-xl font-display font-bold uppercase tracking-widest relative z-10">Start 3-Day Free Trial</span>
+            <span className="text-lg md:text-xl font-display font-bold uppercase tracking-widest relative z-10">Start Lifetime Access</span>
             <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
         <div className="mt-4 flex items-center justify-center gap-4 md:gap-8 text-[9px] md:text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500">
-          <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-orange-500" /> Free Trial</div>
+          <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-orange-500" /> Lifetime Access</div>
           <div className="w-[1px] h-3 bg-zinc-500"></div>
           <div className="flex items-center gap-1.5"><Zap size={14} className="text-orange-500" /> Instant Access</div>
           <div className="w-[1px] h-3 bg-zinc-500 hidden sm:block"></div>
-          <div className="hidden sm:flex items-center gap-1.5"><Users size={14} className="text-orange-500" /> 72 Hours Full Access</div>
+          <div className="hidden sm:flex items-center gap-1.5"><Users size={14} className="text-orange-500" /> lifetime Full Access</div>
         </div>
       </div>
     </div>
@@ -116,7 +116,7 @@ export const SocialProofToast: React.FC = () => {
     <div className={`fixed bottom-20 left-3 z-[70] transition-all duration-400 ${visible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
       <div className="bg-white/95 backdrop-blur-xl border border-slate-100 rounded-full px-3 py-1.5 shadow-md flex items-center gap-2">
         <span className="w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span>
-        <p className="text-[11px] font-medium text-slate-600 whitespace-nowrap"><span className="font-bold text-slate-800">{j.name}</span> from {j.city} just started 3-Day Trial</p>
+        <p className="text-[11px] font-medium text-slate-600 whitespace-nowrap"><span className="font-bold text-slate-800">{j.name}</span> from {j.city} just started Lifetime Access</p>
       </div>
     </div>
   );
@@ -143,24 +143,24 @@ export const VALUE_STACK_ITEMS = [
 
 export const TESTIMONIALS_LANDING = [
   { name: 'Priya P.', role: 'Freelance Designer', location: 'Mumbai, IN', content: 'I used to cry when V-Ray crashed. Literally. The support team is so incredibly kind and patient. Now I use AI so well that I feel completely secure in my career.' },
-  { name: 'Aravind S.', role: 'Senior Architect', location: 'Bangalore, IN', content: 'I feared AI would replace my studio. But Avada held my hand through the transition. We now use it to generate gorgeous concepts for clients in minutes.' },
+  { name: 'Aravind S.', role: 'Senior Architect', location: 'Bangalore, IN', content: 'I feared AI would replace my studio. But Astrojeevan held my hand through the transition. We now use it to generate gorgeous concepts for clients in minutes.' },
   { name: 'Meera I.', role: '3D Visualizer', location: 'Chennai, IN', content: 'The step-by-step guidance is amazing for beginners. Whenever my scene looks dark or weird, I just ask the support team. They are absolute lifesavers.' },
   { name: 'Rahul V.', role: 'Architecture Student', location: 'Delhi, IN', content: 'I felt so behind in college because they still teach completely outdated methods. Within two weeks here, I gained the confidence to start taking well-paying projects.' },
-  { name: 'Ananya G.', role: 'Interior Designer', location: 'Pune, IN', content: 'To have someone to actually look at your screen and say "Oh, simply press this button" saves weeks of frustration. Best trial I ever signed up for.' },
+  { name: 'Ananya G.', role: 'Interior Designer', location: 'Pune, IN', content: 'To have someone to actually look at your screen and say "Oh, simply press this button" saves weeks of frustration. Best Access I ever signed up for.' },
   { name: 'Vikram S.', role: 'Landscape Architect', location: 'Jaipur, IN', content: 'The continuous support makes learning stress-free. D5 Render combined with AI generation is just magical. It took away all my anxiety about falling behind.' },
-  { name: 'Neha K.', role: 'Studio Owner', location: 'Lucknow, IN', content: 'My team of 4 now works with zero stress because we integrated AI the way Avada taught us. No more late nights before client meetings.' },
+  { name: 'Neha K.', role: 'Studio Owner', location: 'Lucknow, IN', content: 'My team of 4 now works with zero stress because we integrated AI the way Astrojeevan taught us. No more late nights before client meetings.' },
   { name: 'Rohit M.', role: 'Freelance Visualizer', location: 'Ahmedabad, IN', content: 'I almost quit 3D entirely because it felt too overwhelming. The friendly support team here broke it down to be so simple. I owe them my entire successful freelance business.' },
   { name: 'Simran P.', role: 'Design Student', location: 'Chandigarh, IN', content: 'Started from absolute zero. I didn\'t even know what SketchUp was. 15 days later, thanks to their constant hand-holding, my portfolio landed me a paid studio gig.' },
   { name: 'Arjun D.', role: 'Architect & Educator', location: 'Hyderabad, IN', content: 'I teach at a university, and sadly, we don\'t provide this level of modern, practical support. I genuinely recommend this to all my anxious students to secure their futures.' },
 ];
 
 export const FAQ_ITEMS_LANDING = [
-  { question: "How does the 3-Day Free Trial work?", answer: "When you sign up, you authorize a UPI AutoPay mandate for your 3-day free trial. You get immediate 72-hour unrestricted access to all 7 course masterclasses. Your subscription auto-renews at ₹399/month starting on Day 4 unless you cancel anytime during your trial." },
+  { question: "How does the Lifetime Access work?", answer: "When you sign up, you authorize a UPI AutoPay mandate for your Lifetime Access. You get immediate lifetime unrestricted access to all 7 course masterclasses. Your subscription auto-renews at ₹299 starting on Day 4 unless you Lifetime Access during your Access." },
   { question: "I'm terrified of AI taking my job. Will this help?", answer: "We completely understand that fear! AI is scary if you ignore it, but it's an incredible superpower when you master it. We will hold your hand and teach you exactly how to use AI as your personal assistant, making you brilliantly fast and completely irreplaceable." },
   { question: "I am a complete beginner and get overwhelmed easily. Is this for me?", answer: "Yes, this program was built exactly with you in mind. We know learning software can be intimidating. We start from the absolute basics ('how to click here') and our team is always available to hold your hand when you feel stuck." },
   { question: "Are you really going to help me, or is this just another course?", answer: "This is a true 24/7 support community. When your render looks weird or your software crashes, you don't have to figure it out alone. You reach out to us, and we patiently help you fix it. Your success is our personal mission." },
   { question: "Do I need to buy expensive software subscriptions?", answer: "Not at all. We will show you exactly how to easily access official free or student versions of the software. We want you earning safely, not spending unnecessarily on expensive licenses." },
-  { question: "What is the cancellation policy?", answer: "You can cancel your subscription mandate anytime during the 3-day trial period directly from your UPI app (Google Pay / PhonePe / Paytm) or by clicking Change Password / Cancel in your Student Portal." },
+  { question: "What is the cancellation policy?", answer: "You can cancel your subscription mandate anytime during the Lifetime Access period directly from your UPI app (Google Pay / PhonePe / Paytm) or by clicking Change Password / Cancel in your Student Portal." },
   { question: "Can I access the training safely on my mobile?", answer: "Yes! All courses are hosted clearly online and work perfectly on any device — laptop, tablet, or phone. You can learn comfortably at your own pace anywhere." },
 ];
 

@@ -909,7 +909,7 @@ export default function StudentPortal() {
   const navigate = useNavigate();
 
   // Check existing session
-  const [user, setUser] = useState<{ email: string; name: string; trialActive: boolean } | null>(() => {
+  const [user, setUser] = useState<{ email: string; name: string; AccessActive: boolean } | null>(() => {
     const saved = localStorage.getItem('student_session');
     return saved ? JSON.parse(saved) : null;
   });
@@ -931,7 +931,7 @@ export default function StudentPortal() {
       verifySubscriptionStatus(activeSubId).then((res) => {
         setSubStatusInfo(res);
         if (!res.active) {
-          const updatedUser = { ...user, trialActive: false };
+          const updatedUser = { ...user, AccessActive: false };
           setUser(updatedUser);
           localStorage.setItem('student_session', JSON.stringify(updatedUser));
         }
@@ -971,7 +971,7 @@ export default function StudentPortal() {
         email: result.student.email,
         phone: result.student.phone,
         name: result.student.name || trimmedEmail.split('@')[0],
-        trialActive: result.student.trial_active,
+        AccessActive: result.student.Access_active,
       };
 
       localStorage.setItem('student_session', JSON.stringify(newUser));
@@ -1068,7 +1068,7 @@ export default function StudentPortal() {
                   <span>We verify your email & phone against our payment records</span>
                 </div>
                 <Button variant="outline" className="w-full text-xs font-semibold" onClick={() => navigate('/')}>
-                  <Sparkles size={14} className="mr-1 text-orange-500" /> Start 3-Day Free Trial
+                  <Sparkles size={14} className="mr-1 text-orange-500" /> Start Lifetime Access
                 </Button>
               </div>
             </CardContent>
@@ -1086,7 +1086,7 @@ export default function StudentPortal() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20 mb-2">
-                <Sparkles size={12} /> 3-DAY FREE TRIAL ACTIVE
+                <Sparkles size={12} /> Lifetime Access ACTIVE
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
                 Welcome, <span className="text-orange-400 capitalize">{user.name}</span>
@@ -1096,9 +1096,9 @@ export default function StudentPortal() {
 
             <div className="flex items-center gap-3">
               <div className="bg-zinc-800 border border-zinc-700 px-3 py-2 rounded-xl text-right">
-                <p className="text-[10px] text-zinc-400 font-mono">TRIAL STATUS</p>
+                <p className="text-[10px] text-zinc-400 font-mono">Access STATUS</p>
                 <p className="text-xs font-bold text-orange-400 flex items-center gap-1">
-                  <Clock size={12} /> 72 Hours Remaining
+                  <Clock size={12} /> lifetime Remaining
                 </p>
               </div>
 

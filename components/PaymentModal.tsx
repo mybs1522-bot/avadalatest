@@ -113,18 +113,8 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, ini
     setIsLoading(true);
 
     try {
-      if (selectedPlan.price === '$49') {
-         await submitPhoneNumber('', selectedPlan.id);
-         window.location.href = 'https://www.avada.space/checkout';
-         return;
-      }
-      if (selectedPlan.price === '$99') {
-         await submitPhoneNumber('', selectedPlan.id);
-         window.location.href = 'https://www.avada.space/checkout-now';
-         return;
-      }
       openRazorpayCheckout({
-        amount: selectedPlan.id === 'lifetime-plus' ? 999 : 397,
+        amount: 299,
         courseIds: ['all-courses-bundle'],
         userPhone: '',
         userEmail: '',
@@ -193,7 +183,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, ini
              
              <p className="text-gray-300 text-sm leading-relaxed font-light">
                 {step === 'DETAILS' && initialCourse 
-                  ? "Included in the Avada All-Access Pass. One subscription, 12 premium courses."
+                  ? "Included in the Astrojeevan All-Access Pass. One subscription, 12 premium courses."
                   : "Join thousands of architects and designers. Access the complete library and fast-track your career."}
              </p>
            </div>
@@ -329,7 +319,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, ini
                       </button>
                       <h3 className="text-2xl font-bold font-display text-gray-900">Select Plan</h3>
                     </div>
-                    <p className="text-gray-500 text-sm mb-6">Start your journey today. Cancel anytime.</p>
+                    <p className="text-gray-500 text-sm mb-6">Start your journey today. Lifetime Access.</p>
                     
                     <div className="space-y-3 mb-8">
                       {PRICING_PLANS.map((plan) => {
@@ -377,7 +367,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, ini
                  <div className="h-full flex flex-col items-center justify-center text-center">
                     <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-6 shadow-sm"><PartyPopper size={40} /></div>
                     <h3 className="text-3xl font-bold font-display mb-2 text-gray-900">You're In!</h3>
-                    <p className="text-gray-500 max-w-xs mb-8">Your subscription is active. Welcome to the Avada community.</p>
+                    <p className="text-gray-500 max-w-xs mb-8">Your subscription is active. Welcome to the Astrojeevan community.</p>
                     <button onClick={onClose} className="w-full max-w-xs py-4 bg-gray-900 text-white font-bold rounded-xl hover:bg-black transition-colors">Start Learning Now</button>
                  </div>
              )}
@@ -411,7 +401,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, ini
                     >
                         I Want This Package <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                     </button>
-                    <p className="text-center text-[10px] text-gray-400">100% Money-back guarantee. Cancel anytime.</p>
+                    <p className="text-center text-[10px] text-gray-400">100% Money-back guarantee. Lifetime Access.</p>
                  </div>
              </div>
           )}

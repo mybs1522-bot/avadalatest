@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
-const RAZORPAY_KEY_ID = Deno.env.get('RAZORPAY_KEY_ID') || 'rzp_live_Wh4xEHePkQXqRO'
+const RAZORPAY_KEY_ID = Deno.env.get('RAZORPAY_KEY_ID') || 'rzp_test_dummykey'
 const RAZORPAY_KEY_SECRET = Deno.env.get('RAZORPAY_KEY_SECRET')
 
 serve(async (req) => {
@@ -15,7 +15,7 @@ serve(async (req) => {
     }
 
     try {
-        const { plan_id, trial_days = 2, monthly_amount = 199 } = await req.json()
+        const { plan_id, Access_days = 2, monthly_amount = 199 } = await req.json()
 
         if (!RAZORPAY_KEY_ID || !RAZORPAY_KEY_SECRET) {
             throw new Error('Razorpay Key Secret is required in environment to create Subscription mandates')
@@ -36,10 +36,10 @@ serve(async (req) => {
                     period: 'monthly',
                     interval: 1,
                     item: {
-                        name: 'Avada Monthly Course Pass',
+                        name: 'Astrojeevan Monthly Course Pass',
                         amount: Math.round(monthly_amount * 100), // paise
                         currency: 'INR',
-                        description: '₹199/month recurring pass after 2-day trial'
+                        description: '₹199/month recurring pass after 2-day Access'
                     }
                 })
             })
@@ -51,8 +51,8 @@ serve(async (req) => {
             activePlanId = planData.id
         }
 
-        // 2. Calculate start_at unix timestamp (48 hrs from now for 2-day trial)
-        const startAtUnix = Math.floor(Date.now() / 1000) + (trial_days * 24 * 60 * 60)
+        // 2. Calculate start_at unix timestamp (48 hrs from now for 2-day Access)
+        const startAtUnix = Math.floor(Date.now() / 1000) + (Access_days * 24 * 60 * 60)
 
         // 3. Create Subscription Mandate in Razorpay
         const subRes = await fetch('https://api.razorpay.com/v1/subscriptions', {

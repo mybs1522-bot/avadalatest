@@ -20,7 +20,7 @@ export const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
             <Link to="/" className="text-xl font-bold tracking-tight">
-              Avada <span className="text-primary">Design</span>
+              Astrojeevan <span className="text-primary">Design</span>
             </Link>
           </div>
           

@@ -35,28 +35,28 @@ export default async function handler(req, res) {
 
     switch (event) {
       case 'subscription.authenticated':
-        // Trial started & AutoPay mandate authorized
+        // Access started & AutoPay mandate authorized
         const subAuth = payload.subscription.entity;
         console.log(`Mandate Authorized for Subscription ${subAuth.id} (Plan: ${subAuth.plan_id})`);
-        // DB Action: Mark user trialActive = true
+        // DB Action: Mark user AccessActive = true
         break;
 
       case 'subscription.cancelled':
-        // Customer revoked AutoPay in GPay/PhonePe or cancelled trial
+        // Customer revoked AutoPay in GPay/PhonePe or cancelled Access
         const subCancelled = payload.subscription.entity;
         console.log(`Subscription Cancelled by User: ${subCancelled.id}`);
-        // DB Action: Revoke access -> Mark user trialActive = false, status = 'cancelled'
+        // DB Action: Revoke access -> Mark user AccessActive = false, status = 'cancelled'
         break;
 
       case 'subscription.paused':
         // Customer paused AutoPay mandate
         const subPaused = payload.subscription.entity;
         console.log(`Subscription Paused by User: ${subPaused.id}`);
-        // DB Action: Mark user trialActive = false, status = 'paused'
+        // DB Action: Mark user AccessActive = false, status = 'paused'
         break;
 
       case 'subscription.charged':
-        // Successful monthly ₹399 billing executed after trial!
+        // Successful monthly ₹299 billing executed after Access!
 
         const subCharged = payload.subscription.entity;
         const payment = payload.payment.entity;

@@ -249,15 +249,15 @@ export const COURSE_CATEGORIES = [
   }
 ];
 
-export const BUNDLE_PRICE = 49;
-export const BUNDLE_ORIGINAL_PRICE = 588; // 12 × $49
+export const BUNDLE_PRICE = 299;
+export const BUNDLE_ORIGINAL_PRICE = 588; // 12 × ₹299
 
 export const PRICING_PLANS = [
   {
     id: 'lifetime-basic',
     duration: 'Lifetime Access',
     period: 'One-time payment',
-    price: '$49',
+    price: '₹299',
     originalPrice: '$99',
     label: 'Best Value'
   }
@@ -292,7 +292,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Olivia Brooks',
     role: 'Interior Designer',
     location: 'Sydney, Australia',
-    content: 'I can now present 10 variations to clients in the time it used to take for one. Best $49 I ever spent.'
+    content: 'I can now present 10 variations to clients in the time it used to take for one. Best ₹299 I ever spent.'
   },
   {
     name: 'Marco Rossi',
@@ -309,7 +309,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     question: "Can I buy individual courses or only the bundle?",
-    answer: "Both options are available! Each course is $9 individually, or get all 12 for just $49 — saving over $59. The bundle is by far the best deal."
+    answer: "Both options are available! Each course is $9 individually, or get all 12 for just ₹299 — saving over $59. The bundle is by far the best deal."
   },
   {
     question: "Are project files included?",

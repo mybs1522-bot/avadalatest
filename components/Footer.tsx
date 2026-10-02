@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h4 className="text-white font-bold text-sm mb-3">Avada Design</h4>
+            <h4 className="text-white font-bold text-sm mb-3">Astrojeevan Design</h4>
             <p className="text-xs leading-relaxed">
               Premium architecture & design courses trusted by 50,000+ professionals across India.
             </p>
@@ -32,13 +32,13 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-bold text-sm mb-3">Contact</h4>
             <ul className="space-y-2 text-xs">
-              <li>support@avada.in</li>
+              <li>support@astrojeevan.in</li>
               <li>WhatsApp: +91 8545015333</li>
             </ul>
           </div>
         </div>
         <div className="border-t border-zinc-800 pt-6 text-center text-xs">
-          <p>&copy; {new Date().getFullYear()} Avada Design. All rights reserved. All prices are inclusive of GST.</p>
+          <p>&copy; {new Date().getFullYear()} Astrojeevan Design. All rights reserved. All prices are inclusive of GST.</p>
         </div>
       </div>
     </footer>

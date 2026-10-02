@@ -31,7 +31,7 @@ export default function RefundPolicy() {
                 </div>
                 <div>
                   <h3 className="font-bold text-foreground mb-1">Send us an email or WhatsApp message</h3>
-                  <p className="text-muted-foreground text-sm">Contact us at <strong>support@avada.in</strong> or WhatsApp us at <strong>+91 8545015333</strong> with your order details (name, email used for purchase, and payment ID if available).</p>
+                  <p className="text-muted-foreground text-sm">Contact us at <strong>support@astrojeevan.in</strong> or WhatsApp us at <strong>+91 8545015333</strong> with your order details (name, email used for purchase, and payment ID if available).</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 bg-card border border-border rounded-xl p-5">
@@ -87,7 +87,7 @@ export default function RefundPolicy() {
               <div className="bg-card border border-border rounded-xl p-5 text-center">
                 <Mail size={24} className="text-primary mx-auto mb-3" />
                 <h3 className="font-bold text-sm mb-1">Email</h3>
-                <p className="text-muted-foreground text-sm">support@avada.in</p>
+                <p className="text-muted-foreground text-sm">support@astrojeevan.in</p>
               </div>
               <div className="bg-card border border-border rounded-xl p-5 text-center">
                 <MessageCircle size={24} className="text-primary mx-auto mb-3" />

@@ -5,12 +5,12 @@ export default function About() {
     <div className="min-h-screen bg-background pt-24 pb-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-8">
-          About <span className="text-primary">Avada Design</span>
+          About <span className="text-primary">Astrojeevan Design</span>
         </h1>
         
         <div className="prose dark:prose-invert max-w-none text-lg text-muted-foreground space-y-6">
           <p>
-            Welcome to Avada Design, the premier destination for architects, designers, and visualization artists
+            Welcome to Astrojeevan Design, the premier destination for architects, designers, and visualization artists
             looking to elevate their skills and master the tools of the trade.
           </p>
           <p>

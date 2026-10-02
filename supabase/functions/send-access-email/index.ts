@@ -27,7 +27,7 @@ serve(async (req: Request) => {
       body: JSON.stringify({
         from: 'AVADA Courses <hello@archbysha.com>',
         to: [email],
-        subject: '🎨 Your Avada Design Bundle — Instant Access Inside',
+        subject: '🎨 Your Astrojeevan Design Bundle — Instant Access Inside',
         html: `
 <!DOCTYPE html>
 <html>
@@ -39,7 +39,7 @@ serve(async (req: Request) => {
         <!-- Header -->
         <tr>
           <td style="background:#000000;padding:32px 40px;">
-            <p style="margin:0;color:#9ca3af;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">AVADA DESIGN</p>
+            <p style="margin:0;color:#9ca3af;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Astrojeevan Design</p>
             <h1 style="margin:8px 0 0;color:#ffffff;font-size:26px;font-weight:900;line-height:1.2;">Your courses are ready. 🎨</h1>
           </td>
         </tr>
@@ -48,7 +48,7 @@ serve(async (req: Request) => {
         <tr>
           <td style="padding:36px 40px;">
             <p style="margin:0 0 20px;color:#374151;font-size:16px;line-height:1.7;">
-              Thank you for purchasing the <strong>Avada Design Bundle</strong> — all 12 premium courses are now yours for life.
+              Thank you for purchasing the <strong>Astrojeevan Design Bundle</strong> — all 12 premium courses are now yours for life.
             </p>
 
             <!-- Access Box -->
@@ -85,7 +85,7 @@ serve(async (req: Request) => {
         <tr>
           <td style="background:#f9fafb;padding:20px 40px;border-top:1px solid #e5e7eb;">
             <p style="margin:0;color:#9ca3af;font-size:12px;">
-              © 2026 Avada Design. You're receiving this because you purchased the Avada Design Bundle.
+              © 2026 Astrojeevan Design. You're receiving this because you purchased the Astrojeevan Design Bundle.
             </p>
           </td>
         </tr>

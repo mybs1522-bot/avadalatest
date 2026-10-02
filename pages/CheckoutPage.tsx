@@ -4,9 +4,9 @@ import { PRODUCTS } from '../lib/data';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../components/ui/card';
-import { triggerRazorpaySubscriptionCheckout } from '../lib/razorpay';
+import { triggerRazorpayCheckout } from '../lib/razorpay';
 import { sendStudentWelcomeEmail } from '../lib/email';
-import { Lock, ShieldCheck, CheckCircle2, Clock, Sparkles } from 'lucide-react';
+import { Lock, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 
 export default function CheckoutPage() {
@@ -42,17 +42,13 @@ export default function CheckoutPage() {
     e.preventDefault();
     if (!validate()) return;
 
-    triggerRazorpaySubscriptionCheckout(
-      {
-        monthlyPrice: 399,
-        trialDays: 3,
-        productName: product ? product.name : 'Avada Architecture Pass',
-      },
+    triggerRazorpayCheckout(
+      299,
       (res) => {
         localStorage.setItem('student_session', JSON.stringify({
           email: formData.email,
           name: formData.name,
-          trialActive: true
+          AccessActive: false // no Access
         }));
 
         // Send Welcome Email via Resend API
@@ -61,12 +57,11 @@ export default function CheckoutPage() {
           studentName: formData.name,
         });
 
-        alert('3-Day Free Trial Activated! Welcome to your Student Portal.');
+        alert('Payment Successful! Welcome to your Student Portal.');
         navigate('/portal');
       },
-
       (err) => {
-        console.error("Subscription setup failed", err);
+        console.error("Payment setup failed", err);
       },
       {
         name: formData.name,
@@ -88,20 +83,10 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-muted/20 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        {/* Trial Header Badge */}
-        <div className="bg-orange-500/10 border border-orange-500/30 rounded-2xl p-4 mb-8 flex items-center gap-3 text-orange-800 dark:text-orange-300">
-          <Sparkles size={24} className="shrink-0 text-orange-600 dark:text-orange-400" />
-          <div>
-            <p className="font-bold text-sm sm:text-base">3-Day Free Trial Activated</p>
-            <p className="text-xs opacity-90">Enjoy 72 hours of full access. Auto-renews at ₹399/month via UPI AutoPay starting Day 4. Cancel anytime before trial ends.</p>
-          </div>
-        </div>
-
-        <h1 className="text-3xl font-extrabold mb-2">Activate Your 3-Day Free Trial</h1>
-        <p className="text-muted-foreground mb-8">Setup your UPI AutoPay mandate for your 3-day free trial.</p>
+        <h1 className="text-3xl font-extrabold mb-2">Complete Your Purchase</h1>
+        <p className="text-muted-foreground mb-8">Enter your details to access the courses.</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Left Col: Customer Details Form */}
           <div>
             <Card>
               <CardHeader>
@@ -135,7 +120,7 @@ export default function CheckoutPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-1.5">Phone Number (UPI Linked) <span className="text-destructive">*</span></label>
+                    <label className="block text-sm font-semibold mb-1.5">Phone Number <span className="text-destructive">*</span></label>
                     <Input 
                       type="tel" 
                       placeholder="10-digit mobile number" 
@@ -155,7 +140,7 @@ export default function CheckoutPage() {
                       onChange={(e) => setFormData({...formData, termsAccepted: e.target.checked})}
                     />
                     <label htmlFor="terms" className="text-sm text-muted-foreground cursor-pointer leading-relaxed">
-                      I accept the <Link to="/terms" className="text-primary hover:underline font-semibold">Terms</Link>, <Link to="/privacy-policy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>, and authorize a recurring UPI AutoPay mandate of ₹399/month starting in 3 days.
+                      I accept the <Link to="/terms" className="text-primary hover:underline font-semibold">Terms</Link>, <Link to="/privacy-policy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>.
                     </label>
                   </div>
                   {errors.terms && <p className="text-destructive text-xs">{errors.terms}</p>}
@@ -164,7 +149,6 @@ export default function CheckoutPage() {
             </Card>
           </div>
 
-          {/* Right Col: Order Summary */}
           <div>
             <Card className="sticky top-24 border-primary/20 bg-primary/5">
               <CardHeader>
@@ -176,54 +160,42 @@ export default function CheckoutPage() {
                     <img src={product.imageUrl} alt={product.name} className="w-20 h-14 object-cover rounded" />
                     <div>
                       <h3 className="font-bold text-sm leading-tight">{product.name}</h3>
-                      <p className="text-xs text-orange-600 font-semibold mt-1">3 Days Free Trial Included</p>
+                      <p className="text-xs text-primary font-semibold mt-1">Lifetime Access</p>
                     </div>
                   </div>
                 )}
 
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Initial Trial (3 Days)</span>
-                    <span className="font-bold text-orange-600">FREE (₹0)</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Recurring Billing (from Day 4)</span>
-                    <span className="font-bold">₹399 / month</span>
+                    <span className="text-muted-foreground">Course Bundle</span>
+                    <span className="font-bold">₹299</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Payment Method</span>
-                    <span className="font-medium text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">UPI AutoPay</span>
+                    <span className="font-medium text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Secure Checkout</span>
                   </div>
                 </div>
 
                 <div className="pt-4 border-t border-border flex justify-between items-center text-lg font-extrabold">
-                  <span>Due Today</span>
-                  <span className="text-orange-600">₹0</span>
+                  <span>Total</span>
+                  <span className="text-primary">₹299</span>
                 </div>
               </CardContent>
               <CardFooter className="flex-col gap-4">
-                <Button type="submit" form="checkout-form" size="lg" className="w-full text-lg h-14 shadow-lg shadow-primary/25 bg-orange-600 hover:bg-orange-700 text-white">
-                  Start 3-Day Free Trial (₹0) <Lock size={16} className="ml-2" />
+                <Button type="submit" form="checkout-form" size="lg" className="w-full text-lg h-14 shadow-lg shadow-primary/25 bg-primary hover:bg-primary/90 text-white">
+                  Pay ₹299 <Lock size={16} className="ml-2" />
                 </Button>
                 <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground text-center">
-                  <ShieldCheck size={14} className="text-orange-500 shrink-0" />
-                  Razorpay UPI AutoPay • Mandate authorization only (Free Trial)
+                  <ShieldCheck size={14} className="text-primary shrink-0" />
+                  Secure Checkout Process
                 </div>
               </CardFooter>
             </Card>
             
             <div className="mt-6 space-y-3">
               <div className="flex items-center gap-3 text-sm">
-                <CheckCircle2 size={16} className="text-orange-500 shrink-0" />
-                <span><strong>3 days full unrestricted access</strong> to course materials.</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <Clock size={16} className="text-orange-500 shrink-0" />
-                <span>First ₹399 charge automatically applies in 72 hours.</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <CheckCircle2 size={16} className="text-orange-500 shrink-0" />
-                <span>Cancel anytime effortlessly before trial expires.</span>
+                <CheckCircle2 size={16} className="text-primary shrink-0" />
+                <span><strong>Instant full unrestricted access</strong> to course materials.</span>
               </div>
             </div>
           </div>

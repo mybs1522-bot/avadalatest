@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
               }
 
               const https = await import('https');
-              const keyId = env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Wh4xEHePkQXqRO';
+              const keyId = env.VITE_RAZORPAY_KEY_ID || 'rzp_test_dummykey';
               const keySecret = env.RAZORPAY_KEY_SECRET || '555SgeR7nJYsI76SZ200lN8W';
               const planId = env.VITE_RAZORPAY_PLAN_ID || 'plan_TOwcG0UPdKNApw';
 

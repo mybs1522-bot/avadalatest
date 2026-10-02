@@ -40,7 +40,7 @@ function PayPalButton({ email, onSuccess, amount }: { email: string; onSuccess: 
       style: { layout: 'vertical', color: 'blue', shape: 'rect', label: 'paypal', height: 52 },
       createOrder: (_: any, actions: any) =>
         actions.order.create({
-          purchase_units: [{ amount: { value: amountVal }, description: 'Avada Design Bundle – All Courses' }],
+          purchase_units: [{ amount: { value: amountVal }, description: 'Astrojeevan Design Bundle – All Courses' }],
           ...(email ? { payer: { email_address: email } } : {}),
         }),
       onApprove: async (_: any, actions: any) => { await actions.order.capture(); sendAccessEmail(email); if ((window as any).fbq) (window as any).fbq('track', 'Purchase', { value: 49, currency: 'USD' }); onSuccess(); },
@@ -210,7 +210,7 @@ export default function ModernPaymentForm({
   email,
   onSuccess,
   onBack,
-  amount = "$49",
+  amount = "₹299",
   bare = false,
 }: ModernPaymentFormProps) {
   const wrap = (content: React.ReactNode) =>

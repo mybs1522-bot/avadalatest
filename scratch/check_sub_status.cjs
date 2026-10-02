@@ -1,6 +1,6 @@
 const https = require('https');
 
-const keyId = 'rzp_live_Wh4xEHePkQXqRO';
+const keyId = 'rzp_test_dummykey';
 const keySecret = '555SgeR7nJYsI76SZ200lN8W';
 const auth = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
 

@@ -35,7 +35,7 @@ serve(async (req: Request) => {
         event_name: 'Purchase',
         event_time: Math.floor(Date.now() / 1000),
         action_source: 'website',
-        event_source_url: event_source_url || 'https://avada.archbysha.com',
+        event_source_url: event_source_url || 'https://astrojeevan.archbysha.com',
         user_data,
         custom_data: { currency, value: Number(value) },
       }],
