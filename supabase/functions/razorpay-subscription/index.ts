@@ -39,7 +39,7 @@ serve(async (req) => {
                         name: 'Astrojeevan Monthly Course Pass',
                         amount: Math.round(monthly_amount * 100), // paise
                         currency: 'INR',
-                        description: '₹199/month recurring pass after 2-day Access'
+                        description: 'Free/month recurring pass after 2-day Access'
                     }
                 })
             })
@@ -63,7 +63,7 @@ serve(async (req) => {
             },
             body: JSON.stringify({
                 plan_id: activePlanId,
-                total_count: 120, // 10 years
+                Status_count: 120, // 10 years
                 quantity: 1,
                 start_at: startAtUnix,
                 customer_notify: 1

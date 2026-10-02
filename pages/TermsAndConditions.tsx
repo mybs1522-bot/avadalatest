@@ -3,86 +3,59 @@ import { Link } from 'react-router-dom';
 
 export default function TermsAndConditions() {
   return (
-    <div className="min-h-screen bg-background pt-16 pb-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+    <div className="min-h-screen bg-slate-50 pt-24 pb-16 px-4">
+      <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100">
         <h1 className="text-4xl font-extrabold tracking-tight mb-2">Terms and Conditions</h1>
-        <p className="text-muted-foreground mb-10">Last updated: July 8, 2026</p>
+        <p className="text-muted-foreground mb-8">Last Updated: October 2, 2026</p>
 
-        <div className="prose max-w-none text-foreground space-y-8">
-
+        <div className="prose prose-slate max-w-none text-slate-600 space-y-8">
           <section>
             <h2 className="text-2xl font-bold mb-3">1. Introduction</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Welcome to Astrojeevan Design ("Company", "we", "our", "us"). These Terms and Conditions govern your use of our website located at <strong>astrojeevan.in</strong> (the "Site") and all digital products, courses, downloadable resources, and services offered by us (collectively, the "Services"). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use our Services.
+            <p>
+              Welcome to Astrojeevan Design ("Company", "we", "our", "us"). These Terms and Conditions govern your use of our website and all digital products, courses, downloadable resources, and services offered by us (collectively, the "Services"). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use our Services.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-3">2. Eligibility</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              You must be at least 18 years of age to purchase our products. By placing an order, you represent and warrant that you are at least 18 years old and that all information you provide is accurate, complete, and current.
+            <h2 className="text-2xl font-bold mb-3">2. Free Access</h2>
+            <p>
+              Astrojeevan Design provides all educational courses and digital resources completely free of charge. There are no hidden fees, subscriptions, or payment requirements to access our core materials.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-3">3. Products & Services</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Astrojeevan Design offers digital educational courses, downloadable resources (textures, 3D models), and community access related to architecture, interior design, and 3D visualization software. All products are delivered digitally. No physical goods are shipped.
+            <h2 className="text-2xl font-bold mb-3">3. Eligibility</h2>
+            <p>
+              You must be at least 18 years of age to enroll in our courses. By enrolling, you represent and warrant that you are at least 18 years old and that all information you provide is accurate, complete, and current.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-3">4. Pricing & Payment</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              All prices displayed on the Site are in Indian Rupees (₹) and are <strong>inclusive of all applicable taxes, including GST</strong>. The price you see is the final price you pay — there are no hidden charges. Payments are processed securely through Razorpay. We accept UPI, debit cards, credit cards, net banking, and wallets.
+            <h2 className="text-2xl font-bold mb-3">4. Intellectual Property</h2>
+            <p>
+              All course content, videos, images, textures, 3D models, and other materials provided are the intellectual property of Astrojeevan Design. You are granted a personal, non-transferable, non-exclusive license to access and use the materials for your own educational and professional purposes. You may not redistribute, resell, or share access to any enrolled materials.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-3">5. Intellectual Property</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              All course content, videos, images, textures, 3D models, and other materials provided are the intellectual property of Astrojeevan Design. You are granted a personal, non-transferable, non-exclusive license to access and use the materials for your own educational and professional purposes. You may not redistribute, resell, or share access to any purchased materials.
+            <h2 className="text-2xl font-bold mb-3">5. Disclaimer of Warranties</h2>
+            <p>
+              The Services are provided on an "AS IS" and "AS AVAILABLE" basis. We make no representations or warranties of any kind, express or implied, regarding the operation of the Site or the information, content, or materials included. We do not guarantee that the courses will result in specific career outcomes or financial gains.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-3">6. User Conduct</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              You agree not to: (a) share your login credentials with others; (b) redistribute or resell any course materials; (c) use automated systems to scrape or download content; (d) use the Services for any unlawful purpose; (e) attempt to gain unauthorized access to any part of the Services.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-3">7. Refund Policy</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              We offer a <strong>7-day no-questions-asked refund policy</strong>. If you are not satisfied with your purchase for any reason, you can request a full refund within 7 days of the date of purchase. Please see our <Link to="/refund-policy" className="text-primary hover:underline font-semibold">Cancellation and Refund Policy</Link> for full details.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-3">8. Limitation of Liability</h2>
-            <p className="text-muted-foreground leading-relaxed">
+            <h2 className="text-2xl font-bold mb-3">6. Limitation of Liability</h2>
+            <p>
               To the fullest extent permitted by applicable law, Astrojeevan Design shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from your use of our Services.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-3">9. Governing Law</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              These Terms shall be governed by and construed in accordance with the laws of India. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the courts in Noida, Uttar Pradesh, India.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-3">10. Contact Us</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              If you have any questions about these Terms and Conditions, please contact us at:
-            </p>
-            <ul className="list-none space-y-1 text-muted-foreground mt-3">
+            <h2 className="text-2xl font-bold mb-3">7. Contact Information</h2>
+            <p>If you have any questions about these Terms, please contact us at:</p>
+            <ul className="list-disc pl-6 mt-2">
               <li><strong>Email:</strong> support@astrojeevan.in</li>
-              <li><strong>Address:</strong> E-36, Coregano, Sector 8, Noida - 201301</li>
-              <li><strong>WhatsApp:</strong> +91 8545015333</li>
-              <li><strong>Page:</strong> <Link to="/contact" className="text-primary hover:underline">Contact Us</Link></li>
             </ul>
           </section>
         </div>

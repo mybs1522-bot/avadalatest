@@ -45,7 +45,7 @@ export const FEAR_STATS = [
   { stat: '82%', label: 'of traditional 3D visualization tasks are actively being replaced by AI rendering tools right now.', icon: '📉' },
   { stat: '10x', label: 'faster output when you learn to comfortably partner with AI instead of fearing it.', icon: '🚀' },
   { stat: '24/7', label: 'Support from our team. We hold your hand through every single software hurdle so you never feel alone.', icon: '🤝' },
-  { stat: '15 Days', label: 'From feeling stuck and overwhelmed, to creating portfolio-ready designs with total confidence.', icon: '⏳' },
+  { stat: '15 Days', label: 'From feeling stuck and overwhelmed, to creating portfolio-ready designs with Status confidence.', icon: '⏳' },
 ];
 
 /* ─── LOGO ─── */
@@ -155,7 +155,7 @@ export const TESTIMONIALS_LANDING = [
 ];
 
 export const FAQ_ITEMS_LANDING = [
-  { question: "How does the Lifetime Access work?", answer: "When you sign up, you authorize a UPI AutoPay mandate for your Lifetime Access. You get immediate lifetime unrestricted access to all 7 course masterclasses. Your subscription auto-renews at ₹299 starting on Day 4 unless you Lifetime Access during your Access." },
+  { question: "How does the Lifetime Access work?", answer: "When you sign up, you authorize a UPI AutoPay mandate for your Lifetime Access. You get immediate lifetime unrestricted access to all 7 course masterclasses. Your subscription Lifetime Access.during your Access." },
   { question: "I'm terrified of AI taking my job. Will this help?", answer: "We completely understand that fear! AI is scary if you ignore it, but it's an incredible superpower when you master it. We will hold your hand and teach you exactly how to use AI as your personal assistant, making you brilliantly fast and completely irreplaceable." },
   { question: "I am a complete beginner and get overwhelmed easily. Is this for me?", answer: "Yes, this program was built exactly with you in mind. We know learning software can be intimidating. We start from the absolute basics ('how to click here') and our team is always available to hold your hand when you feel stuck." },
   { question: "Are you really going to help me, or is this just another course?", answer: "This is a true 24/7 support community. When your render looks weird or your software crashes, you don't have to figure it out alone. You reach out to us, and we patiently help you fix it. Your success is our personal mission." },
@@ -165,8 +165,8 @@ export const FAQ_ITEMS_LANDING = [
 ];
 
 export const INCOME_TIERS = [
-  { label: 'Single Render Charge', before: 'Struggling to ask ₹1000', after: 'Confidently quoting ₹5,000+', icon: '🖼️' },
-  { label: 'Interior Design Project', before: 'Rejected for poor 3D quality', after: 'Winning ₹80,000+ contracts', icon: '🏠' },
+  { label: 'Single Render Charge', before: 'Struggling to get clients', after: 'Winning high-end clients', icon: '🖼️' },
+  { label: 'Interior Design Project', before: 'Rejected for poor 3D quality', after: 'Winning major contracts', icon: '🏠' },
   { label: 'Time to Finish a Room', before: '3 Frustrating, Sleepless Nights', after: '2 Easy Hours with our AI Workflow', icon: '⏱️' },
   { label: 'Your Career Confidence', before: 'Constantly Anxious & Overwhelmed', after: 'Relaxed, In-Demand Professional', icon: '🌟' },
 ];

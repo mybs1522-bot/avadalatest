@@ -2,7 +2,7 @@ export const PRODUCTS = [
   {
     id: 'sketchup-vray-d5',
     name: 'Sketchup + Vray + D5 Render',
-    price: 399,
+    price: 0,
     AccessDays: 3,
     billingPeriod: 'month',
     AccessText: 'Lifetime Access',
@@ -21,7 +21,7 @@ export const PRODUCTS = [
   {
     id: 'all-courses-bundle',
     name: 'All Courses Bundle',
-    price: 399,
+    price: 0,
     AccessDays: 3,
     billingPeriod: 'month',
     AccessText: 'Lifetime Access',

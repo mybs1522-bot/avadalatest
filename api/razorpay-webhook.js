@@ -56,11 +56,11 @@ export default async function handler(req, res) {
         break;
 
       case 'subscription.charged':
-        // Successful monthly ₹299 billing executed after Access!
+        // Successful monthly Free billing executed after Access!
 
         const subCharged = payload.subscription.entity;
         const payment = payload.payment.entity;
-        console.log(`Monthly Billing Success ₹${payment.amount / 100} for Sub ${subCharged.id}`);
+        console.log(`Monthly Billing Success ${payment.amount / 100} for Sub ${subCharged.id}`);
         // DB Action: Extend student subscription period by 30 days
         break;
 

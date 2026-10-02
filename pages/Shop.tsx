@@ -16,7 +16,7 @@ export default function Shop() {
             Our <span className="text-primary">Courses</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Level up your architecture skills with 2 Days Lifetime Access, then ₹199/month.
+            Level up your architecture skills with 2 Days Lifetime Access, Lifetime Access.
           </p>
         </div>
 
@@ -40,10 +40,10 @@ export default function Shop() {
                 </p>
                 <div className="flex flex-col gap-1">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-extrabold text-emerald-600">₹0</span>
+                    <span className="text-3xl font-extrabold text-emerald-600">Free</span>
                     <span className="text-sm font-semibold text-muted-foreground">Today (2-Day Access)</span>
                   </div>
-                  <span className="text-xs text-muted-foreground font-medium">Then ₹199/month via UPI AutoPay</span>
+                  <span className="text-xs text-muted-foreground font-medium">Lifetime Free Access</span>
                 </div>
               </CardContent>
               <CardFooter className="p-6 pt-0 flex flex-col gap-3">

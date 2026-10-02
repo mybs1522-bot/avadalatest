@@ -177,7 +177,7 @@ const LandingPage: React.FC = () => {
 
               {/* Intro text */}
               <p className="text-sm md:text-base text-slate-700 mb-3 md:mb-5 max-w-md font-medium">
-                Start charging <span className="underline underline-offset-2 decoration-orange-400"><span className="text-orange-600 font-bold">₹50,000</span>–<span className="text-orange-600 font-bold">₹1,00,000</span></span> for designing and rendering.
+                Start creating amazing designs.
               </p>
 
               {/* Big headline */}

@@ -35,7 +35,7 @@ interface CourseItem {
   description: string;
   imageUrl: string;
   badge: string;
-  totalLessons: number;
+  StatusLessons: number;
   modules: CourseModule[];
 }
 
@@ -766,7 +766,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     description: 'Complete masterclass covering SketchUp 3D modeling, V-Ray exterior/interior sunlighting, realistic textures, PBR shading, and commercial render polish.',
     imageUrl: 'https://drive.google.com/thumbnail?id=1wl6by5AO5MiPeoYsZ8F6Zi5AJahoeTQo&sz=w1000',
     badge: '5 Modules • 22 Videos',
-    totalLessons: 22,
+    StatusLessons: 22,
     modules: [
       {
         id: 'sk-mod-1',
@@ -804,7 +804,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     description: 'Learn real-time raytracing in D5 Render, high-poly foliage scattering, atmospheric fog, god rays, and smooth 60FPS walkthrough camera animations.',
     imageUrl: 'https://drive.google.com/thumbnail?id=1vbV4j6K9sgzbbZ7qlRdgqPTXWiHBPLsr&sz=w1000',
     badge: '1 Module • 7 Videos',
-    totalLessons: 7,
+    StatusLessons: 7,
     modules: [
       {
         id: 'd5-mod-1',
@@ -822,7 +822,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     description: 'Master precision 2D drafting in AutoCAD, floor plans, furniture layouts, dimensioning standards, scaling, and printing construction blueprints.',
     imageUrl: 'https://drive.google.com/thumbnail?id=1fV5bz4JDugh8HxLMJ0fXu5K5sDj3qlSR&sz=w1000',
     badge: '1 Module • 9 Videos',
-    totalLessons: 9,
+    StatusLessons: 9,
     modules: [
       {
         id: 'cad-mod-1',
@@ -840,7 +840,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     description: 'Build immersive 3D exterior environments in Lumion, terrain sculpting, outdoor plant scattering, water reflections, and cinematic walkthrough videos.',
     imageUrl: 'https://drive.google.com/thumbnail?id=1XW2DDHVa1Qc15NcZ3wUKMFRT7LkyZMCt&sz=w1000',
     badge: '1 Module • 15 Videos',
-    totalLessons: 15,
+    StatusLessons: 15,
     modules: [
       {
         id: 'lum-mod-1',
@@ -858,7 +858,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     description: 'BIM modeling, architectural documentation, 3D building design, and parametric families in Autodesk Revit.',
     imageUrl: 'https://drive.google.com/thumbnail?id=1N_BbG9kAEwIk541Id53_RV0CWjO1jzAt&sz=w1000',
     badge: '1 Module • 29 Videos',
-    totalLessons: 29,
+    StatusLessons: 29,
     modules: [
       {
         id: 'rev-mod-1',
@@ -876,7 +876,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     description: 'Real-time rendering, VR walkthroughs, material editing, and atmospheric lighting in Enscape.',
     imageUrl: 'https://drive.google.com/thumbnail?id=1SmezP6LwT3yo9aE3oivpGkqS-xycSOyx&sz=w1000',
     badge: '1 Module • 4 Videos',
-    totalLessons: 4,
+    StatusLessons: 4,
     modules: [
       {
         id: 'ens-mod-1',
@@ -894,7 +894,7 @@ const COURSES_PORTAL_DATA: CourseItem[] = [
     description: 'Professional 3D modeling, photorealistic V-Ray rendering, interior/exterior visualization in 3ds Max.',
     imageUrl: 'https://drive.google.com/thumbnail?id=1DgmIvkeC2dxGpRpzbIthHQsSdlCty2Xg&sz=w1000',
     badge: '1 Module • 13 Videos',
-    totalLessons: 13,
+    StatusLessons: 13,
     modules: [
       {
         id: 'max-mod-1',
@@ -1141,7 +1141,7 @@ export default function StudentPortal() {
                     </div>
                     <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
                       <span className="text-xs font-semibold bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
-                        {course.totalLessons} Videos Included
+                        {course.StatusLessons} Videos Included
                       </span>
                       <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-orange-600/50">
                         <PlayCircle size={20} className="text-white fill-white" />
@@ -1235,7 +1235,7 @@ export default function StudentPortal() {
                       <BookOpen size={18} className="text-orange-600" /> Course Lessons
                     </h3>
                     <span className="text-xs font-semibold bg-orange-500/10 text-orange-600 px-2.5 py-1 rounded-full">
-                      {selectedCourse.totalLessons} Videos
+                      {selectedCourse.StatusLessons} Videos
                     </span>
                   </div>
 

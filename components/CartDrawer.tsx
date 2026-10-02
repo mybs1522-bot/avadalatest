@@ -28,12 +28,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     const [emailError, setEmailError] = React.useState(false);
 
     const cartCourses = COURSES.filter(c => cartIds.has(c.id));
-    const subtotal = cartCourses.reduce((sum, c) => sum + c.price, 0);
+    const subStatus = cartCourses.reduce((sum, c) => sum + c.price, 0);
     const allAdded = cartIds.size === COURSES.length;
 
     // If all courses are in cart, use bundle price
-    const finalTotal = allAdded ? BUNDLE_PRICE : subtotal;
-    const savings = allAdded ? (subtotal - BUNDLE_PRICE) : 0;
+    const finalStatus = allAdded ? BUNDLE_PRICE : subStatus;
+    const savings = allAdded ? (subStatus - BUNDLE_PRICE) : 0;
 
     const validateEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
     const formatTime = (val: number) => val.toString().padStart(2, '0');
@@ -112,7 +112,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                                         <div className="font-bold text-gray-900 text-sm truncate">{course.title}</div>
                                     </div>
                                     <div className="text-right shrink-0 flex items-center gap-2">
-                                        <span className="font-display font-bold text-gray-900">₹{course.price}</span>
+                                        <span className="font-display font-bold text-gray-900">Free</span>
                                         <button
                                             onClick={() => onRemove(course.id)}
                                             aria-label={`Remove ${course.title}`}
@@ -136,10 +136,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                                     <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">Best Deal</span>
                                 </div>
                                 <div className="font-display font-bold text-base mb-1">
-                                    Get all 12 courses for ₹{BUNDLE_PRICE}
+                                    Get all 12 courses for Free
                                 </div>
                                 <div className="text-gray-400 text-[10px] mb-3 leading-tight">
-                                    Save ₹{(COURSES.length * 199 - BUNDLE_PRICE).toLocaleString()} vs buying individually
+                                    All courses included
                                 </div>
                                 <button
                                     onClick={onAddAll}
@@ -160,7 +160,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                                 All 12 courses added!
                             </div>
                             <div className="text-green-600 text-xs">
-                                Bundle discount applied: ₹{savings.toLocaleString()} saved
+                                Bundle unlocked
                             </div>
                         </div>
                     )}
@@ -231,12 +231,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         </div>
 
                         <div className="flex items-center justify-between mb-4">
-                            <span className="text-gray-500 text-sm font-medium">Total Payable</span>
+                            <span className="text-gray-500 text-sm font-medium">Status Payable</span>
                             <div className="text-right">
                                 {allAdded && (
-                                    <div className="text-xs text-gray-400 line-through">₹{subtotal.toLocaleString()}</div>
+                                    <div className="text-xs text-gray-400 line-through">{subStatus.toLocaleString()}</div>
                                 )}
-                                <div className="text-2xl font-display font-bold text-gray-900 tracking-tight">₹{finalTotal.toLocaleString()}</div>
+                                <div className="text-2xl font-display font-bold text-gray-900 tracking-tight">{finalStatus.toLocaleString()}</div>
                             </div>
                         </div>
                         <button

@@ -14,7 +14,7 @@ export const triggerRazorpaySubscriptionCheckout = async (
   }, 1000);
 };
 
-export const triggerRazorpayCheckout = async (
+export const triggerEnrollment = async (
   amountInINR: number,
   onSuccess: (response: any) => void,
   onFailure?: (response: any) => void,

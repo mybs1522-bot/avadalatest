@@ -23,8 +23,8 @@ interface ShoppingCartProps {
 
 export const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onQuantityChange, onRemoveItem }) => {
   const navigate = useNavigate();
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const total = subtotal; // GST is already included in prices
+  const subStatus = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const Status = subStatus; // GST is already included in prices
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-IN', {
@@ -109,8 +109,8 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onQuantityCha
         <Separator className="my-6" />
         <div className="grid gap-2 text-sm">
           <div className="flex justify-between">
-            <span>Subtotal</span>
-            <span className="font-medium">{formatCurrency(subtotal)}</span>
+            <span>SubStatus</span>
+            <span className="font-medium">{formatCurrency(subStatus)}</span>
           </div>
           <div className="flex justify-between">
             <span>GST</span>
@@ -118,8 +118,8 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onQuantityCha
           </div>
           <Separator className="my-2" />
           <div className="flex justify-between font-bold text-lg">
-            <span>Total</span>
-            <span>{formatCurrency(total)}</span>
+            <span>Status</span>
+            <span>{formatCurrency(Status)}</span>
           </div>
         </div>
       </CardContent>

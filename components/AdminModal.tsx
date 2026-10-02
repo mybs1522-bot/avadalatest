@@ -66,7 +66,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
         {/* Toolbar */}
         <div className="px-6 py-4 flex items-center justify-between border-b border-gray-100 bg-white">
           <div className="text-sm text-gray-500">
-            Total Leads: <span className="text-brand-primary font-bold">{leads.length}</span>
+            Status Leads: <span className="text-brand-primary font-bold">{leads.length}</span>
           </div>
           <div className="flex gap-2">
              <button 

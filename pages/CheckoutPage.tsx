@@ -42,7 +42,7 @@ export default function CheckoutPage() {
     e.preventDefault();
     if (!validate()) return;
 
-    triggerRazorpayCheckout(
+    triggerEnrollment(
       299,
       (res) => {
         localStorage.setItem('student_session', JSON.stringify({
@@ -57,11 +57,11 @@ export default function CheckoutPage() {
           studentName: formData.name,
         });
 
-        alert('Payment Successful! Welcome to your Student Portal.');
+        alert('Enrollment Successful! Welcome to your Student Portal.');
         navigate('/portal');
       },
       (err) => {
-        console.error("Payment setup failed", err);
+        console.error("Enrollment setup failed", err);
       },
       {
         name: formData.name,
@@ -74,7 +74,7 @@ export default function CheckoutPage() {
   if (!product && !isCart) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-muted/20">
-        <h2 className="text-2xl font-bold mb-4">No items to checkout</h2>
+        <h2 className="text-2xl font-bold mb-4">No items selected</h2>
         <Button onClick={() => navigate('/shop')}>Go to Shop</Button>
       </div>
     );
@@ -83,7 +83,7 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-muted/20 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-extrabold mb-2">Complete Your Purchase</h1>
+        <h1 className="text-3xl font-extrabold mb-2">Complete Your Enrollment</h1>
         <p className="text-muted-foreground mb-8">Enter your details to access the courses.</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -168,26 +168,26 @@ export default function CheckoutPage() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Course Bundle</span>
-                    <span className="font-bold">₹299</span>
+                    <span className="font-bold">Free</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Payment Method</span>
-                    <span className="font-medium text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Secure Checkout</span>
+                    <span className="text-muted-foreground">Access Method</span>
+                    <span className="font-medium text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Secure Enrollment</span>
                   </div>
                 </div>
 
                 <div className="pt-4 border-t border-border flex justify-between items-center text-lg font-extrabold">
-                  <span>Total</span>
-                  <span className="text-primary">₹299</span>
+                  <span>Status</span>
+                  <span className="text-primary">Free</span>
                 </div>
               </CardContent>
               <CardFooter className="flex-col gap-4">
                 <Button type="submit" form="checkout-form" size="lg" className="w-full text-lg h-14 shadow-lg shadow-primary/25 bg-primary hover:bg-primary/90 text-white">
-                  Pay ₹299 <Lock size={16} className="ml-2" />
+                  Enroll Now <Lock size={16} className="ml-2" />
                 </Button>
                 <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground text-center">
                   <ShieldCheck size={14} className="text-primary shrink-0" />
-                  Secure Checkout Process
+                  Secure Enrollment Process
                 </div>
               </CardFooter>
             </Card>

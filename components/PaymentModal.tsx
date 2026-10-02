@@ -173,7 +173,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, ini
              ) : (
                <>
                  <div className="flex items-center gap-2 text-brand-accent font-bold mb-4">
-                   <ShieldCheck size={20} /> Secure Checkout
+                   <ShieldCheck size={20} /> Secure Enrollment
                  </div>
                  <h2 className="text-3xl font-display font-bold leading-tight mb-4">
                    Master Design.<br/>Build Future.
@@ -349,10 +349,10 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, ini
                               </div>
                             </div>
                             <div className="text-right sm:text-right flex flex-row sm:flex-col justify-between items-center sm:items-end w-full sm:w-auto mt-2 sm:mt-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100 sm:border-none">
-                              <div className="text-sm text-gray-400 sm:hidden">Total Price</div>
+                              <div className="text-sm text-gray-400 sm:hidden">Status Price</div>
                               <div>
-                                <div className="text-xl font-bold font-display text-gray-900">{plan.price}</div>
-                                <div className="text-[10px] text-gray-400 line-through">{plan.originalPrice || '---'}</div>
+                                <div className="text-xl font-bold font-display text-gray-900">Free</div>
+                                <div className="text-[10px] text-gray-400 line-through"></div>
                               </div>
                             </div>
                           </div>

@@ -210,7 +210,7 @@ export default function ModernPaymentForm({
   email,
   onSuccess,
   onBack,
-  amount = "₹299",
+  amount = "Free",
   bare = false,
 }: ModernPaymentFormProps) {
   const wrap = (content: React.ReactNode) =>
